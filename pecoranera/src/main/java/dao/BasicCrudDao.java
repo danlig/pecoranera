@@ -13,73 +13,72 @@ import jakarta.persistence.criteria.CriteriaQuery;
 class BasicCrudDao<T> {
 	private Class<T> cls;
 	private SessionFactory sessionFactory;
-	
-	public BasicCrudDao(Class<T> cls) {		
+
+	public BasicCrudDao(Class<T> cls) {
 		this.cls = cls;
 	}
-	
+
 	public void init(SessionFactory sessionFactory) {
 		if (sessionFactory != null) {
-			this.sessionFactory = sessionFactory;	
+			this.sessionFactory = sessionFactory;
 		} else {
-			throw new NullPointerException();	
+			throw new NullPointerException();
 		}
 	}
-	
-    private <R> R executeTransaction(Function<Session, R> operation) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = null;
-        R result = null;
-        
-        session.clear();
 
-        try {
-            transaction = session.beginTransaction();
-            result = operation.apply(session);
-            transaction.commit();
-        } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            ex.printStackTrace();
-        } finally {
-            session.close();
-        }
+	private <R> R executeTransaction(Function<Session, R> operation) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		R result = null;
 
-        return result;
-    }
+		session.clear();
 
-    void doSave(T item) {
-        executeTransaction(session -> {
-            session.merge(item);
-            return null;
-        });
-    }
+		try {
+			transaction = session.beginTransaction();
+			result = operation.apply(session);
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
 
-    private void doDelete(T item) {
-        executeTransaction(session -> {
-            session.remove(item);
-            return null;
-        });
-    }
-    
-    void doDeleteByKey(int id) {
-    	T item = doRetrieveByKey(id);
-    	doDelete(item);
-    }
+		return result;
+	}
 
-    T doRetrieveByKey(int id) {
-        return executeTransaction(session -> session.get(cls, id));
-    }
+	void doSave(T item) {
+		executeTransaction(session -> {
+			session.merge(item);
+			return null;
+		});
+	}
 
-    List<T> doRetrieveAll() {
-        return executeTransaction(session -> {
-            HibernateCriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(cls);
-            criteriaQuery.from(cls);
+	private void doDelete(T item) {
+		executeTransaction(session -> {
+			session.remove(item);
+			return null;
+		});
+	}
 
-            return session.createQuery(criteriaQuery).getResultList();
-        });
-    }
+	void doDeleteByKey(int id) {
+		T item = doRetrieveByKey(id);
+		doDelete(item);
+	}
+
+	T doRetrieveByKey(int id) {
+		return executeTransaction(session -> session.get(cls, id));
+	}
+
+	List<T> doRetrieveAll() {
+		return executeTransaction(session -> {
+			HibernateCriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(cls);
+			criteriaQuery.from(cls);
+
+			return session.createQuery(criteriaQuery).getResultList();
+		});
+	}
 }
-

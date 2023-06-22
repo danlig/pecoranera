@@ -8,16 +8,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="artist")
+@Table(name = "artist")
 public class Artist {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_artist")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_artist")
 	private int id;
-	
+
 	private String name;
 	private String description;
-	
+
 	public Artist(String name, String description) {
 		super();
 		this.name = name;

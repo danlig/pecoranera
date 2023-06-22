@@ -9,13 +9,13 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class CartEventKey implements Serializable {
 	private static final long serialVersionUID = -3889855546291339742L;
-	
-	@Column(name="id_event")
+
+	@Column(name = "id_event")
 	private int idEvent;
-	
-	@Column(name="id_cart")
+
+	@Column(name = "id_cart")
 	private int idCart;
-	
+
 	public CartEventKey(int idEvent, int idCart) {
 		super();
 		this.idEvent = idEvent;

@@ -8,11 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="tag")
+@Table(name = "tag")
 public class Tag {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_tag")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_tag")
 	private int id;
 
 	private String name;
@@ -25,7 +25,7 @@ public class Tag {
 	public Tag() {
 		super();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Tag [id=" + id + ", name=" + name + "]";

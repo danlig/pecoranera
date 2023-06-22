@@ -13,24 +13,26 @@ import org.hibernate.cfg.Configuration;
 @WebListener
 public class MainContext implements ServletContextListener {
 	private SessionFactory sessionFactory;
-	
-    @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent) {
-    	// Inizializzazione di Hibernate        
-        Configuration configuration = new Configuration().configure();
-        StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder()
-            .applySettings(configuration.getProperties());
-        StandardServiceRegistry serviceRegistry = registryBuilder.build();
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        
-        // Imposta sessione di hibernate come variabile di contesto
-        ServletContext context = servletContextEvent.getServletContext();
-        context.setAttribute("SessionFactory", sessionFactory);
-    }
 
-    @Override
-    public void contextDestroyed(ServletContextEvent servletContextEvent) {        
-        if (sessionFactory != null)
-        	sessionFactory.close();
-    }
+	@Override
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
+		// Inizializzazione di Hibernate
+		Configuration configuration = new Configuration().configure();
+		StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder()
+				.applySettings(configuration.getProperties());
+		StandardServiceRegistry serviceRegistry = registryBuilder.build();
+		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+
+		// Imposta sessione di hibernate come variabile di contesto
+		ServletContext context = servletContextEvent.getServletContext();
+		context.setAttribute("SessionFactory", sessionFactory);
+		
+		System.out.println("Hibernate initialized succesfully");
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent servletContextEvent) {
+		if (sessionFactory != null)
+			sessionFactory.close();
+	}
 }

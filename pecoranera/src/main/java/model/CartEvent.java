@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import model.keys.CartEventKey;
 
 @Entity
-@Table(name="cart_event")
+@Table(name = "cart_event")
 public class CartEvent {
 	@EmbeddedId
 	private CartEventKey id;
@@ -18,14 +18,14 @@ public class CartEvent {
 	@MapsId("id")
 	@JoinColumn(name = "id_event")
 	private Event event;
-	
+
 	@ManyToOne
 	@MapsId("id")
 	@JoinColumn(name = "id_cart")
 	private Cart cart;
-	
+
 	private int tickets;
-	
+
 	public CartEvent(Event event, Cart cart, int tickets) {
 		super();
 		this.id = new CartEventKey(event.getId(), cart.getId());
@@ -33,7 +33,7 @@ public class CartEvent {
 		this.cart = cart;
 		this.tickets = tickets;
 	}
-	
+
 	public CartEvent() {
 		super();
 	}

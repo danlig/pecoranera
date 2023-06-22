@@ -19,30 +19,27 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="event")
+@Table(name = "event")
 public class Event {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_event")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_event")
 	private int id;
-	
-    @ManyToMany(cascade = { CascadeType.MERGE}, fetch=FetchType.EAGER)
-    @JoinTable(
-        name = "event_tag", 
-        joinColumns = { @JoinColumn(name = "id_event") }, 
-        inverseJoinColumns = { @JoinColumn(name = "id_tag") }
-    )
-    private Set<Tag> tags = new HashSet<>();
-    
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private Set<EventArtist> eventArtists = new HashSet<>();
-	
-	@Column(name="available_tickets")
+
+	@ManyToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@JoinTable(name = "event_tag", joinColumns = { @JoinColumn(name = "id_event") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_tag") })
+	private Set<Tag> tags = new HashSet<>();
+
+	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+	private Set<EventArtist> eventArtists = new HashSet<>();
+
+	@Column(name = "available_tickets")
 	private int availableTickets;
 
-	@Column(name="max_tickets")
+	@Column(name = "max_tickets")
 	private int maxTickets;
-	
+
 	private Date date;
 	private String name;
 	private String description;
@@ -65,7 +62,7 @@ public class Event {
 	public Event() {
 		super();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", availableTickets=" + availableTickets + ", maxTickets=" + maxTickets + ", date="
@@ -136,7 +133,7 @@ public class Event {
 	public void setCancellation(Date cancellation) {
 		this.cancellation = cancellation;
 	}
-	
+
 	public Set<Tag> getTags() {
 		return tags;
 	}

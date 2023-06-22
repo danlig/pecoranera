@@ -17,19 +17,19 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="cart")
+@Table(name = "cart")
 public class Cart {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_cart")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_cart")
 	private int id;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_user", referencedColumnName = "id_user")
 	private User user;
-	
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private Set<CartEvent> cartEvents = new HashSet<>();
+
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+	private Set<CartEvent> cartEvents = new HashSet<>();
 
 	public Cart(User user) {
 		super();
@@ -68,8 +68,8 @@ public class Cart {
 	public void setCartEvents(Set<CartEvent> cartEvents) {
 		this.cartEvents = cartEvents;
 	}
-	
-	public List<Event> getEvents(){
+
+	public List<Event> getEvents() {
 		return cartEvents.stream().map(ce -> ce.getEvent()).collect(Collectors.toList());
 	}
 }

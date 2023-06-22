@@ -18,30 +18,27 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_user")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_user")
 	private int id;
-	
+
 	@OneToOne(mappedBy = "user")
 	private Cart cart;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Order> orders = new HashSet<>();
-	
-    @ManyToMany(cascade = { CascadeType.MERGE }, fetch=FetchType.EAGER)
-    @JoinTable(
-        name = "user_tag", 
-        joinColumns = { @JoinColumn(name = "id_user") }, 
-        inverseJoinColumns = { @JoinColumn(name = "id_tag") }
-    )
-    private Set<Tag> tags = new HashSet<>();
-	
-	@Column(name="is_admin")
+
+	@ManyToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@JoinTable(name = "user_tag", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_tag") })
+	private Set<Tag> tags = new HashSet<>();
+
+	@Column(name = "is_admin")
 	private boolean isAdmin;
-	
+
 	private String email;
 	private String username;
 	private String password;
@@ -58,11 +55,11 @@ public class User {
 	public User() {
 		super();
 	}
-	
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", isAdmin=" + isAdmin + ", email=" + email + ", username="
-				+ username + ", password=" + password + "]";
+		return "User [id=" + id + ", isAdmin=" + isAdmin + ", email=" + email + ", username=" + username + ", password="
+				+ password + "]";
 	}
 
 	public boolean isAdmin() {

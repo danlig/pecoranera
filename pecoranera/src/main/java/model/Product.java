@@ -10,21 +10,21 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class Product {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_product")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_product")
 	private int id;
-	
+
 	@OneToOne
 	@JoinColumn(name = "id_type", referencedColumnName = "id_product_type", nullable = true)
 	private ProductType type;
-	
+
 	private String name;
 	private String description;
 	private double price;
-	
+
 	public Product(ProductType type, String name, String description, double price) {
 		super();
 		this.type = type;

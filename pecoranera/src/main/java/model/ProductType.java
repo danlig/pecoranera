@@ -16,17 +16,17 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="product_type")
+@Table(name = "product_type")
 public class ProductType {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_product_type")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_product_type")
 	private int id;
-	
-	@OneToMany(mappedBy="type", fetch=FetchType.EAGER)
-	@OnDelete(action=OnDeleteAction.SET_NULL)
+
+	@OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.SET_NULL)
 	private Set<Product> products = new HashSet<>();;
-	
+
 	private String name;
 
 	public ProductType(String name) {

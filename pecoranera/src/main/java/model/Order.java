@@ -12,21 +12,21 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="`order`")
+@Table(name = "`order`")
 public class Order {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_order")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_order")
 	private int id;
-	
+
 	private int tickets;
 	private double price;
 	private Date date;
-	
+
 	@OneToOne
 	@JoinColumn(name = "id_user", referencedColumnName = "id_user")
 	private User user;
-	
+
 	@OneToOne
 	@JoinColumn(name = "id_event", referencedColumnName = "id_event", nullable = true)
 	private Event event;
