@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    	<!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/pecoranera</property>
+        <property name="hibernate.connection.username">pecoranera</property>
+        <property name="hibernate.connection.password">%@c7Q$G@mFcf$Zy</property>
+        
+        <!-- JDBC connection pool settings -->
+        <property name="connection.pool_size">5</property>
+        
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+        
+        <!-- SQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+        <!-- Enable logging -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+	
+	
+		<!-- Mapping files s-->
+		<mapping class="model.Artist" />
+		<mapping class="model.Cart" />
+		<mapping class="model.CartEvent" />	
+		<mapping class="model.Event" />
+    	<mapping class="model.EventArtist" />
+    	<mapping class="model.Order" />
+		<mapping class="model.Product" />
+		<mapping class="model.ProductType" />
+    	<mapping class="model.Tag" />
+    	<mapping class="model.User" />
+    </session-factory>
+</hibernate-configuration>
