@@ -9,24 +9,17 @@ import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
 import jakarta.persistence.criteria.CriteriaQuery;
+import utils.hibernate.HibernateUtils;
 
 class BasicCrudDao<T> {
 	private Class<T> cls;
-	private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
 	public BasicCrudDao(Class<T> cls) {
 		this.cls = cls;
 	}
 
-	public void init(SessionFactory sessionFactory) {
-		if (sessionFactory != null) {
-			this.sessionFactory = sessionFactory;
-		} else {
-			throw new NullPointerException();
-		}
-	}
-
-	private <R> R executeTransaction(Function<Session, R> operation) {
+	private <R> R executeTransaction(Function<Session, R> operation) {		
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		R result = null;
@@ -48,31 +41,31 @@ class BasicCrudDao<T> {
 
 		return result;
 	}
-
-	void doSave(T item) {
+	
+	public void doSave(T item) {
 		executeTransaction(session -> {
 			session.merge(item);
 			return null;
 		});
 	}
 
-	private void doDelete(T item) {
+	public void doDelete(T item) {
 		executeTransaction(session -> {
 			session.remove(item);
 			return null;
 		});
 	}
 
-	void doDeleteByKey(int id) {
+	public void doDeleteByKey(int id) {
 		T item = doRetrieveByKey(id);
 		doDelete(item);
 	}
 
-	T doRetrieveByKey(int id) {
+	public T doRetrieveByKey(int id) {
 		return executeTransaction(session -> session.get(cls, id));
 	}
 
-	List<T> doRetrieveAll() {
+	public List<T> doRetrieveAll() {
 		return executeTransaction(session -> {
 			HibernateCriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 			CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(cls);
