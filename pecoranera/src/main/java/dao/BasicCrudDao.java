@@ -49,7 +49,7 @@ class BasicCrudDao<T> {
 		});
 	}
 
-	public void doDelete(T item) {
+	private void doDelete(T item) {
 		executeTransaction(session -> {
 			session.remove(item);
 			return null;
