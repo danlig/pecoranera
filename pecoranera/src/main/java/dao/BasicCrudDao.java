@@ -9,7 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
 import jakarta.persistence.criteria.CriteriaQuery;
-import utils.hibernate.HibernateUtils;
+import utils.HibernateUtils;
 
 class BasicCrudDao<T> {
 	private Class<T> cls;
