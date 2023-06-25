@@ -6,4 +6,14 @@
  <listener>
   <listener-class>listener.MainContext</listener-class>
  </listener>
+ <servlet>
+ 	<servlet-name>TestServlet</servlet-name>
+ 	<display-name>TestServlet</display-name>
+ 	<description></description>
+ 	<servlet-class>controllers.TestServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>TestServlet</servlet-name>
+ 	<url-pattern>/TestServlet</url-pattern>
+ </servlet-mapping>
 </web-app>
