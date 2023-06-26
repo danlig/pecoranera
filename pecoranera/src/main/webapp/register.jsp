@@ -11,13 +11,6 @@
 	<body>
 		<%@ page language="java" import="java.util.List" %>
 		<%
-			String message = (String)request.getAttribute("message");
-			if(message != null) {
-		%>
-			<div style="color: green"><%= message %></div>
-		<%
-		  	}
-			
 			List<String> errors = (List<String>) request.getAttribute("errors");
 			if (errors != null)
 				for (String error : errors) {
@@ -29,9 +22,9 @@
 		
 		<form name="checkformname" method="POST" action="RegisterController">
 			Username: <input type="text" name="username" placeholder="Your name"><br>
-			Email: <input type="email" name="email" placeholder="Your name"><br>
-			Password: <input type="password" name="password" placeholder="Your surname"><br>
-			Confirm Password: <input type="password" name="conf_password" placeholder="Your surname"><br>
+			Email: <input type="email" name="email" placeholder="Your email"><br>
+			Password: <input type="password" name="password" placeholder="Your password"><br>
+			Confirm Password: <input type="password" name="conf_password" placeholder="Confirm password"><br>
 			
 			Tags:<br>
 			<%
