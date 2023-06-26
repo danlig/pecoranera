@@ -40,6 +40,24 @@
  	<description></description>
  	<servlet-class>controllers.LogoutController</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>RemoveController</servlet-name>
+ 	<display-name>RemoveController</display-name>
+ 	<description></description>
+ 	<servlet-class>controllers.crud.artist.RemoveController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>AddController</servlet-name>
+ 	<display-name>AddController</display-name>
+ 	<description></description>
+ 	<servlet-class>controllers.crud.artist.AddController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>EditController</servlet-name>
+ 	<display-name>EditController</display-name>
+ 	<description></description>
+ 	<servlet-class>controllers.crud.artist.EditController</servlet-class>
+ </servlet>
  <servlet-mapping>
  	<servlet-name>TestServlet</servlet-name>
  	<url-pattern>/TestServlet</url-pattern>
@@ -55,5 +73,17 @@
  <servlet-mapping>
  	<servlet-name>LogoutController</servlet-name>
  	<url-pattern>/LogoutController</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>RemoveController</servlet-name>
+ 	<url-pattern>/admin/crud-artist/RemoveController</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>AddController</servlet-name>
+ 	<url-pattern>/admin/crud-artist/AddController</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>EditController</servlet-name>
+ 	<url-pattern>/admin/crud-artist/EditController</url-pattern>
  </servlet-mapping>
 </web-app>
