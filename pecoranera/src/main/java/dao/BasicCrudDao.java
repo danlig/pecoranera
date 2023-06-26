@@ -8,7 +8,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import utils.HibernateUtils;
 
 class BasicCrudDao<T> {
@@ -63,6 +65,18 @@ class BasicCrudDao<T> {
 
 	public T doRetrieveByKey(int id) {
 		return executeTransaction(session -> session.get(cls, id));
+	}
+	
+	public T findItemByField(String fieldName, Object fieldValue) {
+		return executeTransaction(session -> {
+	        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(cls);
+	        Root<T> root = criteriaQuery.from(cls);
+	        criteriaQuery.select(root);
+	        criteriaQuery.where(criteriaBuilder.equal(root.get(fieldName), fieldValue));
+
+	        return session.createQuery(criteriaQuery).uniqueResult();
+	    });
 	}
 
 	public List<T> doRetrieveAll() {
