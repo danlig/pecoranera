@@ -3,6 +3,16 @@
                          "http://java.sun.com/dtd/web-app_2_3.dtd">
 <web-app>
  <display-name>Archetype Created Web Application</display-name>
+ <filter>
+ 	<filter-name>AccessControllFilter</filter-name>
+ 	<display-name>AccessControllFilter</display-name>
+ 	<description></description>
+ 	<filter-class>filter.AccessControllFilter</filter-class>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>AccessControllFilter</filter-name>
+ 	<url-pattern>/AccessControllFilter</url-pattern>
+ </filter-mapping>
  <listener>
   <listener-class>listener.MainContext</listener-class>
  </listener>
@@ -12,8 +22,38 @@
  	<description></description>
  	<servlet-class>controllers.TestServlet</servlet-class>
  </servlet>
+ <servlet>
+ 	<servlet-name>RegisterController</servlet-name>
+ 	<display-name>RegisterController</display-name>
+ 	<description></description>
+ 	<servlet-class>controllers.RegisterController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>LoginController</servlet-name>
+ 	<display-name>LoginController</display-name>
+ 	<description></description>
+ 	<servlet-class>controllers.LoginController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<servlet-name>LogoutController</servlet-name>
+ 	<display-name>LogoutController</display-name>
+ 	<description></description>
+ 	<servlet-class>controllers.LogoutController</servlet-class>
+ </servlet>
  <servlet-mapping>
  	<servlet-name>TestServlet</servlet-name>
  	<url-pattern>/TestServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>RegisterController</servlet-name>
+ 	<url-pattern>/RegisterController</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>LoginController</servlet-name>
+ 	<url-pattern>/LoginController</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>LogoutController</servlet-name>
+ 	<url-pattern>/LogoutController</url-pattern>
  </servlet-mapping>
 </web-app>

@@ -22,4 +22,8 @@ public class UserDao {
 	public static List<User> doRetrieveAll() {
 		return crud.doRetrieveAll();
 	}
+	
+	public static User doRetrieveByEmail(String email) {
+		return crud.findItemByField("email", email);
+	}
 }
