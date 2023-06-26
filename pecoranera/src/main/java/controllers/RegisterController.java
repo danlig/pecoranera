@@ -19,30 +19,17 @@ import model.Cart;
 import model.Tag;
 import model.User;
 
-/**
- * Servlet implementation class RegisterController
- */
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public RegisterController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<String> errors = new ArrayList<>();
 		String username = request.getParameter("username");
@@ -50,18 +37,17 @@ public class RegisterController extends HttpServlet {
 		String password = request.getParameter("password");
 		String conf_password = request.getParameter("conf_password");
 		
+		// Prendere tutti i tag che non sono null
 		Set<Tag> tags = new HashSet<>();
 		for (Tag tag : TagDao.doRetrieveAll()) {
 			if (request.getParameter(tag.getId() + "-tag") != null) {
 				tags.add(tag);
 			}
 		}
-
-		List<User> users = UserDao.doRetrieveAll();
 		
 		if (email == null || email.trim().equals("")) {
 			errors.add("Insert email<br>");
-		} else if (users.stream().filter(p -> p.getEmail().equals(email)).count() != 0) {
+		} else if (UserDao.doRetrieveByEmail(email) != null) {
 			errors.add("Existing email<br>");
 		}
 		
@@ -77,6 +63,8 @@ public class RegisterController extends HttpServlet {
 		
 		if (!errors.isEmpty()) {
 			request.setAttribute("errors", errors);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
+			dispatcher.forward(request, response);
 		} else {
 			User user = new User();
 				
@@ -88,17 +76,16 @@ public class RegisterController extends HttpServlet {
 			UserDao.doSave(user);
 			
 			Cart cart = new Cart();
-			cart.setUser(
-					UserDao.doRetrieveAll().stream().filter(u -> u.getEmail().equals(email)).findFirst().get()
-					);
+			cart.setUser(UserDao.doRetrieveByEmail(email));
 			CartDao.doSave(cart);
 			
-			
-			request.setAttribute("message", "tutt appost");
+			request.getSession().setAttribute("isAdmin", Boolean.FALSE);
+			response.sendRedirect("common/personal-page.jsp");
 		}
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
-		dispatcher.forward(request, response);
+		
+		// TODO:: Criptare le password
+		// TODO:: cercare di rendere il codice più snello
 	}
 
 }
