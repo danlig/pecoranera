@@ -1,26 +1,25 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ArtistDao;
-import model.Artist;
-
 /**
- * Servlet implementation class TestServelt
+ * Servlet implementation class RegisterController
  */
-public class TestServlet extends HttpServlet {
+public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestServlet() {
+    public RegisterController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +28,7 @@ public class TestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		
-		for (Artist a : ArtistDao.doRetrieveAll()) {
-    		out.println(a.getName() + " " + a.getDescription() + "<br>");
-    	}
-		
+		doPost(request, response);
 	}
 
 	/**
@@ -43,7 +36,11 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		List<String> errors = new ArrayList<>();
+		String email =
+		
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
 	}
 
 }

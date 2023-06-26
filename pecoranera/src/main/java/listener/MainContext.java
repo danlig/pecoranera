@@ -16,18 +16,18 @@ public class MainContext implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
-		// Inizializzazione di Hibernate
-		Configuration configuration = new Configuration().configure();
-		StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder()
-				.applySettings(configuration.getProperties());
-		StandardServiceRegistry serviceRegistry = registryBuilder.build();
-		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-		// Imposta sessione di hibernate come variabile di contesto
-		ServletContext context = servletContextEvent.getServletContext();
-		context.setAttribute("SessionFactory", sessionFactory);
-		
-		System.out.println("Hibernate initialized succesfully");
+//		// Inizializzazione di Hibernate
+//		Configuration configuration = new Configuration().configure();
+//		StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder()
+//				.applySettings(configuration.getProperties());
+//		StandardServiceRegistry serviceRegistry = registryBuilder.build();
+//		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+//
+//		// Imposta sessione di hibernate come variabile di contesto
+//		ServletContext context = servletContextEvent.getServletContext();
+//		context.setAttribute("SessionFactory", sessionFactory);
+//		
+//		System.out.println("Hibernate initialized succesfully");
 	}
 
 	@Override
