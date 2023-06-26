@@ -36,7 +36,6 @@ CREATE TABLE `artist` (
 
 LOCK TABLES `artist` WRITE;
 /*!40000 ALTER TABLE `artist` DISABLE KEYS */;
-INSERT INTO `artist` VALUES (4,'dklasklnld','desc1'),(5,'Joji','Hip Hop');
 /*!40000 ALTER TABLE `artist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +61,6 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (1,1),(3,3);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,7 +117,6 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (2,'2023-05-28 23:25:40','Evento incredibile','Bello bellissimo, sul serio',10.00,100,500,'2023-05-28'),(3,'2023-05-28 23:39:18','Evento incredibile 2','Bello bellissimo, sul serio',10.00,100,500,'2023-05-28');
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +201,6 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,1,10.00,'2023-05-29',1,2);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,7 +276,6 @@ CREATE TABLE `tag` (
 
 LOCK TABLES `tag` WRITE;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
-INSERT INTO `tag` VALUES (6,'bellissimo tag');
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +303,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'fjalk','adjlks','Pisellone',0),(3,'example@mial.com','ppa','jojo',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
