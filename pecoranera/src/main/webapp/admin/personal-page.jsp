@@ -8,6 +8,13 @@
 </head>
 <body>
 	<H1>YOU ARE A ADMIN</H1>
-	<a href="<%=request.getContextPath()%>/common/LogoutController">Esci</a>
+	<ul>
+		<li>
+			<a href="artist/page.jsp">CRUD Artisti</a>
+		</li>
+		<li>
+			<a href="<%=request.getContextPath()%>/common/LogoutController">Esci</a>	
+		</li>
+	</ul>
 </body>
 </html>
