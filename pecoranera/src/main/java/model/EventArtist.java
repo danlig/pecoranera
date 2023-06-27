@@ -27,14 +27,6 @@ public class EventArtist {
 
 	private String role;
 
-	public EventArtist(Event event, Artist artist, String role) {
-		super();
-		this.id = new EventArtistKey(event.getId(), artist.getId());
-		this.event = event;
-		this.artist = artist;
-		this.role = role;
-	}
-
 	public EventArtist() {
 		super();
 	}

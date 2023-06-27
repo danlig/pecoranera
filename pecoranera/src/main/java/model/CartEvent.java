@@ -26,14 +26,6 @@ public class CartEvent {
 
 	private int tickets;
 
-	public CartEvent(Event event, Cart cart, int tickets) {
-		super();
-		this.id = new CartEventKey(event.getId(), cart.getId());
-		this.event = event;
-		this.cart = cart;
-		this.tickets = tickets;
-	}
-
 	public CartEvent() {
 		super();
 	}
