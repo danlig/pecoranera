@@ -1,0 +1,16 @@
+{
+    "Panino 1":{
+        "price": 6.50,
+        "description": "Pane gusto pene"
+    },
+
+    "Panino 2":{
+        "price": 8.00,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id feugiat ipsum, sit amet lacinia ex."
+    },
+
+    "Panino della verità":{
+        "price": 7.50,
+        "description": "Dio ci ha abbandonati, siamo destinati alla sofferenza eterna"
+    }
+}
