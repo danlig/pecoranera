@@ -31,11 +31,6 @@ public class Cart {
 	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
 	private Set<CartEvent> cartEvents = new HashSet<>();
 
-	public Cart(User user) {
-		super();
-		this.user = user;
-	}
-
 	public Cart() {
 		super();
 	}

@@ -25,14 +25,6 @@ public class Product {
 	private String description;
 	private double price;
 
-	public Product(ProductType type, String name, String description, double price) {
-		super();
-		this.type = type;
-		this.name = name;
-		this.description = description;
-		this.price = price;
-	}
-
 	public Product() {
 		super();
 	}
