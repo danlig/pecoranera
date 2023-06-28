@@ -27,6 +27,12 @@ public class CartDao {
 
 	public static void addEvent(Cart cart, Event event, int tickets) {
 		BasicCrudDao<CartEvent> crudCE = new BasicCrudDao<>(CartEvent.class);
-		crudCE.doSave(new CartEvent(event, cart, tickets));
+		
+		CartEvent cart_event = new CartEvent();
+		cart_event.setEvent(event);
+		cart_event.setCart(cart);
+		cart_event.setTickets(tickets);
+		
+		crudCE.doSave(cart_event);
 	}
 }

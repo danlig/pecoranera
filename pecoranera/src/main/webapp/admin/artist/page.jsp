@@ -42,16 +42,18 @@
 			<th>Nome</th>
 			<th>Description</th>
 		</tr>
-		<% for (Artist artist : artists) { %>
+		<% for (Artist artist : artists) { 
+			request.setAttribute("artist", artist);
+			%>
 			<tr>
-				<td><%= artist.getId() %></td>
+				<td> <%-- <%= artist.getId() %> --%> ${ artist.id } </td>
 				<td><%= artist.getName() %></td>
 				<td><%= artist.getDescription() %></td>
 				<td>
-					<a href="<%=request.getContextPath()%>/admin/artist/edit.jsp?id_artist=<%= artist.getId()%>">Modifica</a>
+					<a href="${pageContext.request.contextPath}/admin/artist/edit.jsp?id_artist=<%= artist.getId()%>">Modifica</a>
 				</td>
 				<td>
-					<a href="<%=request.getContextPath()%>/admin//crud-artist/RemoveController?id_artist=<%= artist.getId()%>">Cancella</a>
+					<a href="${pageContext.request.contextPath}/admin//crud-artist/RemoveController?id_artist=<%= artist.getId()%>">Cancella</a>
 				</td>
 			<tr>
 		<%} 

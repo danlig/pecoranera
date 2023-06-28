@@ -40,8 +40,10 @@ public class AddController extends HttpServlet {
 		
 		if (!messages.isEmpty()) {
 			request.setAttribute("messages", messages);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/artist/add.jsp");
+			
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/artist/add.jsp");			
 			dispatcher.forward(request, response);
+			
 		} else {
 			Artist artist = new Artist();
 			
@@ -50,11 +52,7 @@ public class AddController extends HttpServlet {
 			
 			ArtistDao.doSave(artist);
 			
-			messages.put("successfully", "Aggiunto Artista");
-			
-			request.setAttribute("messages", messages);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/artist/page.jsp");
-			dispatcher.forward(request, response);
+			response.sendRedirect("page.jsp");
 		}
 	}
 

@@ -27,8 +27,6 @@ public class App {
 		// -----------------------------
 		// TEST ARTIST
 		/// *Test save
-		Artist a = new Artist("dklasklnld", "desc1");
-		ArtistDao.doSave(a); // */
 
 		/*
 		 * Test delete ArtistDao.doDeleteByKey(8); //
