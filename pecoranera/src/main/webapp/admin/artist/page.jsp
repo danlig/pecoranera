@@ -50,10 +50,10 @@
 				<td><%= artist.getName() %></td>
 				<td><%= artist.getDescription() %></td>
 				<td>
-					<a href="<%=request.getContextPath()%>/admin/artist/edit.jsp?id_artist=<%= artist.getId()%>">Modifica</a>
+					<a href="${pageContext.request.contextPath}/admin/artist/edit.jsp?id_artist=<%= artist.getId()%>">Modifica</a>
 				</td>
 				<td>
-					<a href="<%=request.getContextPath()%>/admin//crud-artist/RemoveController?id_artist=<%= artist.getId()%>">Cancella</a>
+					<a href="${pageContext.request.contextPath}/admin//crud-artist/RemoveController?id_artist=<%= artist.getId()%>">Cancella</a>
 				</td>
 			<tr>
 		<%} 
