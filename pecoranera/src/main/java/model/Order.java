@@ -31,15 +31,6 @@ public class Order {
 	@JoinColumn(name = "id_event", referencedColumnName = "id_event", nullable = true)
 	private Event event;
 
-	public Order(int tickets, double price, Date date, User user, Event event) {
-		super();
-		this.tickets = tickets;
-		this.price = price;
-		this.date = date;
-		this.user = user;
-		this.event = event;
-	}
-
 	public Order() {
 		super();
 	}

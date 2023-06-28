@@ -43,15 +43,6 @@ public class User {
 	private String username;
 	private String password;
 
-	public User(Set<Tag> tags, boolean isAdmin, String email, String username, String password) {
-		super();
-		this.tags = tags;
-		this.isAdmin = isAdmin;
-		this.email = email;
-		this.username = username;
-		this.password = password;
-	}
-
 	public User() {
 		super();
 	}
