@@ -25,7 +25,7 @@
 		<%
 			}
 		%>
-		<form method="POST" action="<%=request.getContextPath()%>/admin//crud-artist/AddController">
+		<form method="POST" action="<%=request.getContextPath()%>/admin/artist/AddController">
 			Name: <input type="text" name="name" placeholder="name"><br>
 			Description: <input type="text" name="description" placeholder="description"><br>
 			<input type="submit">

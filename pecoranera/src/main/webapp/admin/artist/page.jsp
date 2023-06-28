@@ -42,9 +42,11 @@
 			<th>Nome</th>
 			<th>Description</th>
 		</tr>
-		<% for (Artist artist : artists) { %>
+		<% for (Artist artist : artists) { 
+			request.setAttribute("artist", artist);
+			%>
 			<tr>
-				<td><%= artist.getId() %></td>
+				<td> <%-- <%= artist.getId() %> --%> ${ artist.id } </td>
 				<td><%= artist.getName() %></td>
 				<td><%= artist.getDescription() %></td>
 				<td>
