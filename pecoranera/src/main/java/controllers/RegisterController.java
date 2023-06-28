@@ -37,13 +37,14 @@ public class RegisterController extends HttpServlet {
 		String password = request.getParameter("password");
 		String conf_password = request.getParameter("conf_password");
 		
+		//La gestione tag la facciamo postuma il primo login
 		// Prendere tutti i tag che non sono null
-		Set<Tag> tags = new HashSet<>();
+		/*Set<Tag> tags = new HashSet<>();
 		for (Tag tag : TagDao.doRetrieveAll()) {
 			if (request.getParameter(tag.getId() + "-tag") != null) {
 				tags.add(tag);
 			}
-		}
+		}*/
 		
 		if (email == null || email.trim().equals("")) {
 			errors.add("Insert email<br>");
@@ -72,7 +73,7 @@ public class RegisterController extends HttpServlet {
 			user.setEmail(email);
 			user.setPassword(password);
 			user.setAdmin(false);
-			user.setTags(tags);
+			//user.setTags(tags);
 			UserDao.doSave(user);
 			
 			Cart cart = new Cart();

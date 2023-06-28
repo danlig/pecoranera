@@ -30,7 +30,7 @@ $(document).ready(function() {
             $("#login-wrapper").toggle();
 
             if(!$("#form-wrapper").length){
-                $("#login-wrapper").load('assets/login.html');
+                $("#login-wrapper").load('assets/login.jsp');
             }
 
             navbarBtn.removeClass('open');
