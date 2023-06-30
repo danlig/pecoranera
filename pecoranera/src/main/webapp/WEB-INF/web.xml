@@ -63,6 +63,20 @@
  	<description></description>
  	<servlet-class>controllers.crud.artist.EditController</servlet-class>
  </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>ReadProductController</display-name>
+ 	<servlet-name>ReadProductController</servlet-name>
+ 	<servlet-class>controllers.crud.product.ReadController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>AddProductController</display-name>
+ 	<servlet-name>AddProductController</servlet-name>
+ 	<servlet-class>controllers.crud.product.AddController</servlet-class>
+ </servlet>
  
  <servlet-mapping>
  	<servlet-name>RegisterController</servlet-name>
@@ -92,6 +106,14 @@
  <servlet-mapping>
  	<servlet-name>EditController</servlet-name>
  	<url-pattern>/admin/artist/EditController</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>ReadProductController</servlet-name>
+ 	<url-pattern>/admin/product/list</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>AddProductController</servlet-name>
+ 	<url-pattern>/AddProductController</url-pattern>
  </servlet-mapping>
  
  <jsp-config>
