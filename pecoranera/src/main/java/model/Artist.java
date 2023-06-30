@@ -18,12 +18,6 @@ public class Artist {
 	private String name;
 	private String description;
 
-	public Artist(String name, String description) {
-		super();
-		this.name = name;
-		this.description = description;
-	}
-
 	public Artist() {
 		super();
 	}

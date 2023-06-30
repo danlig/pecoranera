@@ -27,6 +27,12 @@ public class EventDao {
 
 	public static void addArtist(Event event, Artist artist, String role) {
 		BasicCrudDao<EventArtist> crudEA = new BasicCrudDao<>(EventArtist.class);
-		crudEA.doSave(new EventArtist(event, artist, role));
+		
+		EventArtist event_artist = new EventArtist();
+		event_artist.setEvent(event);
+		event_artist.setArtist(artist);
+		event_artist.setRole(role);
+		
+		crudEA.doSave(event_artist);
 	}
 }

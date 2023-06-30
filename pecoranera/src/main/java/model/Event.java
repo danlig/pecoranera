@@ -46,19 +46,6 @@ public class Event {
 	private double price;
 	private Date cancellation;
 
-	public Event(Set<Tag> tags, int availableTickets, int maxTickets, Date date, String name, String description,
-			double price, Date cancellation) {
-		super();
-		this.tags = tags;
-		this.availableTickets = availableTickets;
-		this.maxTickets = maxTickets;
-		this.date = date;
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.cancellation = cancellation;
-	}
-
 	public Event() {
 		super();
 	}
