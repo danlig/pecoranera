@@ -13,6 +13,9 @@
 			<a href="artist/page.jsp">CRUD Artisti</a>
 		</li>
 		<li>
+			<a href="${pageContext.request.contextPath}/admin/product-type/list">CRUD Product Type</a>
+		</li>
+		<li>
 			<a href="<%=request.getContextPath()%>/common/LogoutController">Esci</a>	
 		</li>
 	</ul>
