@@ -47,15 +47,11 @@ public class EditController extends HttpServlet {
 			}
 			
 			ArtistDao.doSave(artist);
-			
-			messages.put("successfully", "Aggiornato Artista");
 		} else {
-			messages.put("error", "Artista non esistente");
+			response.sendError(HttpServletResponse.SC_BAD_GATEWAY);
 		}
 		
-		request.setAttribute("messages", messages);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/artist/page.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("list");
 	}
 
 }
