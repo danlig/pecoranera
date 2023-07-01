@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+<web-app>
  <display-name>Archetype Created Web Application</display-name>
  
  <filter>
@@ -63,10 +63,10 @@
  	<description></description>
  	<servlet-class>controllers.crud.artist.EditController</servlet-class>
  </servlet>
- 
  <servlet>
  	<description>
  	</description>
+<<<<<<< HEAD
  	<display-name>ReadController</display-name>
  	<servlet-name>ReadController</servlet-name>
  	<servlet-class>controllers.crud.tag.ReadController</servlet-class>
@@ -91,10 +91,7 @@
  	<display-name>RemoveTagController</display-name>
  	<servlet-name>RemoveTagController</servlet-name>
  	<servlet-class>controllers.crud.tag.RemoveController</servlet-class>
- </servlet>
- <servlet>
- 	<description>
- 	</description>
+=======
  	<display-name>ReadProductTypeController</display-name>
  	<servlet-name>ReadProductTypeController</servlet-name>
  	<servlet-class>controllers.crud.product_type.ReadController</servlet-class>
@@ -119,6 +116,7 @@
  	<display-name>RemoveProductTypeController</display-name>
  	<servlet-name>RemoveProductTypeController</servlet-name>
  	<servlet-class>controllers.crud.product_type.RemoveController</servlet-class>
+>>>>>>> branch 'main' of https://github.com/danlig/pecoranera.git
  </servlet>
  
  <servlet-mapping>
