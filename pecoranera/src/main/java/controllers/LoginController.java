@@ -1,10 +1,7 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,38 +18,32 @@ public class LoginController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> errors = new ArrayList<>();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		RequestDispatcher dispatcherToLoginPage = getServletContext().getRequestDispatcher("/login.jsp");
 		
 		if (email == null || email.trim().equals("")) {
-			errors.add("Insert email<br>");
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
 		}
 		
 		if (password == null || password.trim().equals("")) {
-			errors.add("Insert password<br>");
-		}
-		
-		if (!errors.isEmpty()) {
-        	request.setAttribute("errors", errors);
-        	dispatcherToLoginPage.forward(request, response);
-        	return; 
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
 		}
 		
 		User user = UserDao.doRetrieveByEmail(email);
 		if (user == null || !user.getPassword().equals(password)) {
-			errors.add("Wrong Email or Password");
-        	request.setAttribute("errors", errors);
-        	dispatcherToLoginPage.forward(request, response);
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		} else if (user.isAdmin()) {
-			System.out.println("FATTOOOO");
+			response.setStatus(200);
 			request.getSession().setAttribute("isAdmin", Boolean.TRUE);
-			response.sendRedirect("admin/personal-page.jsp");
+			
 		} else {
+			response.setStatus(200);
+			request.getSession().setAttribute("username", user.getUsername());
 			request.getSession().setAttribute("isAdmin", Boolean.FALSE);
-			response.sendRedirect("common/personal-page.jsp");
 		}
+
 	}
 
 }

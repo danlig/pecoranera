@@ -1,5 +1,7 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,19 +24,8 @@
         <a id="goback-link" href="index.jsp"><i class="fa-solid fa-arrow-left"></i> Torna alla home</a>
         <h2>Registrazione</h2>
         <form id="registration-form" method="post" action="">
-            <div id="name-fields">
-               <div>
-                    <label for="name">Nome</label>
-                    <input type="text" name="name" id="name" value='<%= request.getParameter("name")%>'>
-               </div>
-
-                <div>
-                    <label for="surname">Cognome</label>
-                    <input type="text" name="surname" id="surname" value='<%= request.getParameter("surname")%>'>
-                </div>
-            </div>
-            
-            
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value='<%= request.getParameter("username")%>'>
             
             <label for="email">E-mail</label>
             <input type="email" name="email" id="email" value='<%= request.getParameter("signup-email")%>'>

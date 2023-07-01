@@ -27,7 +27,9 @@
 
                     <div>
                         <a href="tel:+39347-084-0640"><i class="fa-solid fa-phone"></i> 347 084 0640</a>
+                        
                         <a href="tel:+39340-964-1940"><i class="fa-solid fa-phone"></i> 340 964 1940</a>
+                        
                         <a href="mailto:pecoranera7475@gmail.com" id="email"><i class="fa-regular fa-envelope"></i> pecoranera7475@gmail.com</a>
                     </div>
                 </div>

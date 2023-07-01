@@ -26,7 +26,7 @@ $(document).ready(function() {
     $(".nav-links[href='account.jsp']").on("click", function(e){
         e.preventDefault();
 
-        if(true){ //CHECK IF NOT LOGGED IN
+        if(!isLoggedIn){
             $("#login-wrapper").toggle();
 
             if(!$("#form-wrapper").length){

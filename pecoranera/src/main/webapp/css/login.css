@@ -137,21 +137,11 @@
     color: var(--neon-color);
 }
 
-#name-fields{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#name-fields input{
-    width: 45%;
-}
-
-#error{
+.error{
     opacity: 0;
     color: red;
-    margin-top: .2rem;
-    font-size: 1.1rem;
+    padding-top: .2rem;
+    font-size: .9rem;
     font-family: var(--main-font);
 }
 

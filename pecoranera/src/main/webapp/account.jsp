@@ -1,5 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
+
+<c:if test="${sessionScope.isAdmin == null || empty sessionScope.isAdmin}">
+       <c:redirect url="./index.jsp"/>
+</c:if>
+
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,10 +36,14 @@
 
         <div id="display-data">
             <section id="panoramica">
-                <h2 class="page-header">Edmundo Peli</h2>
+                <h2 class="page-header"><c:out value="${sessionScope.username}"/></h2>
 
                 <div>
-                    <h3></h3>
+                    <h3>I tuoi ordini</h3>
+
+                    <div class="order-preview"></div>
+
+                    <div class="order-preview"></div>
                 </div>
             </section>
 

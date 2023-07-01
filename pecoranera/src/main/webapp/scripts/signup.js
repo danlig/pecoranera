@@ -18,30 +18,55 @@ $(document).ready(function(){
     //TO DO: AJAX CALL TO SIGNUP
     //After registration success/failure
     $("#registration-form").on("submit", async function(e){
-        e.preventDefault();
 
         if(checkLength && checkLower && checkUpper && checkNumber && checkSpecial){
             if(arePasswordMatching){
-                //Check if account doesn't exist
-                if($("#email").val() == "null@null.com"){
-                    alert("Questa mail è già collegata ad un account");
+                //Try registration
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'RegisterController',
+        
+                    data:{
+                        username: $("#username").val(),
+                        email: $("#email").val(),
+                        password: $("#password").val(),
+                        conf_password: $("#confirm-password").val()
+                    },
+        
+                    success: function(){
+                        alert("REGISTRATO");
+                        window.location.replace(`account.jsp`);
+                    },
+        
+                    statusCode: {
+                        401: function(message){
+                            alert(JSON.stringify(message));
+                            $("#signup-error").css("opacity", "1");
+                            e.preventDefault();
+                        },
+                    }
+                });
+
+                /*if($("#email").val()){
+
 
                 } else {
                     loadingWheel.fadeIn(500);
                     loadingWheel.children().first().load("./assets/loading-wheel.html");
-                    /*$("#registration").hide();
-                    $("#registration-submitted").show();*/
                     await new Promise(r => setTimeout(r, 2000));
                     window.location.href = `confirm-email.jsp`;
-                }
+                }*/
             }
 
             else {
-                alert("Le password non corrispondono");
+                console.log("Le password non corrispondono");
             }
         } else {
-            alert("La password scelta non è molto sicura!");
+            console.log("La password scelta non è molto sicura!");
         }
+
+        e.preventDefault();
     });
 
     //Click on eye(s) to show passwords

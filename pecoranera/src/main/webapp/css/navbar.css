@@ -33,8 +33,6 @@ html, body{
     border: 2px solid var(--neon-light);
 }
 
-
-
 nav{
     position: fixed;
     background-color: var(--dark-background);

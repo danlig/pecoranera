@@ -1,0 +1,68 @@
+@import "variables.css";
+
+body{
+    background-color: var(--page-background);
+    color: var(--main-color);
+    font-family: var(--main-font);
+}
+
+section{
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+#pecoranera{
+    padding-top: calc(var(--nav-height) + 9vh);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.side-text{
+    width: 50vw;
+}
+
+.side-text h2{
+    font-size: 2rem;
+    font-family: var(--header-font);
+    padding-right: 4rem;
+    width: fit-content;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.side-text p{
+    font-size: 1.1rem;
+}
+
+#slideshow{
+    position: relative;
+    width: 30vw;
+    --slide-width: 20vw;
+}
+
+#slideshow img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--dark-background);
+    width: var(--slide-width);
+    height: 15rem;
+    transition: 1s ease-in-out;
+}
+
+img.first{
+    left: 0;
+    z-index: 3;
+    background-color: black;
+}
+
+img.second{
+    left: calc(var(--slide-width)/4);
+    z-index: 2;
+}
+
+img.third{
+    left: calc(var(--slide-width)/2);
+    z-index: 1;
+    background-color: gray;
+}
