@@ -10,7 +10,7 @@
 	<H1>YOU ARE A ADMIN</H1>
 	<ul>
 		<li>
-			<a href="artist/page.jsp">CRUD Artisti</a>
+			<a href="${pageContext.request.contextPath}/admin/artist/list">CRUD Artisti</a>
 		</li>
 		<li>
 			<a href="${pageContext.request.contextPath}/admin/tag/list">CRUD Tag</a>
