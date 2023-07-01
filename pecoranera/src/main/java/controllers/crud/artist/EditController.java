@@ -25,8 +25,6 @@ public class EditController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String> messages = new HashMap<>();
-
 		String name = (String) request.getParameter("name");
 		String description = (String) request.getParameter("description");
 		
