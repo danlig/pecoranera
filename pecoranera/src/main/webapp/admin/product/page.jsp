@@ -34,8 +34,8 @@
 				<th>Id</th>
 				<th>Nome</th>
 				<th>Descrizione</th>
-				<th>Tipo di Prodotto</th>
 				<th>Prezzo</th>
+				<th>Tipo di Prodotto</th>
 			</tr>
 			
 			<tr>
