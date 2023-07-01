@@ -1,4 +1,4 @@
-package controllers.crud.artist;
+package controllers.crud.tag;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,50 +10,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ArtistDao;
-import model.Artist;
+import dao.TagDao;
+import model.Tag;
 
-public class AddController extends HttpServlet {
+public class EditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public AddController() {
+    
+    public EditController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> messages = new HashMap<>();
-
 		String name = (String) request.getParameter("name");
-		String description = (String) request.getParameter("description");
-
-		if (name == null || name.trim().equals("")) {
-			messages.put("error", "Insert Name");
-		}
+		String id_tag = request.getParameter("id_tag");
 		
-		if (description == null || description.trim().equals("")) {
-			messages.put("error", "Insert Description");
+		Tag tag = null;
+		if (id_tag != null) {
+			
+			tag = TagDao.doRetrieveByKey(Integer.parseInt(id_tag));
+			
+			if (name == null || name.trim().equals("")) {
+				messages.put("error", "Inserire il nome");
+			} 
+		} else {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}
 		
 		if (!messages.isEmpty()) {
+			request.setAttribute("tags", TagDao.doRetrieveAll());
 			request.setAttribute("messages", messages);
-			request.setAttribute("artists", ArtistDao.doRetrieveAll());
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/artist/page.jsp");			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/tag/page.jsp");
 			dispatcher.forward(request, response);
-			
 		} else {
-			Artist artist = new Artist();
-			
-			artist.setName(name);
-			artist.setDescription(description);
-			
-			ArtistDao.doSave(artist);
+			tag.setName(name);
+			TagDao.doSave(tag);
 			
 			response.sendRedirect("list");
 		}
+		
 	}
 
 }

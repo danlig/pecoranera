@@ -1,8 +1,9 @@
-package controllers.crud.artist;
+package controllers.crud.product_type;
+
+import java.util.Map;
+import java.util.HashMap;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ArtistDao;
-import model.Artist;
+import model.ProductType;
+import dao.ProductTypeDao;
 
 public class AddController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,35 +24,23 @@ public class AddController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> messages = new HashMap<>();
-
 		String name = (String) request.getParameter("name");
-		String description = (String) request.getParameter("description");
 
 		if (name == null || name.trim().equals("")) {
-			messages.put("error", "Insert Name");
-		}
-		
-		if (description == null || description.trim().equals("")) {
-			messages.put("error", "Insert Description");
-		}
-		
-		if (!messages.isEmpty()) {
+			messages.put("error", "Inserire il nome");
+
+			request.setAttribute("product_types", ProductTypeDao.doRetrieveAll());
 			request.setAttribute("messages", messages);
-			request.setAttribute("artists", ArtistDao.doRetrieveAll());
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/artist/page.jsp");			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/product-type/page.jsp");
 			dispatcher.forward(request, response);
-			
 		} else {
-			Artist artist = new Artist();
-			
-			artist.setName(name);
-			artist.setDescription(description);
-			
-			ArtistDao.doSave(artist);
-			
+			ProductType product_type = new ProductType();
+			product_type.setName(name);
+			ProductTypeDao.doSave(product_type);
+
 			response.sendRedirect("list");
 		}
 	}

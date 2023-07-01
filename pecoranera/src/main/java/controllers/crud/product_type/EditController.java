@@ -1,13 +1,18 @@
-package controllers.crud.artist;
+package controllers.crud.product_type;
+
+import java.util.Map;
+import java.util.HashMap;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ArtistDao;
-import model.Artist;
+import model.ProductType;
+import dao.ProductTypeDao;
 
 public class EditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,29 +27,23 @@ public class EditController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = (String) request.getParameter("name");
-		String description = (String) request.getParameter("description");
-		
-		String id_artist = request.getParameter("id_artist");
-		if (id_artist != null) {
-			Artist artist = ArtistDao.doRetrieveByKey(Integer.parseInt(id_artist));
-			
+		String id_product_type = request.getParameter("id_product_type");
+
+		ProductType product_type = null;
+		if (id_product_type != null) {
+
+			product_type = ProductTypeDao.doRetrieveByKey(Integer.parseInt(id_product_type));
+
 			if (name == null || name.trim().equals("")) {
-				artist.setName(artist.getName());
-			} else {
-				artist.setName(name);
-			}
-			
-			if (description == null || description.trim().equals("")) {
-				artist.setDescription(artist.getDescription());
-			} else {
-				artist.setDescription(description);
-			}
-			
-			ArtistDao.doSave(artist);
+				name = product_type.getName();
+			} 
 		} else {
-			response.sendError(HttpServletResponse.SC_BAD_GATEWAY);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}
 		
+		product_type.setName(name);
+		ProductTypeDao.doSave(product_type);
+
 		response.sendRedirect("list");
 	}
 
