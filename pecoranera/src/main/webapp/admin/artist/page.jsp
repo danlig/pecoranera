@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="dao.ArtistDao, model.Artist, java.util.List, java.util.Map"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,40 +25,56 @@
 		</style>
 	</head>
 <body>
-	<%
+	<%--<%
 		Map<String, String> messages = (Map<String, String>) request.getAttribute("messages");
 		if (messages != null)
 			for (Map.Entry<String, String> message : messages.entrySet()) {
-	%>
+	
 		<p class="<%= message.getKey() %>-color"><%= message.getValue() %></p>
 	<%
 		}
-		List<Artist> artists = ArtistDao.doRetrieveAll();
-	%>
-	<a href="<%=request.getContextPath()%>/admin/artist/add.jsp">Aggiungi un Artista</a>
-	<br><br>
+	%> --%>
 	<table>
 		<tr>
 			<th>Id</th>
 			<th>Nome</th>
 			<th>Description</th>
 		</tr>
-		<% for (Artist artist : artists) { 
-			request.setAttribute("artist", artist);
-			%>
-			<tr>
-				<td> <%-- <%= artist.getId() %> --%> ${ artist.id } </td>
-				<td><%= artist.getName() %></td>
-				<td><%= artist.getDescription() %></td>
+		<tr>
+			<form method="post" action="${pageContext.request.contextPath}/admin/artist/add">
+				<td>#</td>
 				<td>
-					<a href="${(String) pageContext.request.contextPath}/admin/artist/edit.jsp?id_artist=<%= artist.getId()%>">Modifica</a>
+					<input name="name" type="text" placeholder="Insert Name">
 				</td>
 				<td>
-					<a href="${(String) pageContext.request.contextPath}/admin//crud-artist/RemoveController?id_artist=<%= artist.getId()%>">Cancella</a>
+					<input name="description" type="text" placeholder="Insert Description">
 				</td>
+				<td colspan="2">
+					<input type="submit"value="Crea">
+				</td>
+			</form>
+		</tr>
+		<c:forEach var="artist" items="${artists}">
 			<tr>
-		<%} 
-		%>
+				<form method="POST" action="${pageContext.request.contextPath}/admin/artist/edit?id_artist=${artist.id}">
+					<td>
+						<c:out value="${artist.id}"/>
+					</td>
+					<td>
+						<input name="name" type="text" value="${artist.name }">
+					</td>
+					<td>
+						<input name="description" type="text" value="${artist.description }">
+					</td>
+					<td>
+						<input type="submit" value="Modifica">
+					</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/admin/artist/delete?id_artist=${artist.id}">Cancella</a>
+					</td>
+				</form>
+			</tr>
+		</c:forEach>
 	</table>
 </body>
 </html>

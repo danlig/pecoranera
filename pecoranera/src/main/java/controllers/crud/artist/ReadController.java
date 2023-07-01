@@ -1,8 +1,7 @@
 package controllers.crud.artist;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,26 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ArtistDao;
+import model.Artist;
 
-/**
- * Servlet implementation class RemoveController
- */
-public class RemoveController extends HttpServlet {
+public class ReadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public RemoveController() {
+    public ReadController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id_artist = request.getParameter("id_artist");
+		List<Artist> artists = ArtistDao.doRetrieveAll();
+		request.setAttribute("artists", artists);
 		
-		if (id_artist == null) {
-			response.sendError(HttpServletResponse.SC_BAD_GATEWAY);
-		}
-		
-		ArtistDao.doDeleteByKey(Integer.parseInt(id_artist));
-		response.sendRedirect("list");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/artist/page.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
