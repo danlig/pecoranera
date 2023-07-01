@@ -66,9 +66,30 @@
  <servlet>
  	<description>
  	</description>
- 	<display-name>ReadArtistController</display-name>
- 	<servlet-name>ReadArtistController</servlet-name>
- 	<servlet-class>controllers.crud.artist.ReadController</servlet-class>
+ 	<display-name>ReadController</display-name>
+ 	<servlet-name>ReadController</servlet-name>
+ 	<servlet-class>controllers.crud.tag.ReadController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>AddTagController</display-name>
+ 	<servlet-name>AddTagController</servlet-name>
+ 	<servlet-class>controllers.crud.tag.AddController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>EditTagController</display-name>
+ 	<servlet-name>EditTagController</servlet-name>
+ 	<servlet-class>controllers.crud.tag.EditController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>RemoveTagController</display-name>
+ 	<servlet-name>RemoveTagController</servlet-name>
+ 	<servlet-class>controllers.crud.tag.RemoveController</servlet-class>
  </servlet>
  
  <servlet-mapping>
@@ -104,6 +125,22 @@
  	<servlet-name>ReadArtistController</servlet-name>
  	<url-pattern>/admin/artist/list</url-pattern>
  </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>ReadController</servlet-name>
+ 	<url-pattern>/admin/tag/list</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>AddTagController</servlet-name>
+ 	<url-pattern>/admin/tag/add</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>EditTagController</servlet-name>
+ 	<url-pattern>/admin/tag/edit</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>RemoveTagController</servlet-name>
+ 	<url-pattern>/admin/tag/delete</url-pattern>
+ </servlet-mapping>
  
  <jsp-config>
      <jsp-property-group>
@@ -111,6 +148,7 @@
          <el-ignored>
              false
          </el-ignored>
+         
      </jsp-property-group>
  </jsp-config>
 </web-app>
