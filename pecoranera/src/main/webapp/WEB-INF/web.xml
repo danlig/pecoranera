@@ -136,17 +136,21 @@
  
  <servlet-mapping>
  	<servlet-name>RemoveController</servlet-name>
- 	<url-pattern>/admin/artist/RemoveController</url-pattern>
+ 	<url-pattern>/admin/artist/delete</url-pattern>
  </servlet-mapping>
  
  <servlet-mapping>
  	<servlet-name>AddController</servlet-name>
- 	<url-pattern>/admin/artist/AddController</url-pattern>
+ 	<url-pattern>/admin/artist/add</url-pattern>
  </servlet-mapping>
  
  <servlet-mapping>
  	<servlet-name>EditController</servlet-name>
- 	<url-pattern>/admin/artist/EditController</url-pattern>
+ 	<url-pattern>/admin/artist/edit</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>ReadArtistController</servlet-name>
+ 	<url-pattern>/admin/artist/list</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
 <<<<<<< HEAD
