@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
  <display-name>Archetype Created Web Application</display-name>
  
  <filter>
@@ -63,6 +63,7 @@
  	<description></description>
  	<servlet-class>controllers.crud.artist.EditController</servlet-class>
  </servlet>
+ 
  <servlet>
  	<description>
  	</description>
@@ -90,6 +91,34 @@
  	<display-name>RemoveTagController</display-name>
  	<servlet-name>RemoveTagController</servlet-name>
  	<servlet-class>controllers.crud.tag.RemoveController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>ReadProductTypeController</display-name>
+ 	<servlet-name>ReadProductTypeController</servlet-name>
+ 	<servlet-class>controllers.crud.product_type.ReadController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>AddProductTypeController</display-name>
+ 	<servlet-name>AddProductTypeController</servlet-name>
+ 	<servlet-class>controllers.crud.product_type.AddController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>EditProductTypeController</display-name>
+ 	<servlet-name>EditProductTypeController</servlet-name>
+ 	<servlet-class>controllers.crud.product_type.EditController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>RemoveProductTypeController</display-name>
+ 	<servlet-name>RemoveProductTypeController</servlet-name>
+ 	<servlet-class>controllers.crud.product_type.RemoveController</servlet-class>
  </servlet>
  
  <servlet-mapping>
@@ -122,6 +151,7 @@
  	<url-pattern>/admin/artist/EditController</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
+<<<<<<< HEAD
  	<servlet-name>ReadController</servlet-name>
  	<url-pattern>/admin/tag/list</url-pattern>
  </servlet-mapping>
@@ -136,6 +166,22 @@
  <servlet-mapping>
  	<servlet-name>RemoveTagController</servlet-name>
  	<url-pattern>/admin/tag/delete</url-pattern>
+=======
+ 	<servlet-name>ReadProductTypeController</servlet-name>
+ 	<url-pattern>/admin/product-type/list</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>AddProductTypeController</servlet-name>
+ 	<url-pattern>/admin/product-type/add</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>EditProductTypeController</servlet-name>
+ 	<url-pattern>/admin/product-type/edit</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>RemoveProductTypeController</servlet-name>
+ 	<url-pattern>/admin/product-type/delete</url-pattern>
+>>>>>>> branch 'main' of https://github.com/danlig/pecoranera.git
  </servlet-mapping>
  
  <jsp-config>
