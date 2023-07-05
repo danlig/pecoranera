@@ -165,7 +165,7 @@ nav ul li{
     left: 50%;
     transform: translateX(-50%);
     perspective: 1000px;
-    z-index: 4;
+    z-index: 5;
     width: fit-content;
     padding: .5rem;
 }

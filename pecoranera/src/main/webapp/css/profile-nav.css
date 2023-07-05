@@ -1,0 +1,32 @@
+#profile-nav{
+    width: 18rem;
+    height: 100vh;
+    padding-top: calc(var(--nav-height) + 3rem);
+    padding-bottom: .5rem;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: var(--dark-background);
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+#profile-nav a{
+    display: block;
+    color: var(--main-color);
+    text-decoration: none;
+    font-size: 2rem;
+    font-family: var(--header-font);
+    padding-left: 1.5rem;
+    transition: .5s ease-out;
+}
+
+#profile-nav a:hover, 
+#profile-nav a:focus{
+    color: var(--neon-light);
+}
+
+#profile-nav a.active_page{
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+}

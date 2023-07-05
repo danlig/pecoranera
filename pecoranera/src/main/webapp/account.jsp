@@ -26,13 +26,9 @@
     </jsp:include>
 
     <section id="profile-section">
-        <div id="side-nav">
-            <a href="#panoramica" class="account-link">Panoramica</a>
-            <a href="#ordini" class="account-link">Ordini</a>
-            <a href="#preferenze" class="account-link">Preferenze</a>
-            <a href="#dati" class="account-link">Dati Personali</a>
-            <a href="index.jsp" class="account-link">Esci</a>
-        </div>
+        <jsp:include page="./assets/profile-nav.jsp">
+            <jsp:param name="profile_page" value="panoramica" />
+        </jsp:include>
 
         <div id="display-data">
             <section id="panoramica">

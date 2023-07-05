@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/info.css">
         <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
-        <script src="${pageContext.request.contextPath}/scripts/info.js"></script>
+        <script type="module" src="${pageContext.request.contextPath}/scripts/info.js"></script>
     </head>
 </head>
 <body>
@@ -33,21 +33,21 @@
         </div>
 
         <div id="slideshow">
-            <img src="" alt="" class="first">
-            <img src="" alt="" class="second">
-            <img src="" alt="" class="third">
+            <img src="${pageContext.request.contextPath}/images/locale1.jpg" alt="" id="img1">
+            <img src="${pageContext.request.contextPath}/images/locale2.jpg" alt="" id="img2">
+            <img src="${pageContext.request.contextPath}/images/batteria2.jpg" alt="" id="img3">
         </div>
         
     </section>
 
     <section id="aldo-fucile">
-        <div class="side-text right">
-            <img src="" alt="">
+        <img src="${pageContext.request.contextPath}/images/aldo_fucile.png" alt="">
 
+        <div class="side-text">
             <h2>Aldo Fucile</h2>
 
             <p>
-                Affascinato sin da piccolo dagli strumenti a percussione ne 
+                "Affascinato sin da piccolo dagli strumenti a percussione ne 
                 intuisco ben presto le infinite modalità espressive non solo di 
                 natura ritmica ma anche melodica ed armonica. <br>
                 Ho capito che l'esprimersi attraverso le percussioni è un'arte 
@@ -57,7 +57,7 @@
                 Il mio obiettivo è quello di riuscire a tradurre in suoni e 
                 ritmo reali, servendomi di questa modalità di ascolto profondo, 
                 le sonorità e il ritmo che incessantemente fluiscono nel tempo e che 
-                forse costituiscono l'essenza della vita stessa e della natura.
+                forse costituiscono l'essenza della vita stessa e della natura."
             </p>
         </div>
     </section>

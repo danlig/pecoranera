@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    let loadingWheel = $("#loading-wheel-wrapper");
 
     $(".close-login").on("click", function(e){
         e.preventDefault();
@@ -28,12 +29,14 @@ $(document).ready(function(){
             url: 'LoginController',
 
             data:{
-                email: $("login-email").val(),
-                password: $("login-password").val()
+                email: $("#login-email").val(),
+                password: $("#login-password").val()
             },
 
             success: function(){
                 alert('LOGGATO!!!!');
+                loadingWheel.fadeOut(500);
+                window.location.replace(`account.jsp#panoramica`);
             },
 
             statusCode: {
@@ -41,10 +44,13 @@ $(document).ready(function(){
                 401: function(){
                     //alert("ERRORE BRO");
                     $("#login-error").css("opacity", "1");
+                    loadingWheel.fadeOut(500);
                 }
             }
         });
 
+        loadingWheel.fadeIn(500);
+        loadingWheel.children().first().load("./assets/loading-wheel.html");
         e.preventDefault();
     });
 

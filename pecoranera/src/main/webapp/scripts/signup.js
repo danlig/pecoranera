@@ -36,11 +36,13 @@ $(document).ready(function(){
         
                     success: function(){
                         alert("REGISTRATO");
-                        window.location.replace(`account.jsp`);
+                        loadingWheel.fadeOut(500);
+                        window.location.replace(`account.jsp#panoramica`);
                     },
         
                     statusCode: {
                         401: function(message){
+                            loadingWheel.fadeOut(500);
                             alert(JSON.stringify(message));
                             $("#signup-error").css("opacity", "1");
                             e.preventDefault();
@@ -48,15 +50,9 @@ $(document).ready(function(){
                     }
                 });
 
-                /*if($("#email").val()){
 
-
-                } else {
-                    loadingWheel.fadeIn(500);
-                    loadingWheel.children().first().load("./assets/loading-wheel.html");
-                    await new Promise(r => setTimeout(r, 2000));
-                    window.location.href = `confirm-email.jsp`;
-                }*/
+                loadingWheel.fadeIn(500);
+                loadingWheel.children().first().load("./assets/loading-wheel.html");
             }
 
             else {

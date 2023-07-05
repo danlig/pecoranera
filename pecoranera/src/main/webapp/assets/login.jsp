@@ -43,6 +43,12 @@
             <a id="login-link" href="login">Hai già un account?</a>
         </form>
 
+        <div id="loading-wheel-wrapper" style="display: none;">
+            <div id="loading-wheel">
+    
+            </div>
+        </div>
+
         <script src="scripts/login.js"></script>
     </div>
 </body>
