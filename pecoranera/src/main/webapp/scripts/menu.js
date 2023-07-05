@@ -31,7 +31,7 @@ $(document).ready(function(){
 
     async function loadProductTypes(){
         $.ajax({
-            url: "MenuController",
+            url: "menu",
 
             dataType: 'json',
 
@@ -70,7 +70,7 @@ $(document).ready(function(){
 
         else {
             $.ajax({
-                url: `MenuProductController`,
+                url: `menu/product`,
 
                 data:{
                     type: ""
@@ -89,7 +89,7 @@ $(document).ready(function(){
                 
                statusCode: {
                   404: function() {
-                    alert('Errore, json file non trovato');
+                    alert('Errore, prodotti non trovati');
                   }
                 }
              }).done(function(){
@@ -129,6 +129,7 @@ $(document).ready(function(){
     });
 
     //load products after loading 
-    $(window).on("load", loadProducts(productChoice, true));
     $(window).on("load", loadProductTypes());
+    $(window).on("load", loadProducts(productChoice, true));
+    
 });
