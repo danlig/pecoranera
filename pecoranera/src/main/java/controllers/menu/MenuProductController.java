@@ -21,7 +21,7 @@ public class MenuProductController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id_product_type = request.getParameter("type"); //mettere il nome
+		String id_product_type = request.getParameter("type");
 		
 		try {
 			ProductType productType = ProductTypeDao.doRetrieveByKey(Integer.parseInt(id_product_type));
