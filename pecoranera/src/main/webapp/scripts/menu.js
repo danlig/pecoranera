@@ -73,7 +73,7 @@ $(document).ready(function(){
                 url: `menu/product`,
 
                 data:{
-                    type: ""
+                    type: productChoice
                 },
 
                 dataType: 'json',
