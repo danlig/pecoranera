@@ -40,8 +40,8 @@ $(document).ready(function(){
                 $.each(data, function(key, val){ 
                     productTypes[key] = val;
 
-                    $("#category-select").append(`<option value="${key}">${value}</option>`)
-                    $("#product-types-link").append(`<a href="#${key}" class="category-link">${value}</a>`);
+                    $("#category-select").append(`<option value="${key}">${val}</option>`)
+                    $("#product-types-link").append(`<a href="#${key}" class="category-link">${val}</a>`);
                 });
                 
             },
