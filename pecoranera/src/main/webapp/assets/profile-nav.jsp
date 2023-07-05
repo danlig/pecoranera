@@ -8,11 +8,11 @@
 </head>
 <body>
     <div id="profile-nav">
-        <a href="#panoramica" class="account-link ${param.profile_page == 'panoramica'  ? 'active_page' : ''}">Panoramica</a>
-        <a href="#ordini" class="account-link ${param.profile_page == 'ordini'  ? 'active_page' : ''}">Ordini</a>
-        <a href="#preferenze" class="account-link ${param.profile_page == 'preferenze'  ? 'active_page' : ''}">Preferenze</a>
-        <a href="#dati" class="account-link ${param.profile_page == 'dati'  ? 'active_page' : ''}">Dati Personali</a>
-        <a href="logout" class="account-link">Esci</a>
+        <a href="#panoramica" class="account-link"><span>Panoramica</span><i class="fa-solid fa-panorama"></i></a>
+        <a href="#ordini" class="account-link"><span>Ordini</span><i class="fa-solid fa-ticket"></i></a>
+        <a href="#preferenze" class="account-link"><span>Preferenze</span><i class="fa-solid fa-thumbs-up"></i></a>
+        <a href="#dati" class="account-link"><span>Dati Personali</span><i class="fa-solid fa-circle-info"></i></a>
+        <a href="logout" class="account-link"><span>Esci</span><i class="fa-solid fa-right-from-bracket"></i></a>
     </div>
 </body>
 </html>

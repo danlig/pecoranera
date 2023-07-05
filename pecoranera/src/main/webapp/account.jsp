@@ -31,25 +31,7 @@
         </jsp:include>
 
         <div id="display-data">
-            <section id="panoramica">
-                <h2 class="page-header"><c:out value="${sessionScope.username}"/></h2>
 
-                <div>
-                    <h3>I tuoi ordini</h3>
-
-                    <div class="order-preview"></div>
-
-                    <div class="order-preview"></div>
-                </div>
-            </section>
-
-            <section id="ordini">
-                <p>ORDINI</p>
-            </section>
-
-            <section id="preferenze">
-                <p>PREFERENZE</p>
-            </section>
         </div>
     </section>
 

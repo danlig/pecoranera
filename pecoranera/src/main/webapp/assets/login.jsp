@@ -1,9 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
+
     <div id="form-wrapper">
         <link rel="stylesheet" href="css/login.css">
         <button class="close-login"><i class="fa-solid fa-xmark"></i></button>
@@ -51,5 +47,3 @@
 
         <script src="scripts/login.js"></script>
     </div>
-</body>
-</html>

@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <script src="https://kit.fontawesome.com/0447c444c7.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
-        <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
-    </head>
 
-    <body>
         <footer>
+            <script src="https://kit.fontawesome.com/0447c444c7.js" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+            <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+
             <div>
                 <div class="footer-section">
                     <h2>RISORSE</h2>
@@ -52,5 +48,3 @@
 
             <span id="copyright">&copy; Copyright <%= new java.text.SimpleDateFormat("yyyy").format(new java.util.Date()) %>, Pecoranera</span>
         </footer>
-    </body>
-</html>

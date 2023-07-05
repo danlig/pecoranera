@@ -145,6 +145,12 @@
     font-family: var(--main-font);
 }
 
+#loading-wheel-wrapper{
+    position: fixed;
+    background-color: var(--dark-background);
+    z-index: 5;
+}
+
 @media only screen and (max-width: 600px) {
     #form-wrapper{
         width: 80vw;

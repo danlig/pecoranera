@@ -5,7 +5,7 @@
     padding-bottom: .5rem;
     margin: 0;
     box-sizing: border-box;
-    background-color: var(--dark-background);
+    background-color: black;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -21,6 +21,14 @@
     transition: .5s ease-out;
 }
 
+#profile-nav a>span{
+    display: block;
+}
+
+#profile-nav a>i{
+    display: none;
+}
+
 #profile-nav a:hover, 
 #profile-nav a:focus{
     color: var(--neon-light);
@@ -29,4 +37,41 @@
 #profile-nav a.active_page{
     color: var(--neon-color);
     text-shadow: var(--neon-effect);
+}
+
+@media only screen and ((max-width: 600px) or (max-aspect-ratio: 1)){
+    #profile-nav{
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        height: fit-content;
+        padding-top: 0;
+        padding-bottom: 5rem;
+        flex-direction: row;
+        z-index: 2;
+    }
+
+    #profile-nav::before{
+        content: "";
+        position: absolute;
+        top: -3rem;
+        width: 100vw;
+        height: 3rem;
+        background-color: black;
+        border-radius: 100% 100% 0 0;
+        z-index: 1;
+    }
+
+    #profile-nav a{
+        padding-left: 0rem;
+    }
+    
+
+    #profile-nav a>span{
+        display: none;
+    }
+
+    #profile-nav a>i{
+        display: block;
+    }
 }

@@ -50,7 +50,7 @@ $(document).ready(function(){
         });
 
         loadingWheel.fadeIn(500);
-        loadingWheel.children().first().load("./assets/loading-wheel.html");
+        loadingWheel.children().first().load("./assets/loading-wheel.jsp");
         e.preventDefault();
     });
 
