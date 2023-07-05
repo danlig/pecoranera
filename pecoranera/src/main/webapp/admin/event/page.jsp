@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -38,6 +38,9 @@
 				<th>Date</th>
 				<th>Available Tickets</th>
 				<th>Max Tickets</th>
+				<th>Photo</th>
+				<th>Artist</th>
+				<th>Tag</th>
 			</tr>
 			
 			<tr>
@@ -71,6 +74,26 @@
 						<input type="number" name="max_tickets" placeholder="Insert Max Tickets">
 					</td>
 					
+					<td>
+						<input type="file" name="photo">
+					</td>
+					
+					<td>
+						<select style="height: 30px" name="tags" multiple>
+							<c:forEach var="tag" items="${tags}">
+								<option value="${tag.id}">${tag.name}</option>
+							</c:forEach>
+						</select>
+					</td>
+					
+					<td>
+						<select style="height: 30px" name="artists" multiple>
+							<c:forEach var="artist" items="${artists}">
+								<option value="${artist.id}">${artist.name}</option>
+							</c:forEach>
+						</select>
+					</td>
+					
 					<td colspan="2">
 						<input type="submit" value="Crea">
 					</td>
@@ -82,7 +105,60 @@
 				<tr>
 					<form method="POST" action="${pageContext.request.contextPath}/admin/pevent/edit?id_event=${event.id}">
 						<td>
+							<c:out value="${event.id}" />
+						</td>
 						
+						<td>
+							<input type="text" name="name" value="${event.name}">
+						</td>
+						
+						<td>
+							<input type="text" name="description" value="${event.description}">
+						</td>
+						
+						<td>
+							<input type="text" name="price" value="${event.price}">
+						</td>
+						
+						<td>
+							<input type="date" name="date" value="${event.date}">
+						</td>
+						
+						<td>
+							<input type="number" name="available_tickets" value="${event.availableTickets}">
+						</td>
+						
+						<td>
+							<input type="number" name="max_tickets" value="${event.maxTickets}">
+						</td>
+						
+						<td>
+							<input type="file" name="photo">
+						</td>
+						
+						<td>
+							<select style="height: 30px" name="tags" multiple>
+								<c:forEach var="tag" items="${tags}">
+									<option value="${tag.id}">${tag.name}</option>
+								</c:forEach>
+							</select>
+						</td>
+					
+						<td>
+							<select style="height: 30px" name="artists" multiple>
+								<c:forEach var="artist" items="${artists}">
+									<option value="${artist.id}">${artist.name}</option>
+								</c:forEach>
+							</select>
+						</td>
+
+						<td>
+							<input type="submit" value="Modifica">
+						</td>
+						
+						
+						<td>
+							<a href="${pageContext.request.contextPath}/admin/event/edit?id_event=${event.id}">Elimina</a>
 						</td>
 					</form>
 				</tr>

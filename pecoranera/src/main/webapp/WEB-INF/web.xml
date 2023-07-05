@@ -125,6 +125,41 @@
  	<servlet-class>controllers.crud.product_type.RemoveController</servlet-class>
  </servlet>
  
+ <!-- Servlet per gli event -->
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>AddEventController</display-name>
+ 	<servlet-name>AddEventController</servlet-name>
+ 	<servlet-class>controllers.crud.event.AddController</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>ReadEventController</display-name>
+ 	<servlet-name>ReadEventController</servlet-name>
+ 	<servlet-class>controllers.crud.event.ReadController</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>EditEventController</display-name>
+ 	<servlet-name>EditEventController</servlet-name>
+ 	<servlet-class>controllers.crud.event.EditController</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>RemoveEventController</display-name>
+ 	<servlet-name>RemoveEventController</servlet-name>
+ 	<servlet-class>controllers.crud.event.RemoveController</servlet-class>
+ </servlet> 
+ 
+ 
  
  <servlet-mapping>
  	<servlet-name>RegisterController</servlet-name>
@@ -206,6 +241,29 @@
  	<servlet-name>RemoveProductTypeController</servlet-name>
  	<url-pattern>/admin/product-type/delete</url-pattern>
  </servlet-mapping>
+  
+ <!-- Servlet-mapping per gli eventi -->
+ 
+ <servlet-mapping>
+ 	<servlet-name>AddEventController</servlet-name>
+ 	<url-pattern>/admin/event/add</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>ReadEventController</servlet-name>
+ 	<url-pattern>/admin/event/list</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>EditEventController</servlet-name>
+ 	<url-pattern>/admin/event/edit</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>RemoveEventController</servlet-name>
+ 	<url-pattern>/admin/event/delete</url-pattern>
+ </servlet-mapping>
+ 
  
  <jsp-config>
      <jsp-property-group>
