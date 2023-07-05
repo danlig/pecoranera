@@ -1,4 +1,4 @@
-package controllers.product;
+package controllers.menu;
 
 import java.io.IOException;
 import com.google.gson.Gson;
