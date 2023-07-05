@@ -19,14 +19,12 @@
     <div id="category-selection">
         <label for="category-select">Sfoglia:</label>
         <select name="category-select" id="category-select">
-            <option value="birre">Birre</option>
-            <option value="vini">Vini</option>
-            <option value="panini">Panini</option>
+            
         </select>
 
-        <a href="#birre" class="category-link">Birre</a>
-        <a href="#vini" class="category-link">Vini</a>
-        <a href="#panini" class="category-link">Panini</a>
+        <div id="product-types-link">
+            
+        </div>
     </div>
 
     <section id="product-section">

@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
-    let productChoice = window.location.hash.substring(1) || "birre";
+    let productChoice = window.location.hash.substring(1) || "1";
     let loadedProducts = {};
+    let productTypes = {};
     let previousRef;
    
     $(`a[href="#${productChoice}"]`).addClass("active");
@@ -28,25 +29,55 @@ $(document).ready(function(){
                 </div>`;
     }
 
-    function loadProducts(jsonFile, isFirstTime){
+    async function loadProductTypes(){
+        $.ajax({
+            url: "MenuController",
 
-        if(jsonFile == previousRef)
+            dataType: 'json',
+
+            success: function(data) {        
+                    
+                $.each(data, function(key, val){ 
+                    productTypes[key] = val;
+
+                    $("#category-select").append(`<option value="${key}">${value}</option>`)
+                    $("#product-types-link").append(`<a href="#${key}" class="category-link">${value}</a>`);
+                });
+                
+            },
+
+            error: function(){
+                alert("Errore nel caricamento dei tipi di prodotti")
+            }
+        });
+
+    }
+
+    function loadProducts(choice, isFirstTime){
+
+        if(choice == previousRef)
             return;
 
         if(!isFirstTime){
             loadedProducts[previousRef] = $("#product-section>div").children().detach();
         }
 
-        if(loadedProducts.hasOwnProperty(jsonFile)){
+        if(loadedProducts.hasOwnProperty(choice)){
             $("#product-section>div").empty();
-            $("#product-section>div").append(loadedProducts[jsonFile]);
-            previousRef = jsonFile;
+            $("#product-section>div").append(loadedProducts[choice]);
+            previousRef = choice;
         }
 
         else {
             $.ajax({
-                url: `assets/${jsonFile}.json`,
+                url: `MenuProductController`,
+
+                data:{
+                    type: ""
+                },
+
                 dataType: 'json',
+
                 success: function(data) {
                     
                     
@@ -65,7 +96,7 @@ $(document).ready(function(){
                 if(isFirstTime){
                     previousRef = productChoice;
                 } else {
-                    previousRef = jsonFile;
+                    previousRef = choice;
                 }
              });
         }
@@ -99,5 +130,5 @@ $(document).ready(function(){
 
     //load products after loading 
     $(window).on("load", loadProducts(productChoice, true));
-
+    $(window).on("load", loadProductTypes());
 });

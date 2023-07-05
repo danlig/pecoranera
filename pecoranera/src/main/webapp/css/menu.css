@@ -19,6 +19,13 @@ body{
     border-bottom: 2px solid white;
 }
 
+#product-types-link{
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .category-link{
     position: relative;
     display: block;
