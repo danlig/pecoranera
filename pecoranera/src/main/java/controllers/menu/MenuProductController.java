@@ -30,8 +30,8 @@ public class MenuProductController extends HttpServlet {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
 			
-			response.setContentType("text/plain");
-			response.getWriter().write(new Gson().toJson(productType.getProducts()));
+			response.setContentType("application/json");
+			//response.getWriter().write(new Gson().toJson(productType.getProducts()));
 		} catch (NumberFormatException ex) {
 			response.sendError(HttpServletResponse.SC_ACCEPTED, "Id Format Not Allow");
 		}

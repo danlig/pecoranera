@@ -29,19 +29,21 @@ $(document).ready(function(){
                 </div>`;
     }
 
-    async function loadProductTypes(){
+    function loadProductTypes(){
         $.ajax({
             url: "menu",
 
             dataType: 'json',
 
-            success: function(data) {        
-                    
+            success: function(data) {    
+                 
                 $.each(data, function(key, val){ 
-                    productTypes[key] = val;
+                    console.log(val);
 
-                    $("#category-select").append(`<option value="${key}">${val}</option>`)
-                    $("#product-types-link").append(`<a href="#${key}" class="category-link">${val}</a>`);
+                    productTypes[val.id] = val.name;
+
+                    $("#category-select").append(`<option value="${val.id}">${val.name}</option>`)
+                    $("#product-types-link").append(`<a href="#${val.id}" class="category-link">${val.name}</a>`);
                 });
                 
             },
