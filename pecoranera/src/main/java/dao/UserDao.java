@@ -7,8 +7,8 @@ import model.User;
 public class UserDao {
 	private static BasicCrudDao<User> crud = new BasicCrudDao<>(User.class);
 
-	public static void doSave(User item) {
-		crud.doSave(item);
+	public static User doSave(User item) {
+		return crud.doSave(item);
 	}
 
 	public static void doDeleteByKey(int id) {

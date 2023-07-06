@@ -9,8 +9,8 @@ import model.EventArtist;
 public class EventDao {
 	private static BasicCrudDao<Event> crud = new BasicCrudDao<>(Event.class);
 
-	public static void doSave(Event item) {
-		crud.doSave(item);
+	public static Event doSave(Event item) {
+		return crud.doSave(item);
 	}
 
 	public static void doDeleteByKey(int id) {

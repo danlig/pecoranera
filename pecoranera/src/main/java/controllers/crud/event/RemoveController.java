@@ -1,38 +1,49 @@
 package controllers.crud.event;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class RemoveController
- */
+import com.google.gson.Gson;
+
+import dao.EventDao;
+import model.Event;
+
 public class RemoveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public RemoveController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		List<String> message = new ArrayList<>();
+		String id_event = request.getParameter("id_event");
+		
+		try {
+			Event event = EventDao.doRetrieveByKey(Integer.parseInt(id_event));
+			
+			if (event == null) {
+				message.add("Event Not Found");
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, new Gson().toJson(message));
+			}
+			
+			// Rimuovere il file
+			EventDao.doDeleteByKey(event.getId());
+			
+			response.sendRedirect("list");
+		} catch (NumberFormatException ex) {
+			message.add("Id Format Not Allowed");
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(message));
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

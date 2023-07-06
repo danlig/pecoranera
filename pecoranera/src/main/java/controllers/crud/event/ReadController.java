@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ArtistDao;
 import dao.EventDao;
 import dao.TagDao;
 
@@ -20,7 +21,6 @@ public class ReadController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("events", EventDao.doRetrieveAll());
 		request.setAttribute("tags", TagDao.doRetrieveAll());
-		request.setAttribute("events", EventDao.doRetrieveAll());
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/event/page.jsp");
 		dispatcher.forward(request, response);

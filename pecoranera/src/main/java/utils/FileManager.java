@@ -12,13 +12,18 @@ import javax.servlet.GenericServlet;
 import javax.servlet.http.Part;
 
 public class FileManager {
-	private static final String PATH_DIR = File.separator + "static" + File.separator + "imgs";
+	private static final String PATH_DIR = "static" + File.separator + "imgs";
 	
 	public static boolean addImg(String path, String dir, String newName, Part partFile) {
 		String fileName = newName + getFileExtension(partFile);
 		String savePath = path + PATH_DIR + File.separator + dir + File.separator + fileName;
 	
+		System.out.println("Path dir:" + savePath);
+		
 		File file = new File(savePath);
+		if (!file.exists()) {
+			file.mkdir();
+		}
 		
 		try (
 			InputStream inputStream = partFile.getInputStream();
@@ -36,6 +41,24 @@ public class FileManager {
 		}
 		
 		return true;
+	}
+	
+	public static boolean deleteImg(String path, String dirName, String fileName) {
+		File dir = new File(path + PATH_DIR + File.separator + dirName);
+		
+		if (!dir.exists()) {
+			return false;
+		}
+		
+        File[] files = dir.listFiles((dir1, name) -> name.startsWith(fileName));
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    file.delete();
+                }
+            }
+        }
+        return true;
 	}
 	
 	public static String getFileExtension(Part file) {
