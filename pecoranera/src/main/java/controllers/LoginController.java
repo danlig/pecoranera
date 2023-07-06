@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utils.LoginUtils;
+import utils.ValidatorUtils;
 import dao.UserDao;
 import model.User;
 
@@ -20,19 +22,19 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		
-		if (email == null || email.trim().equals("")) {
+    
+		if (!ValidatorUtils.CheckEmail(email)) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			return;
 		}
 		
-		if (password == null || password.trim().equals("")) {
+		if (!ValidatorUtils.CheckPassword(password)) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			return;
 		}
 		
 		User user = UserDao.doRetrieveByEmail(email);
-		if (user == null || !user.getPassword().equals(password)) {
+		if (user == null || !user.getPassword().equals(LoginUtils.toHash(password))) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		} else if (user.isAdmin()) {
 			response.setStatus(200);
@@ -45,5 +47,4 @@ public class LoginController extends HttpServlet {
 		}
 
 	}
-
 }

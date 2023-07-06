@@ -12,6 +12,8 @@ import dao.CartDao;
 import dao.UserDao;
 import model.Cart;
 import model.User;
+import utils.ValidatorUtils;
+import utils.LoginUtils;
 
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,18 +32,17 @@ public class RegisterController extends HttpServlet {
 		String password = request.getParameter("password");
 		String conf_password = request.getParameter("conf_password");
 			
-		if (email == null || email.trim().equals("") || UserDao.doRetrieveByEmail(email) != null) {
+		if (!ValidatorUtils.CheckEmail(email) || UserDao.doRetrieveByEmail(email) != null) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "email");
 			return;
 		}
 		
-		if (username == null || username.trim().equals("")) {
+		if (!ValidatorUtils.CheckUsername(username)) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "username");
 			return;
 		} 
-		
-		//Add password safety to this if
-		if (password == null || password.trim().equals("") || !password.equals(conf_password)) {
+
+		if (!ValidatorUtils.CheckPassword(password) || !password.equals(conf_password) || email.equals(password)) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "password");
 			return;
 		}
@@ -52,7 +53,7 @@ public class RegisterController extends HttpServlet {
 
 		user.setUsername(username);
 		user.setEmail(email);
-		user.setPassword(password);
+		user.setPassword(LoginUtils.toHash(password));
 		user.setAdmin(false);
 		UserDao.doSave(user);
 		
@@ -62,7 +63,5 @@ public class RegisterController extends HttpServlet {
 		
 		request.getSession().setAttribute("username", username);
 		request.getSession().setAttribute("isAdmin", Boolean.FALSE);
-
 	}
-
 }
