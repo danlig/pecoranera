@@ -1,4 +1,4 @@
-import {moveToListAndSort, resetTags, ajaxTagRequest} from "./modules/eventTagManager.js";
+import {moveToListAndSort, resetTags, ajaxTagRequest, selectedTags} from "./modules/eventTagManager.js";
 
 $(document).ready(function(){
     ajaxTagRequest("#filter-choice div");
@@ -7,6 +7,28 @@ $(document).ready(function(){
     resetTags($("input[type=reset]"), $("#selected-filter div"), $("#filter-choice div"))
 
     $("input[type=reset]").on("click", function(){
-        
-    })
+
+    });
+
+    $("#save-changes").on("click", function(){
+        $.ajax({
+            url: 'TagController',
+
+            type: "POST",
+
+            dataType: "json",
+
+            data:{
+                ids: JSON.stringify(selectedTags)
+            },
+
+            success: function(){
+                alert("Preferenze salvate");
+            },
+
+            error: function(){
+                alert("Errore nel salvataggio preferenze");
+            }
+        });
+    });
 });
