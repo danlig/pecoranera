@@ -41,7 +41,7 @@
                 <span>La password deve contenere almeno:</span>
 
                 <ul id="pwd-checklist">
-                    <li id="pwd-length" class="pwd-check">16 caratteri <i class="fa-solid fa-xmark"></i></li>
+                    <li id="pwd-length" class="pwd-check">tra gli 8 e i 20 caratteri <i class="fa-solid fa-xmark"></i></li>
                     <li id="pwd-upper" class="pwd-check">Una maiuscola <i class="fa-solid fa-xmark"></i></li>
                     <li id="pwd-lower" class="pwd-check">Una minuscola <i class="fa-solid fa-xmark"></i></li>
                     <li id="pwd-number" class="pwd-check">Un numero <i class="fa-solid fa-xmark"></i></li>

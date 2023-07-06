@@ -133,7 +133,7 @@ label{
 
 #category-select>option{
     background-color: var(--dark-background);
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 #scroll-up{

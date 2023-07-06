@@ -69,11 +69,11 @@
         <h1>MENU</h1>
         
         <div id="menu-choice">
-            <a id="food" href="menu.jsp#birre">
+            <a id="food" href="menu.jsp#2">
                 Hai fame? Prova il nostro menu!
             </a>
 
-            <a id="drink" href="menu.jsp#panini">
+            <a id="drink" href="menu.jsp#1">
                 Hai sete? Sperimenta i nostri drink!
             </a>
         </div>

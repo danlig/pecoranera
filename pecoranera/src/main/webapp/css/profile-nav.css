@@ -46,7 +46,7 @@
         width: 100vw;
         height: fit-content;
         padding-top: 0;
-        padding-bottom: 5rem;
+        padding-bottom: 2.5rem;
         flex-direction: row;
         z-index: 2;
     }

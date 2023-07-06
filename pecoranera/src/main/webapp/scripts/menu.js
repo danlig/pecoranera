@@ -3,9 +3,6 @@ $(document).ready(function(){
     let productChoice = window.location.hash.substring(1) || "1";
     let loadedProducts = {};
     let previousRef;
-   
-    $(`a[href="#${productChoice}"]`).addClass("active");
-    $(`option[value="${productChoice}"]`).attr('selected', 'selected');
 
     $(window).scroll(function() {
         if ($(document).scrollTop() > 1) {
@@ -37,11 +34,12 @@ $(document).ready(function(){
             success: function(data) {    
                  
                 $.each(data, function(key, val){ 
-                    console.log(val);
-
                     $("#category-select").append(`<option value="${val.id}">${val.name}</option>`)
                     $("#product-types-link").append(`<a href="#${val.id}" class="category-link">${val.name}</a>`);
                 });
+
+                $(`a[href="#${productChoice}"]`).addClass("active");
+                $(`option[value="${productChoice}"]`).attr('selected', 'selected');
                 
             },
 
@@ -131,5 +129,4 @@ $(document).ready(function(){
     //load products after loading 
     $(window).on("load", loadProductTypes());
     $(window).on("load", loadProducts(productChoice, true));
-    
 });

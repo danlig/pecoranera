@@ -44,6 +44,7 @@ public class RegisterController extends HttpServlet {
 
 		if (!ValidatorUtils.CheckPassword(password) || !password.equals(conf_password) || email.equals(password)) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "password");
+			System.out.println("password");
 			return;
 		}
 		

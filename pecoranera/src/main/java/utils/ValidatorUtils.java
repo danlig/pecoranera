@@ -28,7 +28,7 @@ public class ValidatorUtils {
 		 
 		 String regex = "^(?=.*[0-9])"
 		               + "(?=.*[a-z])(?=.*[A-Z])"
-		               + "(?=.*[@#$%^&+=])"
+		               + "(?=.*[@#!$%^&+=])"
 		               + "(?=\\S+$).{8,20}$";
 		 return RegexValidation(regex, password);
 	 }

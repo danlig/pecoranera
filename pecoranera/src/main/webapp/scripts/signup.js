@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    let pwdLength = /^.{10,35}$/,
+    let pwdLength = /^.{8,20}$/,
         pwdUpper = /[A-Z]+/,
         pwdLower = /[a-z]+/,
         pwdNumber = /[0-9]+/,
@@ -41,9 +41,9 @@ $(document).ready(function(){
                     },
         
                     statusCode: {
-                        401: function(message){
+                        401: function(request, error){
                             loadingWheel.fadeOut(500);
-                            alert(JSON.stringify(message));
+                            alert(JSON.stringify(error));
                             $("#signup-error").css("opacity", "1");
                             e.preventDefault();
                         },
@@ -163,6 +163,18 @@ $(document).ready(function(){
 
         arePasswordMatching = checkPasswordMatch();
     });
+
+    $("#password").on("keydown", function(e){
+        if (e.keyCode == 32) {
+            return false;
+        }
+    });
+
+    $("#confirm-password").on("keydown", function(e){
+        if (e.keyCode == 32) {
+            return false;
+        }
+    })
 
     $("#confirm-password").on("input", function(){
         arePasswordMatching = checkPasswordMatch();
