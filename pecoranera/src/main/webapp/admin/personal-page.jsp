@@ -13,6 +13,9 @@
 			<a href="${pageContext.request.contextPath}/admin/artist/list">CRUD Artisti</a>
 		</li>
 		<li>
+			<a href="${pageContext.request.contextPath}/admin/product/list">CRUD Product</a>
+    </li>
+    <li>
 			<a href="${pageContext.request.contextPath}/admin/tag/list">CRUD Tag</a>
 		</li>
 		<li>

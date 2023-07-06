@@ -65,6 +65,34 @@
  	<description></description>
  	<servlet-class>controllers.crud.artist.EditController</servlet-class>
  </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>ReadProductController</display-name>
+ 	<servlet-name>ReadProductController</servlet-name>
+ 	<servlet-class>controllers.crud.product.ReadController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>AddProductController</display-name>
+ 	<servlet-name>AddProductController</servlet-name>
+ 	<servlet-class>controllers.crud.product.AddController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>EditProductController</display-name>
+ 	<servlet-name>EditProductController</servlet-name>
+ 	<servlet-class>controllers.crud.product.EditController</servlet-class>
+ </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>RemoveProductController</display-name>
+ 	<servlet-name>RemoveProductController</servlet-name>
+ 	<servlet-class>controllers.crud.product.RemoveController</servlet-class>
+ </servlet>
  
  <servlet>
  	<servlet-name>RemoveArtistController</servlet-name>
@@ -205,6 +233,22 @@
  <servlet-mapping>
  	<servlet-name>RemoveProductTypeController</servlet-name>
  	<url-pattern>/admin/product-type/delete</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>ReadProductController</servlet-name>
+ 	<url-pattern>/admin/product/list</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>AddProductController</servlet-name>
+ 	<url-pattern>/admin/product/add</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>EditProductController</servlet-name>
+ 	<url-pattern>/admin/product/edit</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ 	<servlet-name>RemoveProductController</servlet-name>
+ 	<url-pattern>/admin/product/delete</url-pattern>
  </servlet-mapping>
  
  <jsp-config>
