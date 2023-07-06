@@ -18,6 +18,8 @@ import dao.UserDao;
 import model.Cart;
 import model.Tag;
 import model.User;
+import utils.ValidatorUtils;
+import utils.LoginUtils;
 
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,20 +47,24 @@ public class RegisterController extends HttpServlet {
 			}
 		}
 		
-		if (email == null || email.trim().equals("")) {
-			errors.add("Insert email<br>");
+		if (!ValidatorUtils.CheckEmail(email)) {
+			errors.add("Invalid email");
 		} else if (UserDao.doRetrieveByEmail(email) != null) {
-			errors.add("Existing email<br>");
+			errors.add("Existing email");
 		}
 		
-		if (username == null || username.trim().equals("")) {
-			errors.add("Insert username<br>");
+		if (!ValidatorUtils.CheckUsername(username)) {
+			errors.add("Invalid username");
 		} 
 		
-		if (password == null || password.trim().equals("")) {
-			errors.add("Insert password<br>");
+		if (!ValidatorUtils.CheckPassword(password)) {
+			errors.add("Invalid password");
 		} else if (!password.equals(conf_password)) {
-			errors.add("Not equeals passwords<br>");
+			errors.add("Passwords do not match");
+		}
+		
+		if (email.equals(password)) {
+			errors.add("Password and email match");
 		}
 		
 		if (!errors.isEmpty()) {
@@ -70,7 +76,7 @@ public class RegisterController extends HttpServlet {
 				
 			user.setUsername(username);
 			user.setEmail(email);
-			user.setPassword(password);
+			user.setPassword(LoginUtils.toHash(password));
 			user.setAdmin(false);
 			user.setTags(tags);
 			UserDao.doSave(user);
@@ -82,10 +88,5 @@ public class RegisterController extends HttpServlet {
 			request.getSession().setAttribute("isAdmin", Boolean.FALSE);
 			response.sendRedirect("common/personal-page.jsp");
 		}
-		
-		
-		// TODO:: Criptare le password
-		// TODO:: cercare di rendere il codice più snello
 	}
-
 }

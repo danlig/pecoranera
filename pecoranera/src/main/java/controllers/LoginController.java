@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utils.LoginUtils;
+import utils.ValidatorUtils;
 import dao.UserDao;
 import model.User;
 
@@ -26,13 +28,11 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 		RequestDispatcher dispatcherToLoginPage = getServletContext().getRequestDispatcher("/login.jsp");
 		
-		if (email == null || email.trim().equals("")) {
-			errors.add("Insert email<br>");
-		}
+		if (!ValidatorUtils.CheckEmail(email))
+			errors.add("Invalid email");
 		
-		if (password == null || password.trim().equals("")) {
-			errors.add("Insert password<br>");
-		}
+		if (!ValidatorUtils.CheckPassword(password))
+			errors.add("Invalid password");
 		
 		if (!errors.isEmpty()) {
         	request.setAttribute("errors", errors);
@@ -41,12 +41,11 @@ public class LoginController extends HttpServlet {
 		}
 		
 		User user = UserDao.doRetrieveByEmail(email);
-		if (user == null || !user.getPassword().equals(password)) {
-			errors.add("Wrong Email or Password");
+		if (user == null || !user.getPassword().equals(LoginUtils.toHash(password))) {
+			errors.add("Wrong email or password");
         	request.setAttribute("errors", errors);
         	dispatcherToLoginPage.forward(request, response);
 		} else if (user.isAdmin()) {
-			System.out.println("FATTOOOO");
 			request.getSession().setAttribute("isAdmin", Boolean.TRUE);
 			response.sendRedirect("admin/personal-page.jsp");
 		} else {
@@ -54,5 +53,4 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect("common/personal-page.jsp");
 		}
 	}
-
 }
