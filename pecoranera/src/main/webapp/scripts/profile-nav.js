@@ -1,5 +1,7 @@
 $(document).ready(function(){
     let firstPage = window.location.hash.substring(1) || "panoramica";
+    let previousPage = null;
+    let pages = [];
 
     let loadPage = function(page){
         $(".active_page").each(function(){
@@ -8,11 +10,18 @@ $(document).ready(function(){
 
         $(`a[href='#${page}']`).addClass("active_page");
 
-        $(".account-subpage").each(function(){
-            $(this).remove();
-        });
+        if(previousPage != null){
+            pages[previousPage] = $(`#${previousPage}`).detach();
+        }
 
-        $("#display-data").load(`account/${page}.jsp`);
+        if(pages.hasOwnProperty(page)){
+            //$(`#${page}`).show();
+            $("#display-data").append(pages[page]);
+        } else {
+            $("#display-data").load(`account/${page}.jsp`);
+        }
+
+        previousPage = page;
     }
 
     loadPage(firstPage);

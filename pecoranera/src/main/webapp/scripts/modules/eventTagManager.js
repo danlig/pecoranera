@@ -7,31 +7,36 @@ function tagsToHtml(el, selected) {
     return `<span id="${el.key}" class="filter-tag">${el.value}</span>`;
 }
 
+let ajaxTagRequest = function(loadDestination){
+    $.ajax({
+        url: 'EventController',
+
+        dataType: 'json',
+
+        success: function(data) {
+    
+            $.each(data, function(key, val) {
+                tags.push({"key": val.id, "value": val.name});
+            });
+    
+            tags.forEach(element => {
+                $(loadDestination).append(tagsToHtml(element, false));
+            });
+    
+        },
+        
+        statusCode: {
+            404: function() {
+            alert('Errore, json file non trovato');
+            }
+        }
+    });
+}
 
 //Load tags with ajax
-let loadTags = function(elem){
+let loadTags = function(elem, loadDestination){
     elem.on("load", function(){
-        $.ajax({
-            url: 'assets/tags.json',
-            dataType: 'json',
-            success: function(data) {
-        
-                $.each(data, function(key, val) {
-                    tags.push({"key": key, "value": val});
-                });
-        
-                tags.forEach(element => {
-                    $("#filter-choice div").append(tagsToHtml(element, false));
-                });
-        
-            },
-            
-            statusCode: {
-                404: function() {
-                alert('Errore, json file non trovato');
-                }
-            }
-            });
+        ajaxTagRequest(loadDestination)
     });
 };
 
@@ -69,7 +74,6 @@ let moveToListAndSort = function(source, target, isSelected) {
         }).appendTo(target);
     });
 
-
 };
 
 //reset Tag choice
@@ -100,4 +104,4 @@ let resetTags = function(resetButton, fromElem, toElem){
     });
 }
 
-export {loadTags, moveToListAndSort, resetTags};
+export {loadTags, moveToListAndSort, resetTags, ajaxTagRequest, selectedTags, tags};

@@ -1,0 +1,30 @@
+@import "variables.css";
+
+#preferenze h2{
+    font-family: var(--header-font);
+    font-size: 1.75rem;
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+}
+
+.filter-tag{
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid var(--main-color);
+    border-radius: 20px;
+    font-family: var(--main-font);
+    font-size: 1.1rem;
+    padding: .5rem .75rem;
+    text-decoration: none;
+    transition: .5s ease-out;
+    background-color: var(--page-background);
+    color: var(--main-color);
+    margin-right: .5rem;
+    margin-bottom: 1rem;
+}
+
+.filter-tag:hover{
+    background-color: var(--main-color);
+    color: var(--page-background);
+}

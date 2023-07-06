@@ -12,7 +12,7 @@ $(document).ready(function(){
     let filterBar = $("#filter-fieldset");
     filterBar.slideUp();
     
-    loadTags($(window));
+    loadTags($(window), "#filter-choice div");
     moveToListAndSort("#selected-filter div", "#filter-choice div", false);
     moveToListAndSort("#filter-choice div", "#selected-filter div", true);
     resetTags($("input[type=reset]"), $("#selected-filter div"), $("#filter-choice div"))
