@@ -2,6 +2,8 @@ package controllers.Tag;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import dao.EventDao;
+import dao.TagDao;
 import dao.UserDao;
 import model.User;
+import model.Tag;
 
 @WebServlet("/TagController")
 public class TagController extends HttpServlet{
@@ -30,6 +34,16 @@ public class TagController extends HttpServlet{
 		
 		int array[] = Arrays.stream(gson.fromJson(request.getParameter("ids"), String[].class)).mapToInt(Integer::parseInt).toArray();
 		
+		Set<Tag> tags = new HashSet<>();
+		
+		for (int x : array) {
+			tags.add(TagDao.doRetrieveByKey(x));
+		}
+		
+		user.setTags(tags);
+		UserDao.doSave(user);
+		
+		response.setStatus(200);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

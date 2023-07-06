@@ -63,6 +63,7 @@ public class RegisterController extends HttpServlet {
 		CartDao.doSave(cart);
 		
 		request.getSession().setAttribute("username", username);
+		request.getSession().setAttribute("user", user.getId()); // FIX: non restituisce id
 		request.getSession().setAttribute("isAdmin", Boolean.FALSE);
 	}
 }
