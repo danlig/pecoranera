@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
 			
 		} else {
 			response.setStatus(200);
-			request.getSession().setAttribute("username", user.getUsername());
+			request.getSession().setAttribute("user", user.getId());
 			request.getSession().setAttribute("isAdmin", Boolean.FALSE);
 		}
 
