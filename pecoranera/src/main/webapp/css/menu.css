@@ -1,0 +1,191 @@
+@import "variables.css";
+
+html, body{
+    min-height: 100vh;
+    background-color: var(--page-background);
+    color: var(--main-color);
+}
+
+body{
+    padding-top: calc(var(--nav-height) + 12vh);
+}
+
+#category-selection{
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto 2rem auto;
+    border-bottom: 2px solid white;
+}
+
+#product-types-link{
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.category-link{
+    position: relative;
+    display: block;
+    color: inherit;
+    font-family: var(--header-font);
+    font-size: 1.5rem;
+    text-decoration: none;
+    margin: 0;
+    padding: .5rem .75rem 1rem;
+    transition: .5s ease-out;
+}
+
+.category-link::before{
+    content: "";
+    width: 100%;
+    left: 0;
+    position: absolute;
+    bottom: -2px;
+    height: 1px;
+    z-index: 3;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    transition: .5s ease-out;
+}
+
+.category-link:hover{
+    color: var(--neon-light);
+}
+
+.category-link.active{
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+}
+
+.category-link.active::before{
+    background-color: var(--neon-color);
+    border: 1px solid var(--neon-light);
+    box-shadow: var(--neon-effect);
+}
+
+#product-section>div{
+    min-height: 50vh;
+}
+
+.product{
+    width: 90vw;
+    margin: 0 auto 2rem auto;
+    padding-bottom: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #272727;
+}
+
+.product>div{
+    width: 75%;
+}
+
+.product>div h2{
+    font-family: var(--header-font);
+    font-size: 1.75rem;
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.product>div p{
+    font-family: var(--main-font);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, .8);
+    margin: 0;
+}
+
+.product span{
+    font-family: var(--header-font);
+    font-size: 2.2rem;
+    display: flex;
+    height: inherit;
+    align-items: center;
+}
+
+#category-select, label{
+    display: none;
+    font-size: 2rem;
+    font-family: var(--header-font);
+}
+
+label{
+    color: var(--main-color);
+    margin-right: 1.5rem;
+}
+
+#category-select{
+    outline: none;
+    background-color: transparent;
+    color: var(--neon-color);
+    border: 2px solid var(--neon-color);
+    box-shadow: 0 0 5px var(--neon-light);
+    margin-bottom: 1rem;
+    padding-right: .5rem;
+}
+
+#category-select>option{
+    background-color: var(--dark-background);
+    font-size: 2rem;
+}
+
+#scroll-up{
+    position: fixed;
+    display: none;
+    bottom: 20vh;
+    right: 10vw;
+    width: fit-content;
+    height: fit-content;
+    outline: none;
+    border-radius: 50%;
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, .5);
+    color: inherit;
+    padding: 1rem;
+    opacity: 1;
+    cursor: pointer;
+    transition: .5s ease-out;
+}
+
+#scroll-up i{
+    font-size: 3rem;
+}
+
+#scroll-up:hover, #scroll-up:active{
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 0 15px #eee;
+}
+
+@media only screen and (max-width: 600px) {
+    #category-selection a{
+        display: none;
+    }
+
+    #category-select, label{
+        display: inline-block;
+    }
+
+    #product-types-link{
+        display: none;
+    }
+
+    .product>div{
+        width: 60%;
+    }
+
+    .product{
+        width: 80vw;
+    }
+
+    #scroll-up{
+        bottom: 10vh;
+    }
+}

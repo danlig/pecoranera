@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro&family=Lato&family=League+Gothic&family=Special+Elite&display=swap');
+:root{
+    --nav-height: 4.8rem;
+
+    --main-color: #E8E9F3;
+    --page-background: #1a1a1a;
+    --dark-background: #121212;
+    --neon-color: #DEAADB;
+    --neon-light: #8332AC;
+
+    --stroke:-1px -1px 0 #000,
+    0   -1px 0 #000,
+    1px -1px 0 #000,
+    1px  0   0 #000,
+    1px  1px 0 #000,
+    0    1px 0 #000,
+   -1px  1px 0 #000,
+   -1px  0   0 #000,
+    0 0 10px #000,
+    0 0 5px #000;
+    
+    --header-font: "Advent Pro", sans-serif;
+    --main-font: "Lato", sans-serif;
+    --neon-effect: 0 0 10px var(--neon-light), 0 0 5px var(--neon-light), 1px 1px var(--neon-light), -1px -1px var(--neon-light), 1px -1px var(--neon-light), -1px 1px var(--neon-light);
+}
+
+@media only screen and (max-width: 600px){
+   :root{
+        --nav-height: 4.5rem;
+   }
+}
