@@ -18,9 +18,9 @@ $(document).ready(function(){
     });
 
     function productToHtml(key, val) {
-        return `<div id="${key}" class="product">
+        return `<div id="${val.id}" class="product">
                     <div>
-                        <h2>${key}</h2>
+                        <h2>${val.name}</h2>
 
                         <p>${val.description}</p>
                     </div>
@@ -71,6 +71,7 @@ $(document).ready(function(){
         }
 
         else {
+			
             $.ajax({
                 url: `menu/product`,
 
@@ -81,7 +82,7 @@ $(document).ready(function(){
                 dataType: 'json',
 
                 success: function(data) {
-                    
+                    alert("AJAX");
                     
                     $.each(data, function(key, val){ 
                         $("#product-section>div").append(productToHtml(key, val));

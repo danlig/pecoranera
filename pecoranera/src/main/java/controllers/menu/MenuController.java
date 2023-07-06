@@ -27,14 +27,14 @@ public class MenuController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		
-		GsonBuilder gsonBuilder = new GsonBuilder();
+		/*GsonBuilder gsonBuilder = new GsonBuilder();
 		new GraphAdapterBuilder()
 			.addType(ProductType.class)
 			.registerOn(gsonBuilder);
 
-		Gson gson = gsonBuilder.create();
+		Gson gson = gsonBuilder.create();*/
 
-		response.getWriter().write(gson.toJson(ProductTypeDao.doRetrieveAll()));
+		response.getWriter().write(new Gson().toJson(ProductTypeDao.doRetrieveAll()));
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
