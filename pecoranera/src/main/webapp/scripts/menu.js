@@ -2,7 +2,6 @@ $(document).ready(function(){
 
     let productChoice = window.location.hash.substring(1) || "1";
     let loadedProducts = {};
-    let productTypes = {};
     let previousRef;
    
     $(`a[href="#${productChoice}"]`).addClass("active");
@@ -17,7 +16,7 @@ $(document).ready(function(){
         }
     });
 
-    function productToHtml(key, val) {
+    function productToHtml(val) {
         return `<div id="${val.id}" class="product">
                     <div>
                         <h2>${val.name}</h2>
@@ -39,8 +38,6 @@ $(document).ready(function(){
                  
                 $.each(data, function(key, val){ 
                     console.log(val);
-
-                    productTypes[val.id] = val.name;
 
                     $("#category-select").append(`<option value="${val.id}">${val.name}</option>`)
                     $("#product-types-link").append(`<a href="#${val.id}" class="category-link">${val.name}</a>`);
@@ -76,16 +73,14 @@ $(document).ready(function(){
                 url: `menu/product`,
 
                 data:{
-                    type: productChoice
+                    type: choice
                 },
 
                 dataType: 'json',
 
                 success: function(data) {
-                    alert("AJAX");
-                    
                     $.each(data, function(key, val){ 
-                        $("#product-section>div").append(productToHtml(key, val));
+                        $("#product-section>div").append(productToHtml(val));
                     });
                     
                 },
@@ -106,7 +101,9 @@ $(document).ready(function(){
     }
     
     //click dei link categoria consegue un caricamento del prodotto del tipo scelto
-    $(".category-link").on("click", function(){
+    $("#product-types-link").on("click", ".category-link" ,function(e){
+        e.preventDefault();
+        
         $(this).addClass("active");
         $(this).siblings().removeClass("active");
 

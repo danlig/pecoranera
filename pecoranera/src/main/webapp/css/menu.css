@@ -165,12 +165,16 @@ label{
 }
 
 @media only screen and (max-width: 600px) {
-    #category-selection>a{
+    #category-selection a{
         display: none;
     }
 
     #category-select, label{
         display: inline-block;
+    }
+
+    #product-types-link{
+        display: none;
     }
 
     .product>div{
