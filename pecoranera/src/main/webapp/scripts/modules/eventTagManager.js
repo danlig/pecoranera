@@ -9,7 +9,7 @@ function tagsToHtml(el, selected) {
 
 let ajaxTagRequest = function(loadDestination){
     $.ajax({
-        url: 'EventController',
+        url: 'TagRetrieveController',
 
         dataType: 'json',
 

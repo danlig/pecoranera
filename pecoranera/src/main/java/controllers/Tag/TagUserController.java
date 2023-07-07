@@ -18,6 +18,10 @@ import dao.UserDao;
 import model.Tag;
 import model.User;
 
+/*
+ * Restituisce i tags dell'utente in sessione
+ * */
+
 @WebServlet("/TagUserController")
 public class TagUserController extends HttpServlet{
 	private static final long serialVersionUID = 1L;

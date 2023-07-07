@@ -1,11 +1,14 @@
 package dao;
 
 import java.util.Date;
+import java.util.Set;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
+import org.hibernate.query.criteria.JpaPredicate;
+import org.hibernate.sql.ast.tree.predicate.Predicate;
 
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
@@ -45,11 +48,7 @@ public class EventDao {
 		crudEA.doSave(event_artist);
 	}
 	
-	public static List<Event> doRetrieveFilter(String titolo){
-		return doRetrieveFilter(titolo, null, null, null);
-	}
-	
-	public static List<Event> doRetrieveFilter(String titolo, Date dataInizio, Date dataFine, List<Tag> tags) {
+	public static List<Event> doRetrieveFilter(String titolo, Date dataInizio, Date dataFine, Set<Tag> tags) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction tx = null;
 		List<Event> resultList = null;
@@ -62,12 +61,16 @@ public class EventDao {
 		    CriteriaQuery<Event> criteriaQuery = builder.createQuery(Event.class);
 		    Root<Event> root = criteriaQuery.from(Event.class);
 		    
-		    // Define the condition for the attribute "name" using the LIKE operator
-		    criteriaQuery.where(builder.like(root.get("name"), "%" + titolo + "%"));
+		    JpaPredicate condition1 = builder.isTrue(builder.literal(true)), 
+		    			 condition2 = builder.isTrue(builder.literal(true));;
+		    
+		    if (titolo != null)
+		    	condition1 = builder.like(root.get("name"), "%" + titolo + "%");
 		    
 		    if (dataInizio != null && dataFine != null)
-			    // Define the query and get the result list
-			    criteriaQuery.where(builder.between(root.get("date"), dataInizio, dataFine));
+		    	condition2 = builder.between(root.get("date"), dataInizio, dataFine);
+
+		    criteriaQuery.where(builder.and(condition1, condition2));
 		    
 		    // Execute the query and get the result list
 		    resultList = session.createQuery(criteriaQuery).getResultList();
@@ -80,6 +83,19 @@ public class EventDao {
 		    e.printStackTrace();
 		} finally {
 		    session.close();
+		}
+		
+		
+		if (tags != null && !tags.isEmpty()) {
+			// Controllo tag
+			for (Event e : resultList) {
+				for (Tag t : tags) {
+					if (!e.getTags().contains(t)) {
+						resultList.remove(e);
+						break;
+					}		
+				}
+			}	
 		}
 
 		return resultList;

@@ -1,4 +1,4 @@
-package controllers.event;
+package controllers.Tag;
 
 import java.io.IOException;
 
@@ -12,11 +12,15 @@ import com.google.gson.Gson;
 
 import dao.TagDao;
 
-@WebServlet("/EventController")
-public class EventController extends HttpServlet {
+/*
+ * Restituisce tutti i tags
+ * */
+
+@WebServlet("/TagRetrieveController")
+public class TagRetrieveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public EventController() {
+    public TagRetrieveController() {
         super();
     }
 
