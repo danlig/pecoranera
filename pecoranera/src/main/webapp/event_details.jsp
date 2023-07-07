@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -13,7 +14,11 @@
     <script type="module" src="${pageContext.request.contextPath}/scripts/event_details.js"></script>
 </head>
 <body>
-    <div id="event">        
+    <jsp:include page="./assets/navbar.jsp">
+        <jsp:param name="active_page" value="eventi" />
+    </jsp:include>
+
+    <div id="event" style="padding-top:8rem">        
         <div>
             <div id="left-side">
                 <img src="" alt="">
@@ -45,6 +50,7 @@
                 </form>
 
                 <div id="tag-list">
+                    
                     <span id="1" class="filter-tag">Blues</span>
                     <span id="2" class="filter-tag">Jazz Fusion</span>
                     <span id="3" class="filter-tag">Soul Jazz</span>
@@ -63,5 +69,7 @@ Aliquam cursus, neque in maximus venenatis, odio est imperdiet augue, rhoncus fi
 Proin convallis, tellus eu facilisis maximus, felis ipsum tincidunt risus, ut dapibus lacus lectus at lacus. Morbi at lorem nec est pretium maximus. Integer molestie, justo et aliquet consectetur, lorem nisi maximus arcu, eu volutpat elit lacus eget ante. Aenean varius lacus rutrum venenatis laoreet. Maecenas eget ullamcorper urna. Fusce ultrices posuere tellus in ultrices. Vestibulum vitae gravida mauris. Duis tincidunt eget ligula quis aliquet.
         </p>
     </div>
+
+    <jsp:include page="./assets/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -12,6 +12,13 @@ $(document).ready(function(){
     let pageNumber = 0;
 
     filterBar.slideUp();
+
+    let resetSearchbarData = function(){
+        searchBar.css("top", navBarHeight + "px");
+        navBarHeight = $("nav").outerHeight();
+        sticky = searchBar.offset();
+    }
+
     
     let eventToHTML = function(event){        
 
@@ -26,14 +33,51 @@ $(document).ready(function(){
         </a>`;
     }
 
+    let upcomingEventHTML = function(event){
+        return `<a class="upcoming-event" href="event_details.jsp?id=${event.id}">
+                    <img src="./images/lellopetrarca.jpg" alt="">
+
+                    <div>
+                            <h2>${event.name}</h2>
+
+                            <div class="tags">
+                                ${event.tags.map(tag => (`<span class="event-tag">${tag.name}</span>`) ).join("")}
+                            </div>
+                    
+                            <div class="event-date">${new Date(Date.parse(event.date)).toLocaleDateString("it-IT", {weekday:"long",month:"short", day:"numeric"})}</div>
+                    </div>
+                </a>`;
+    }
+
+    let loadUpcoming = async function(){
+        await $.ajax({
+            url: "UpcomingEventsController",
+
+            dataType: "json",
+
+            success: function(data){
+                $.each(data, function(key, val){
+                    $("#upcoming>div").append(upcomingEventHTML(val));
+                })
+            },
+
+            error: function(){
+                alert("Errore nel caricamento degli eventi evidenziati");
+            }
+        });
+
+        resetSearchbarData();
+    }
+
     let loadEvents = async function(offsetPage){
+        
         await $.ajax({
             url: "EventRetrieveController",
 
             data: {
                 startDate: $("#data-inizio").val() || new Date().toLocaleDateString("en-CA", {year:"numeric",month:"2-digit", day:"2-digit"}).replace("/", "-"),
                 endDate: $("#data-fine").val() || "2200-12-31",
-                searchText: $("#name-search").val() || null,
+                name: $("#name-search").val(),
                 tags: JSON.stringify(selectedTags),
                 offset: offsetPage,
                 pageSize: 1
@@ -60,7 +104,8 @@ $(document).ready(function(){
                 $("loader-wrapper").hide();
             }
         });
-
+    
+        return;
     }
 
 
@@ -69,6 +114,7 @@ $(document).ready(function(){
     moveToListAndSort("#filter-choice div", "#selected-filter div", true);
     resetTags($("input[type=reset]"), $("#selected-filter div"), $("#filter-choice div"))
     loadEvents(0);
+    loadUpcoming();
 
     //toggle filterbar
     filterButton.on("click", function(){
@@ -83,9 +129,7 @@ $(document).ready(function(){
 
     //Reset important data on window resize
     $(window).resize(function(){
-        searchBar.css("top", navBarHeight + "px");
-        navBarHeight = $("nav").outerHeight();
-        sticky = searchBar.offset();
+        resetSearchbarData();
     });
 
 
@@ -106,13 +150,13 @@ $(document).ready(function(){
 
     $("#submit-filters").on("click", function(){
         pageNumber = 0;
-        $("loader-wrapper").show();
+        $("#loader-wrapper").show();
         loadEvents(pageNumber);        
     })
 
     $("#search-button").on("click", function(){
         pageNumber = 0;
-        $("loader-wrapper").show();
+        $("#loader-wrapper").show();
         loadEvents(pageNumber);        
     });
 

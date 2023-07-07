@@ -23,35 +23,7 @@
         <h1>Prossimi Eventi</h1>
 
         <div>
-            <a class="upcoming-event" href="event_details.jsp?id=1">
-                <img src="${pageContext.request.contextPath}/images/lellopetrarca.jpg" alt="">
-
-               <div>
-                    <h2>Lello Petrarca Trio</h2>
-        
-                    <div class="tags">
-                        <span class="event-tag">Jazz Classico</span>
-                        <span class="event-tag">Jazz Moderno</span>
-                    </div>
             
-                    <div class="event-date">Marted&igrave; 30 Maggio</div>
-               </div>
-            </a>
-
-            <a class="upcoming-event" href="event_details.jsp?id=2">
-                <img src="${pageContext.request.contextPath}/images/tizia123.jpg" alt="" />
-
-                <div>
-                    <h2>Tizio Caio Quartet</h2>
-
-                    <div class="tags">
-                        <span class="event-tag">Blues</span>
-                        <span class="event-tag">Gipsy Jazz</span>
-                    </div>
-
-                    <div class="event-date">Venerd&igrave; 2 Giugno</div>
-                </div>
-            </a>
         </div>    
 
     </section>
