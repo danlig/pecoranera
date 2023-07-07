@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 import java.util.Set;
-
+import java.util.stream.Collectors;
 import java.util.HashSet;
 
 import jakarta.persistence.CascadeType;
@@ -17,6 +17,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "event")
@@ -31,7 +32,7 @@ public class Event {
 			@JoinColumn(name = "id_tag") })
 	private Set<Tag> tags = new HashSet<>();
 
-	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
 	private Set<EventArtist> eventArtists = new HashSet<>();
 
 	@Column(name = "available_tickets")
@@ -39,13 +40,16 @@ public class Event {
 
 	@Column(name = "max_tickets")
 	private int maxTickets;
-
+	
+	@Transient
+	private Set<Artist> artists = new HashSet<>();
+	
 	private Date date;
 	private String name;
 	private String description;
 	private double price;
 	private Date cancellation;
-
+	
 	public Event() {
 		super();
 	}
@@ -135,5 +139,13 @@ public class Event {
 
 	public void setEventArtists(Set<EventArtist> eventArtists) {
 		this.eventArtists = eventArtists;
+	}
+	
+	public Set<Artist> getArtists() {
+		return eventArtists.stream().map(e -> e.getArtist()).collect(Collectors.toSet());
+	}
+	
+	public void setArtists(Set<Artist> artists) {
+		this.artists = artists;
 	}
 }
