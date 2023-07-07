@@ -18,16 +18,6 @@
         </div>
     </div>
 
-    <div id="confirm-changes" style="display: none;">
-        <div>
-            <p>Sei sicuro di voler salvare i cambiamenti?</p>
-
-            <div>
-                <input type="submit" value="">
-            </div>
-        </div>
-    </div>
-
     <input id="save-changes" type="submit" value="Salva">
-    <input type="reset" value="Reset">
+    <input type="reset" value="Rimuovi tutti">
 </section>

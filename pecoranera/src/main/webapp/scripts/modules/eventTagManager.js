@@ -3,7 +3,7 @@ let tags = [];
 let selectedTags = [];
 
 //tagsValues to HTML element
-function tagsToHtml(el, selected) {
+function tagsToHtml(el) {
     return `<span id="${el.key}" class="filter-tag">${el.value}</span>`;
 }
 
@@ -20,17 +20,19 @@ let ajaxTagRequest = function(loadDestination){
             });
     
             tags.forEach(element => {
-                $(loadDestination).append(tagsToHtml(element, false));
+                $(loadDestination).append(tagsToHtml(element));
             });
-    
+            
         },
         
         statusCode: {
             404: function() {
-            alert('Errore, json file non trovato');
+                alert('Errore, nel retrival dei tag');
             }
         }
     });
+
+    return;
 }
 
 //Load tags with ajax
