@@ -60,9 +60,22 @@ public class EventRetrieveController extends HttpServlet {
     			tags.add(TagDao.doRetrieveByKey(x));
     		}
         }
+        
+		int pageSize, offset;
+		
+		try {
+			pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		}
+		catch(Exception e) {pageSize = 9; }
+		
+		
+		try{
+			offset =  Integer.parseInt(request.getParameter("offset"));
+		}
+		catch(Exception e){ offset = 0; }
 
 		
-		response.getWriter().write(new Gson().toJson(EventDao.doRetrieveFilter(name, startDate, endDate, tags)));
+		response.getWriter().write(new Gson().toJson(EventDao.doRetrieveFilter(name, startDate, endDate, tags, pageSize, offset)));
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

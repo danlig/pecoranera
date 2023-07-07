@@ -48,7 +48,7 @@ public class EventDao {
 		crudEA.doSave(event_artist);
 	}
 	
-	public static List<Event> doRetrieveFilter(String titolo, Date dataInizio, Date dataFine, Set<Tag> tags) {
+	public static List<Event> doRetrieveFilter(String titolo, Date dataInizio, Date dataFine, Set<Tag> tags, int pageSize, int offset) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction tx = null;
 		List<Event> resultList = null;
@@ -72,8 +72,13 @@ public class EventDao {
 
 		    criteriaQuery.where(builder.and(condition1, condition2));
 		    
+		    criteriaQuery.orderBy(builder.asc(root.get("date")));
+		    
 		    // Execute the query and get the result list
-		    resultList = session.createQuery(criteriaQuery).getResultList();
+		    resultList = session.createQuery(criteriaQuery)  
+		    		.setFirstResult(offset)
+				    .setMaxResults(pageSize)
+				    .getResultList();
 		    
 		    tx.commit();
 		} catch (Exception e) {
@@ -97,6 +102,11 @@ public class EventDao {
 				}
 			}	
 		}
+		
+		// Elimina event-artists
+		for (Event e : resultList) {
+			e.setEventArtists(null);
+		}
 
 		return resultList;
 	}
@@ -109,6 +119,16 @@ public class EventDao {
 		Root<Event> root = query.from(Event.class);
 		query.select(root);
 		query.where(builder.greaterThan(root.get("date"), LocalDate.now()));
+		
+		/*
+		 * query.where(
+				    builder.and(
+				        builder.greaterThan(root.get("date"), LocalDate.now()),
+				        builder.isNotNull(root.get("cancellationDate"))
+				    )
+				);
+		 * */
+		
 		query.orderBy(builder.asc(root.get("date")));
 		
 		List<Event> upcomingEvents = session.createQuery(query)
