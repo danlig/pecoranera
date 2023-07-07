@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,14 +52,11 @@ public class EventRetrieveController extends HttpServlet {
             endDate = dateFormat.parse(request.getParameter("endDate"));
         } catch (Exception e) { endDate = null; }
 
-        Set<Tag> tags = null;
+        Set<Integer> tags = null;
+        
         if (request.getParameter("tags") != null) {
-    		int array[] = Arrays.stream(new Gson().fromJson(request.getParameter("tags"), String[].class)).mapToInt(Integer::parseInt).toArray();
-    		tags = new HashSet<>();
-    		
-    		for (int x : array) {
-    			tags.add(TagDao.doRetrieveByKey(x));
-    		}
+    		tags = Arrays.stream(new Gson().fromJson(request.getParameter("tags"), String[].class)).mapToInt(Integer::parseInt)
+    				.boxed().collect(Collectors.toCollection(HashSet::new));
         }
         
 		int pageSize, offset;

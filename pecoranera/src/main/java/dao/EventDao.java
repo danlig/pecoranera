@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -48,7 +49,7 @@ public class EventDao {
 		crudEA.doSave(event_artist);
 	}
 	
-	public static List<Event> doRetrieveFilter(String titolo, Date dataInizio, Date dataFine, Set<Tag> tags, int pageSize, int offset) {
+	public static List<Event> doRetrieveFilter(String titolo, Date dataInizio, Date dataFine, Set<Integer> tags, int pageSize, int offset) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction tx = null;
 		List<Event> resultList = null;
@@ -90,22 +91,25 @@ public class EventDao {
 		    session.close();
 		}
 		
+		// Nascondi event-artists
+		for (Event e : resultList) {
+			e.setEventArtists(null);
+		}	
 		
+		// Filtro tag
 		if (tags != null && !tags.isEmpty()) {
-			// Controllo tag
+			List<Event> clonedList = new ArrayList<>(resultList);
+			
 			for (Event e : resultList) {
-				for (Tag t : tags) {
-					if (!e.getTags().contains(t)) {
-						resultList.remove(e);
+				for (Integer t : tags) {
+					if (!e.getTags().stream().filter(eventTag -> eventTag.getId() == t).findAny().isPresent()) {
+						clonedList.remove(e);
 						break;
 					}		
 				}
 			}	
-		}
-		
-		// Elimina event-artists
-		for (Event e : resultList) {
-			e.setEventArtists(null);
+			
+			return clonedList;
 		}
 
 		return resultList;
