@@ -101,7 +101,7 @@ public class EventDao {
 		return resultList;
 	}
 	
-	public static List<Event> doRetrieveUpcoming(){
+	public static List<Event> doRetrieveUpcomingPage(int pageSize, int offset){
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<Event> query = builder.createQuery(Event.class);
@@ -112,8 +112,8 @@ public class EventDao {
 		query.orderBy(builder.asc(root.get("date")));
 		
 		List<Event> upcomingEvents = session.createQuery(query)
-			    .setFirstResult(0)
-			    .setMaxResults(2)
+			    .setFirstResult(offset)
+			    .setMaxResults(pageSize)
 			    .getResultList();
 
 		session.close();
