@@ -1,5 +1,6 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import java.util.List;
@@ -8,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import org.hibernate.query.criteria.JpaPredicate;
-import org.hibernate.sql.ast.tree.predicate.Predicate;
 
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
@@ -99,5 +99,24 @@ public class EventDao {
 		}
 
 		return resultList;
+	}
+	
+	public static List<Event> doRetrieveUpcoming(){
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Event> query = builder.createQuery(Event.class);
+		
+		Root<Event> root = query.from(Event.class);
+		query.select(root);
+		query.where(builder.greaterThan(root.get("date"), LocalDate.now()));
+		query.orderBy(builder.asc(root.get("date")));
+		
+		List<Event> upcomingEvents = session.createQuery(query)
+			    .setFirstResult(0)
+			    .setMaxResults(2)
+			    .getResultList();
+
+		session.close();
+		return upcomingEvents;
 	}
 }
