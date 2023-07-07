@@ -12,38 +12,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import dao.EventDao;
+
 import dao.TagDao;
 import dao.UserDao;
-import model.User;
 import model.Tag;
+import model.User;
 
-@WebServlet("/TagController")
-public class TagController extends HttpServlet{
+@WebServlet("/TagUserController")
+public class TagUserController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     
-    public TagController() {
+    public TagUserController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json");
+		
 		int id = Integer.parseInt(request.getSession().getAttribute("user").toString());
 		User user = UserDao.doRetrieveByKey(id);
 		
-		Gson gson = new Gson();
-		
-		int array[] = Arrays.stream(gson.fromJson(request.getParameter("ids"), String[].class)).mapToInt(Integer::parseInt).toArray();
-		
-		Set<Tag> tags = new HashSet<>();
-		
-		for (int x : array) {
-			tags.add(TagDao.doRetrieveByKey(x));
-		}
-		
-		user.setTags(tags);
-		UserDao.doSave(user);
-		
-		response.setStatus(200);
+		response.getWriter().write(new Gson().toJson(user.getTags()));
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
