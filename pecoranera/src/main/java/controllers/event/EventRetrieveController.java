@@ -70,7 +70,7 @@ public class EventRetrieveController extends HttpServlet {
 		
 		
 		try{
-			offset =  Integer.parseInt(request.getParameter("offset"));
+			offset =  Integer.parseInt(request.getParameter("offset")) * pageSize;
 		}
 		catch(Exception e){ offset = 0; }
 

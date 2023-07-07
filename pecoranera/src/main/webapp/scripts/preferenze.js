@@ -38,10 +38,6 @@ $(document).ready(function(){
     moveToListAndSort("#filter-choice div", "#selected-filter div", true);
     resetTags($("input[type=reset]"), $("#selected-filter div"), $("#filter-choice div"))
 
-    $("input[type=reset]").on("click", function(){
-
-    });
-
     $("#save-changes").on("click", function(){
         $.ajax({
             url: 'TagSaveController',

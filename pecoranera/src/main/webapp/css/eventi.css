@@ -65,14 +65,18 @@ h1,h2{
 
 .tags{
     padding-left: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
 .event-tag{
     display: inline-block;
     background-color: var(--page-background);
     border-radius: 20px;
+    margin-right: .5rem;
     font-family: var(--main-font);
-    font-size: 1.1rem;
+    font-size: .9rem;
     padding: .5rem .75rem;
     text-decoration: none;
     color: var(--main-color);
@@ -376,6 +380,39 @@ input[type=submit]:hover, input[type=submit]:focus{
 .small-event:hover h2, .small-event:hover div,
 .small-event:focus h2, .small-event:focus div{
     opacity: .5;
+}
+
+#loader-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    padding-bottom: 2.5rem;
+}
+
+#loader-button{
+    outline: none;
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+    box-shadow: .25rem .25rem black;
+    font-family: var(--header-font);
+    font-size: 2rem;
+    padding: .75rem 1rem;
+    background-color: var(--dark-background);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+#loader-button:hover{
+    box-shadow: .5rem .5rem black;
+}
+
+#loader-button:active{
+    box-shadow: none;
+    background-color: black;
+    transition: .25s ease;
 }
 
 @media screen and (max-aspect-ratio: 3/2) {

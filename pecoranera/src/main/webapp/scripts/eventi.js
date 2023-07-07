@@ -1,4 +1,4 @@
-import {loadTags, moveToListAndSort, resetTags} from "./modules/eventTagManager.js";
+import {loadTags, moveToListAndSort, resetTags, selectedTags} from "./modules/eventTagManager.js";
 
 $(document).ready(function(){
     
@@ -7,15 +7,68 @@ $(document).ready(function(){
 
     let sticky = searchBar.offset();;
 
-
     let filterButton = $("#filtri-btn")
     let filterBar = $("#filter-fieldset");
+    let pageNumber = 0;
+
     filterBar.slideUp();
     
+    let eventToHTML = function(event){        
+
+        return `<a class="small-event" href="event_details.jsp?id=${event.id}">
+                    <h2>${event.name}</h2>
+
+                    <div class="tags">
+                        ${event.tags.map(tag => (`<span class="event-tag">${tag.name}</span>`) ).join("")}
+                    </div>
+
+                    <div class="event-date">${new Date(Date.parse(event.date)).toLocaleDateString("it-IT", {weekday:"long",month:"short", day:"numeric"})}</div>
+        </a>`;
+    }
+
+    let loadEvents = async function(offsetPage){
+        await $.ajax({
+            url: "EventRetrieveController",
+
+            data: {
+                startDate: $("#data-inizio").val() || new Date().toLocaleDateString("en-CA", {year:"numeric",month:"2-digit", day:"2-digit"}).replace("/", "-"),
+                endDate: $("#data-fine").val() || "2200-12-31",
+                searchText: $("#name-search").val() || null,
+                tags: JSON.stringify(selectedTags),
+                offset: offsetPage,
+                pageSize: 1
+            },
+
+            dataType: "json",
+
+            success: function(data){
+                if(offsetPage == 0){
+                    $("#all-events").children(".small-event").remove();
+                }
+                
+                if(data.length == 0){
+                    $("#loader-wrapper").hide();
+                } else {
+                    $.each(data, function(key, val){
+                        $("#all-events").append(eventToHTML(val));
+                    })
+                }
+            },
+
+            error: function(){
+                alert("Erroe caricamento eventi");
+                $("loader-wrapper").hide();
+            }
+        });
+
+    }
+
+
     loadTags($(window), "#filter-choice div");
     moveToListAndSort("#selected-filter div", "#filter-choice div", false);
     moveToListAndSort("#filter-choice div", "#selected-filter div", true);
     resetTags($("input[type=reset]"), $("#selected-filter div"), $("#filter-choice div"))
+    loadEvents(0);
 
     //toggle filterbar
     filterButton.on("click", function(){
@@ -50,4 +103,21 @@ $(document).ready(function(){
         }
     
     });
+
+    $("#submit-filters").on("click", function(){
+        pageNumber = 0;
+        $("loader-wrapper").show();
+        loadEvents(pageNumber);        
+    })
+
+    $("#search-button").on("click", function(){
+        pageNumber = 0;
+        $("loader-wrapper").show();
+        loadEvents(pageNumber);        
+    });
+
+    $("#loader-button").on("click", function(){
+        pageNumber++;
+        loadEvents(pageNumber);
+    })
 });

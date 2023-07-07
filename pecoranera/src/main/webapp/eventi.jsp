@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -55,7 +57,6 @@
     </section>
 
     <div id="searchbar">
-        <!--<form action="">-->
             <div id="upper-search">
 
                 <button id="filtri-btn" class="searchbar-btn">Filtri</button>
@@ -99,58 +100,21 @@
                 </div>
 
                 <div id="form-buttons">
-                    <input type="submit" value="Applica Filtri" class="searchbar-btn">
+                    <input id="submit-filters" type="submit" value="Applica Filtri" class="searchbar-btn">
                     <input type="reset" class="searchbar-btn">
                 </div>
             </fieldset>
-       <!-- </form>-->
+
     </div>
 
     <section id="all-events">
-        <a class="small-event" href="event_details.jsp?id=3">
-                <h2>Tizio Caio Quartet</h2>
-
-                <div class="tags">
-                    <span class="event-tag">Blues</span>
-                    <span class="event-tag">Gipsy Jazz</span>
-                </div>
-
-                <div class="event-date">Venerd&igrave; 2 Giugno</div>
-        </a>
-
-        <a class="small-event" href="event_details.jsp?id=4">
-            <h2>Tizio Caio Quartet</h2>
-
-            <div class="tags">
-                <span class="event-tag">Blues</span>
-                <span class="event-tag">Gipsy Jazz</span>
-            </div>
-
-            <div class="event-date">Venerd&igrave; 2 Giugno</div>
-        </a>
-
-        <a class="small-event" href="event_details.jsp?id=5">
-            <h2>Tizio Caio Quartet</h2>
-
-            <div class="tags">
-                <span class="event-tag">Blues</span>
-                <span class="event-tag">Gipsy Jazz</span>
-            </div>
-
-            <div class="event-date">Venerd&igrave; 2 Giugno</div>
-        </a>
-
-        <a class="small-event" href="event_details.jsp?id=6">
-            <h2>Tizio Caio Quartet</h2>
-
-            <div class="tags">
-                <span class="event-tag">Blues</span>
-                <span class="event-tag">Gipsy Jazz</span>
-            </div>
-
-            <div class="event-date">Venerd&igrave; 2 Giugno</div>
-        </a>
+        
+        
     </section>
+
+    <div id="loader-wrapper">
+        <button id="loader-button">Carica altri eventi</button>
+    </div>
 
     <jsp:include page="./assets/footer.jsp"></jsp:include>
     
