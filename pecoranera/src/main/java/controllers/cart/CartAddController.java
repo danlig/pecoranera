@@ -24,7 +24,7 @@ import model.Cart;
 import model.Event;
 
 /*
- * Aggiunge un item al carrello dell'utente in sessione
+ * Aggiunge un item al carrello dell'utente in sessione 
  *  */
 
 @WebServlet("/CartAddController")
