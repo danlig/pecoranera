@@ -12,6 +12,7 @@ import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import org.hibernate.query.criteria.JpaPredicate;
 
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
 import model.Artist;
 import model.Event;
@@ -63,7 +64,8 @@ public class EventDao {
 		    Root<Event> root = criteriaQuery.from(Event.class);
 		    
 		    JpaPredicate condition1 = builder.isTrue(builder.literal(true)), 
-		    			 condition2 = builder.isTrue(builder.literal(true));;
+		    			 condition2 = builder.isTrue(builder.literal(true)),
+    					 condition3 = builder.isTrue(builder.literal(true));
 		    
 		    if (titolo != null)
 		    	condition1 = builder.like(root.get("name"), "%" + titolo + "%");
@@ -71,7 +73,12 @@ public class EventDao {
 		    if (dataInizio != null && dataFine != null)
 		    	condition2 = builder.between(root.get("date"), dataInizio, dataFine);
 
-		    criteriaQuery.where(builder.and(condition1, condition2));
+		    if (tags != null && !tags.isEmpty()) {
+		    	Join<Event, Tag> tagJoin = root.join("tags");
+		    	condition3 = builder.in(tagJoin.get("id"), tags);
+		    }
+		    
+		    criteriaQuery.where(builder.and(condition1, condition2, condition3));
 		    
 		    criteriaQuery.orderBy(builder.asc(root.get("date")));
 		    
@@ -94,24 +101,8 @@ public class EventDao {
 		// Nascondi event-artists
 		for (Event e : resultList) {
 			e.setEventArtists(null);
-		}	
-		
-		// Filtro tag
-		if (tags != null && !tags.isEmpty()) {
-			List<Event> clonedList = new ArrayList<>(resultList);
-			
-			for (Event e : resultList) {
-				for (Integer t : tags) {
-					if (!e.getTags().stream().filter(eventTag -> eventTag.getId() == t).findAny().isPresent()) {
-						clonedList.remove(e);
-						break;
-					}		
-				}
-			}	
-			
-			return clonedList;
 		}
-
+		
 		return resultList;
 	}
 	
