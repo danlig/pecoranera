@@ -41,7 +41,8 @@ public class LoginController extends HttpServlet {
 		}
 		
 		User user = UserDao.doRetrieveByEmail(email);
-		if (user == null || !user.getPassword().equals(password)) {
+		
+		if (user == null || ! user.getPassword().equals(password)) {
 			errors.add("Wrong Email or Password");
         	request.setAttribute("errors", errors);
         	dispatcherToLoginPage.forward(request, response);

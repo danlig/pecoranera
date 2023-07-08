@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ArtistDao;
+import dao.EventDao;
 import dao.UserDao;
 import model.Artist;
+import model.Event;
 import model.User;
 
 public class TestServlet extends HttpServlet {
@@ -24,8 +26,12 @@ public class TestServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		User user = UserDao.doRetrieveByEmail("example@mail.com");
-		out.println(user);
+		for (User item : UserDao.doRetrieveAll()) {
+			out.println(item);
+		}
+		
+//		User user = UserDao.doRetrieveByEmail("example@mail.com");
+//		out.println(user);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
