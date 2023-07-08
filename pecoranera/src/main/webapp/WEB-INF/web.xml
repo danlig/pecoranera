@@ -159,7 +159,38 @@
  	<servlet-class>controllers.crud.event.RemoveController</servlet-class>
  </servlet> 
  
+ <!-- Servlet per gli eventi-artisti -->
  
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>ReadEventArtistController</display-name>
+ 	<servlet-name>ReadEventArtistController</servlet-name>
+ 	<servlet-class>controllers.crud.event_artist.ReadController</servlet-class>
+ </servlet> 
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>AddEventArtistController</display-name>
+ 	<servlet-name>AddEventArtistController</servlet-name>
+ 	<servlet-class>controllers.crud.event_artist.AddController</servlet-class>
+ </servlet> 
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>RemoveEventArtistController</display-name>
+ 	<servlet-name>RemoveEventArtistController</servlet-name>
+ 	<servlet-class>controllers.crud.event_artist.RemoveController</servlet-class>
+ </servlet> 
+ 
+ 
+ 
+  <servlet-mapping>
+ 	<servlet-name>TestServlet</servlet-name>
+ 	<url-pattern>/test</url-pattern>
+ </servlet-mapping>
  
  <servlet-mapping>
  	<servlet-name>RegisterController</servlet-name>
@@ -264,6 +295,22 @@
  	<url-pattern>/admin/event/delete</url-pattern>
  </servlet-mapping>
  
+ <!-- Servlet-mapping per gli eventi-artisti -->
+ 
+ <servlet-mapping>
+ 	<servlet-name>ReadEventArtistController</servlet-name>
+ 	<url-pattern>/admin/event-artist/list</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>AddEventArtistController</servlet-name>
+ 	<url-pattern>/admin/event-artist/add</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>RemoveEventArtistController</servlet-name>
+ 	<url-pattern>/admin/event-artist/delete</url-pattern>
+ </servlet-mapping>
  
  <jsp-config>
      <jsp-property-group>
