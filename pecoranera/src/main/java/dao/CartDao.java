@@ -37,4 +37,13 @@ public class CartDao {
 		
 		crudCE.doSave(cart_event);
 	}
+	
+	public static void removeEvent(Cart cart, Event event) {
+		BasicCrudDao<CartEvent> crudCE = new BasicCrudDao<>(CartEvent.class);
+		
+		CartEvent cart_event = new CartEvent();
+		cart_event.setId(new CartEventKey(event.getId(), cart.getId()));	
+		
+		crudCE.doDelete(cart_event);
+	}
 }
