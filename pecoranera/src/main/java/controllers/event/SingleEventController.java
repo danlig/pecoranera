@@ -1,6 +1,7 @@
 package controllers.event;
 
 import java.io.IOException;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import dao.EventDao;
+import model.CartEvent;
 import model.Event;
+import model.EventArtist;
 
 /*
  * Restituisce un evento in base al suo id, comprensivo di artisti
@@ -30,8 +33,12 @@ public class SingleEventController extends HttpServlet {
 		int id =  Integer.parseInt(request.getParameter("id"));
 		Event e = EventDao.doRetrieveByKey(id);
 		
-		e.setArtists(e.getArtists());
-		e.setEventArtists(null);
+		Set<EventArtist> artists = e.getEventArtists();
+		
+		for (EventArtist artist : artists) {
+			artist.setEvent(null);
+			artist.setId(null);
+		}
 		
 		response.getWriter().write(new Gson().toJson(e));
 	}

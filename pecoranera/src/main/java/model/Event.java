@@ -41,9 +41,6 @@ public class Event {
 	@Column(name = "max_tickets")
 	private int maxTickets;
 	
-	@Transient
-	private Set<Artist> artists = new HashSet<>();
-	
 	private Date date;
 	private String name;
 	private String description;
@@ -139,13 +136,5 @@ public class Event {
 
 	public void setEventArtists(Set<EventArtist> eventArtists) {
 		this.eventArtists = eventArtists;
-	}
-	
-	public Set<Artist> getArtists() {
-		return eventArtists.stream().map(e -> e.getArtist()).collect(Collectors.toSet());
-	}
-	
-	public void setArtists(Set<Artist> artists) {
-		this.artists = artists;
 	}
 }
