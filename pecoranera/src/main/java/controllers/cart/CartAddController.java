@@ -1,25 +1,15 @@
 package controllers.cart;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import dao.CartDao;
 import dao.EventDao;
-import dao.TagDao;
 import dao.UserDao;
-import model.Tag;
-import model.User;
 import model.Cart;
 import model.Event;
 
