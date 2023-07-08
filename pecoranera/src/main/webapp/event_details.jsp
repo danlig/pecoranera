@@ -67,6 +67,10 @@
         
     </section>
 
+    <div id="wheel-wrapper" style="display:none;">
+        <div></div>
+    </div>
+
     <jsp:include page="./assets/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -84,7 +84,7 @@ section.event>div{
     text-decoration: none;
     transition: .5s ease-out;
     background-color: var(--page-background);
-    color: var(--neon-light);
+    color: var(--main-color);
     margin-right: .5rem;
     margin-bottom: 1rem;
 }
@@ -169,6 +169,28 @@ section.event>div{
     background-color: black;
     color: white;
     transition: .25s;
+}
+
+#wheel-wrapper{
+    position: fixed;
+    width: 20vw;
+    height: 20vw;
+    background-color: var(--dark-background);
+    border: 1px solid black;
+    border-radius: 25px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10vw;
+}
+
+#wheel-wrapper>div{
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 @media only screen and ((max-width: 600px) or (max-aspect-ratio: 1)){

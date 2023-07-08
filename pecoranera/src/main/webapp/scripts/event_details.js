@@ -1,6 +1,27 @@
 $(document).ready(function(){
 
     let eventID = $("section").first().attr("id");
+    const wheel = $("#wheel-wrapper>div");
+
+    let waitForElement = function (selector) {
+        return new Promise(resolve => {
+            if (document.querySelector(selector)) {
+                return resolve(document.querySelector(selector));
+            }
+    
+            const observer = new MutationObserver(mutations => {
+                if (document.querySelector(selector)) {
+                    resolve(document.querySelector(selector));
+                    observer.disconnect();
+                }
+            });
+    
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
+    }
 
     let loadEvent = async function(){
         $.ajax({
@@ -37,7 +58,7 @@ $(document).ready(function(){
                         $("#ticket-info>span").show();
                     } else {
                         for(let i = 1; i <= data.availableTickets; i++){
-                            $("#ticket-number").append(`<option value='${i}'>${i}</option>`)
+                            $("#ticket-number").append(`<option value='${i}' ${i == 1 ? "selected" : ""}>${i}</option>`)
                         }
                     }
                 }
@@ -55,16 +76,37 @@ $(document).ready(function(){
         });
     }
 
-    $("#add-to-cart").on("click", function(){
-        $.ajax({
-            url: "CartAddController",
+    $("#add-to-cart").on("click", async function(){
+        wheel.parent().show();
+        
+        wheel.load("./assets/loading-wheel.jsp");
 
-            dataType: "json",
-
-            success: function(){
-                
-            }
+        waitForElement(".lds-roller").then(() =>{
+            $.ajax({
+                url: "CartAddController",
+    
+                data: {
+                    tickets: parseInt($("#ticket-number").val()),
+                    event: eventID
+                },
+        
+                success: () => {
+                    wheel.children().remove();
+                    wheel.append('<i class="fa-solid fa-check fa-bounce" style="color:lawngreen"></i>')
+                },
+    
+                error: () => {
+                    wheel.children().remove();
+                    wheel.append('<i class="fa-solid fa-xmark fa-bounce" style="color:crimson"></i>')
+                }
+            })
         });
+
+        setTimeout(function () {
+            wheel.parent().fadeOut(750);
+        }, 3000);
+        
+        
     });
 
     /*let refreshEvent = async function(){
