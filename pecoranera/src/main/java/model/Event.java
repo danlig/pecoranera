@@ -33,7 +33,7 @@ public class Event {
 			@JoinColumn(name = "id_tag") })
 	private Set<Tag> tags = new HashSet<>();
 
-	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
 	private Set<EventArtist> eventArtists = new HashSet<>();
 
 	@Column(name = "available_tickets")
