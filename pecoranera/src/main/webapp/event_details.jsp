@@ -18,56 +18,57 @@
         <jsp:param name="active_page" value="eventi" />
     </jsp:include>
 
-    <div id="event" style="padding-top:8rem">        
+    <section id='<%= request.getParameter("id")%>' class="event">   
+        <div id="mobile-title">
+            <h2 class="event-header"></h2>
+            <h3 class="event-date"></h3>
+        </div>
+        
         <div>
-            <div id="left-side">
+            <div id="left-div" class="columns">
                 <img src="" alt="">
 
                 <div id="artist-list">
-                    <span class="artist">Lello Petrarca</span>
-                    <span class="artist">Aldo Fucile</span>
-                    <span class="artist">Vincenzo Faraldo</span>
+
                 </div> 
             </div>
 
-            <div id="right-side">
-                <h2 class="event-header">Nome-Evento</h2>
+            <div id="center-div" class="columns">
+                <h2 class="event-header desktop"></h2>
+                <h3 class="event-date desktop"></h3>
 
-                <form method="post" action="">
-                    <div>
-                        <div id="ticket-input">
-                            <button id="subtract" class="ticket-mod">-</button>
-                            <input type="number" name="ticket-number" id="ticket-number" min="1">
-                            <button id="add" class="ticket-mod">+</button>
-                        </div>
-                        
-                        <p id="ticket-price">€10.50</p>
-                    </div>
+                <div id="tag-list"></div>
 
-                    <p id="available-tickets">Biglietti disponibili: <span>15</span></p>
+                <div>
+                    <p id="event-description"> </p>
+                </div>                  
+            </div>  
 
-                    <button type="submit">Acquista <span id="buy-number">1</span> <span id="plural-word">biglietto</span></button>
-                </form>
+            <div id="right-div" class="columns">
+                <div id="ticket-info">
+                    <p id="ticket-price"></p>
 
-                <div id="tag-list">
+                    <span style="display:none;" class="out-of-tickets">BIGLIETTI TERMINATI</span>
                     
-                    <span id="1" class="filter-tag">Blues</span>
-                    <span id="2" class="filter-tag">Jazz Fusion</span>
-                    <span id="3" class="filter-tag">Soul Jazz</span>
-                </div>  
+                    <div id="ticket-availability">  
+                        <label for="ticket-number">Quantità: </label>
+                        <select name="ticket-number" id="ticket-number">
+
+                        </select>
+                    </div>
+                </div>
+
+                <p id="available-tickets">Biglietti disponibili: <span></span></p>
+
+                <button id="add-to-cart" type="submit">Aggiungi al carrello</button>
+            </div>
+
         </div>
         
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultrices aliquam faucibus. Etiam porttitor dapibus arcu sit amet euismod. Praesent tincidunt tempor gravida. Sed scelerisque massa nunc, vitae sagittis lacus hendrerit vitae. Proin ultrices neque eu lorem porta vehicula. Vestibulum pretium eleifend nunc, dapibus interdum augue. Mauris ligula dolor, volutpat eget bibendum commodo, posuere ut quam.
+    </section>
 
-In vel enim lorem. Ut ac nunc eget justo cursus aliquam et eget tortor. Phasellus tristique odio ut tortor bibendum, in auctor lectus facilisis. Nulla hendrerit vehicula metus, vulputate convallis risus maximus at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In eleifend lectus in quam interdum, quis bibendum nisl bibendum. Nullam dui nunc, semper in neque in, sagittis posuere arcu. Maecenas sit amet consequat mi. Morbi posuere condimentum nunc. Sed non ultricies ipsum. Vivamus vitae hendrerit nisl. Sed a tortor facilisis, ornare neque et, hendrerit quam. Vivamus congue erat ut lorem pharetra, quis sagittis libero elementum.
-
-Aenean vel sodales purus. Nunc pharetra accumsan eros nec congue. Duis at auctor lectus, eu porttitor libero. Nulla et nisl velit. In malesuada malesuada sagittis. Nulla vitae volutpat justo, sed viverra dui. Sed placerat non magna ut fringilla. Pellentesque eget tellus orci. Duis aliquam velit et egestas posuere. Vestibulum scelerisque convallis tempus. Fusce ut leo at eros vestibulum posuere. Maecenas justo libero, commodo non posuere sit amet, dictum in eros. Etiam ligula odio, efficitur et odio nec, scelerisque faucibus orci. Mauris interdum pulvinar mollis. Pellentesque vitae nisl aliquam, rutrum nulla eu, tempus nisi.
-
-Aliquam cursus, neque in maximus venenatis, odio est imperdiet augue, rhoncus finibus purus nunc quis mi. Suspendisse congue sem at auctor maximus. In non tempor libero. Aliquam vel risus id nunc gravida mollis. In at ultrices tortor. Sed elementum massa rutrum blandit consectetur. Morbi at pretium felis, nec elementum diam. Nullam sed purus eros.
-
-Proin convallis, tellus eu facilisis maximus, felis ipsum tincidunt risus, ut dapibus lacus lectus at lacus. Morbi at lorem nec est pretium maximus. Integer molestie, justo et aliquet consectetur, lorem nisi maximus arcu, eu volutpat elit lacus eget ante. Aenean varius lacus rutrum venenatis laoreet. Maecenas eget ullamcorper urna. Fusce ultrices posuere tellus in ultrices. Vestibulum vitae gravida mauris. Duis tincidunt eget ligula quis aliquet.
-        </p>
+    <div id="wheel-wrapper" style="display:none;">
+        <div></div>
     </div>
 
     <jsp:include page="./assets/footer.jsp"></jsp:include>

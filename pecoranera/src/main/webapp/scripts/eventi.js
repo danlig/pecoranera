@@ -70,7 +70,7 @@ $(document).ready(function(){
     }
 
     let loadEvents = async function(offsetPage){
-        
+        console.log(selectedTags);
         await $.ajax({
             url: "EventRetrieveController",
 

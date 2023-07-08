@@ -44,8 +44,6 @@ $(document).ready(function(){
 
             type: "POST",
 
-            dataType: "json",
-
             data:{
                 ids: JSON.stringify(selectedTags)
             },
