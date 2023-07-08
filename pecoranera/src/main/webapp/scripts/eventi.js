@@ -29,7 +29,7 @@ $(document).ready(function(){
                         ${event.tags.map(tag => (`<span class="event-tag">${tag.name}</span>`) ).join("")}
                     </div>
 
-                    <div class="event-date">${new Date(Date.parse(event.date)).toLocaleDateString("it-IT", {weekday:"long",month:"short", day:"numeric"})}</div>
+                    <div class="event-date">${new Date(Date.parse(event.date.replace("?", " "))).toLocaleDateString("it-IT", {weekday:"long",month:"short", day:"numeric"})}</div>
         </a>`;
     }
 
@@ -44,7 +44,7 @@ $(document).ready(function(){
                                 ${event.tags.map(tag => (`<span class="event-tag">${tag.name}</span>`) ).join("")}
                             </div>
                     
-                            <div class="event-date">${new Date(Date.parse(event.date)).toLocaleDateString("it-IT", {weekday:"long",month:"short", day:"numeric"})}</div>
+                            <div class="event-date">${new Date(Date.parse(event.date.replace("?", " "))).toLocaleDateString("it-IT", {weekday:"long",month:"short", day:"numeric"})}</div>
                     </div>
                 </a>`;
     }
@@ -70,7 +70,6 @@ $(document).ready(function(){
     }
 
     let loadEvents = async function(offsetPage){
-        console.log(selectedTags);
         await $.ajax({
             url: "EventRetrieveController",
 

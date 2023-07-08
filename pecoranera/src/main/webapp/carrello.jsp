@@ -19,12 +19,23 @@
         <jsp:param name="active_page" value="carrello" />
     </jsp:include>
 
+    <c:if test="${sessionScope.isAdmin == null || empty sessionScope.isAdmin}">
+       <c:redirect url="./index.jsp"/>
+    </c:if>
 
     <section id="cart-list">
         <div class="event">
             <img src="" alt="">
 
-            
+            <div class="event-details">
+                <h3 class="event-header"></h3>
+                <h4 class="event-date"></h4>
+
+                <div class="tag-list">
+
+                </div>
+            </div>
+
         </div>
     </section>
 

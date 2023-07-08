@@ -34,7 +34,7 @@ $(document).ready(function(){
             },
 
             success: function(data){
-                let eventDate = new Date(Date.parse(data.date));
+                let eventDate = new Date(Date.parse(data.date.replace("?", " ")));
 
                 $(".event-header").each(function() {
                     $(this).text(data.name);
