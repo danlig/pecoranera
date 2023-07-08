@@ -2,6 +2,7 @@ package controllers.event;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import com.google.gson.Gson;
 
 import dao.EventDao;
 import model.Event;
+import model.EventArtist;
 
 /*
  * Restituisce gli eventi prossimi

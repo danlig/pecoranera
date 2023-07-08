@@ -141,6 +141,12 @@ public class EventDao {
 			    .getResultList();
 
 		session.close();
+		
+		// Nascondi event-artists
+		for (Event e : upcomingEvents) {
+			e.setEventArtists(null);
+		}
+		
 		return upcomingEvents;
 	}
 }
