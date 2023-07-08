@@ -5,6 +5,7 @@ import java.util.List;
 import model.Cart;
 import model.CartEvent;
 import model.Event;
+import model.keys.CartEventKey;
 
 public class CartDao {
 	private static BasicCrudDao<Cart> crud = new BasicCrudDao<>(Cart.class);
@@ -32,6 +33,7 @@ public class CartDao {
 		cart_event.setEvent(event);
 		cart_event.setCart(cart);
 		cart_event.setTickets(tickets);
+		cart_event.setId(new CartEventKey(event.getId(), cart.getId()));
 		
 		crudCE.doSave(cart_event);
 	}
