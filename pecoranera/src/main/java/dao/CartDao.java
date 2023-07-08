@@ -26,14 +26,27 @@ public class CartDao {
 		return crud.doRetrieveAll();
 	}
 
-	public static void addEvent(Cart cart, Event event, int tickets) {
+	public static void addEvent(Cart cart, Event event, int tickets, boolean edit) {
 		BasicCrudDao<CartEvent> crudCE = new BasicCrudDao<>(CartEvent.class);
 		
+		// Inizializza id della entry
+		CartEventKey id = new CartEventKey(event.getId(), cart.getId());
+			
+		// Somma tickets con quelli esistenti?
+		if (!edit) {
+			for (CartEvent ce : cart.getCartEvents()) {
+				if (ce.getId().equals(id)) {
+					tickets += ce.getTickets();
+					break;
+				}
+			}
+		}
+
 		CartEvent cart_event = new CartEvent();
 		cart_event.setEvent(event);
 		cart_event.setCart(cart);
 		cart_event.setTickets(tickets);
-		cart_event.setId(new CartEventKey(event.getId(), cart.getId()));
+		cart_event.setId(id);
 		
 		crudCE.doSave(cart_event);
 	}

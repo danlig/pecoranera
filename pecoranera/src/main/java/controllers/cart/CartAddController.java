@@ -43,11 +43,13 @@ public class CartAddController extends HttpServlet{
         try {
         	tickets = Integer.parseInt(request.getParameter("tickets"));
         } catch (Exception e) { tickets = 1; }
-        
+
 		int idEvento = Integer.parseInt(request.getParameter("event"));
 		Event event = EventDao.doRetrieveByKey(idEvento);
+		
+		boolean edit = request.getParameter("edit") != null;
         
-        CartDao.addEvent(cart, event, tickets);
+        CartDao.addEvent(cart, event, tickets, edit);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
