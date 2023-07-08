@@ -38,6 +38,7 @@
 				<th>Date</th>
 				<th>Max Tickets</th>
 				<th>Photo</th>
+				<th>Artist</th>
 				<th>Tag</th>
 			</tr>
 			
@@ -61,7 +62,7 @@
 					</td>
 					
 					<td>
-						<input type="datetime" name="date">
+						<input type="date" name="date">
 					</td>
 					
 					<td>
@@ -71,6 +72,8 @@
 					<td>
 						<input type="file" name="photo">
 					</td>
+					
+					<td></td>
 					
 					<td>
 						<select style="height: 30px" name="tags" multiple>
@@ -89,7 +92,7 @@
 			
 			<c:forEach var="event" items="${events}">
 				<tr>
-					<form method="POST" action="${pageContext.request.contextPath}/admin/pevent/edit?id_event=${event.id}">
+					<form method="POST" action="${pageContext.request.contextPath}/admin/event/edit?id_event=${event.id}" enctype="multipart/form-data">
 						<td>
 							<c:out value="${event.id}" />
 						</td>
@@ -119,6 +122,10 @@
 						</td>
 						
 						<td>
+							<a href="${pageContext.request.contextPath}/admin/event-artist/list?id_event=${event.id}">artisti</a>
+						</td>	
+						
+						<td>
 							<select style="height: 30px" name="tags" multiple>
 								<c:forEach var="tag" items="${tags}">
 									<option value="${tag.id}">${tag.name}</option>
@@ -129,7 +136,6 @@
 						<td>
 							<input type="submit" value="Modifica">
 						</td>
-						
 						
 						<td>
 							<a href="${pageContext.request.contextPath}/admin/event/delete?id_event=${event.id}">Elimina</a>

@@ -3,6 +3,8 @@ package controllers.crud.event;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +35,10 @@ public class RemoveController extends HttpServlet {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, new Gson().toJson(message));
 			}
 			
-			// Rimuovere il file
-			EventDao.doDeleteByKey(event.getId());
+			event.setCancellation(new Date());
+			EventDao.doSave(event);
+			
+			// TODO:: Rimuovere ogni file con l'id del evento cancellato
 			
 			response.sendRedirect("list");
 		} catch (NumberFormatException ex) {

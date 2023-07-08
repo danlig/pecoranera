@@ -19,7 +19,7 @@ public class ReadController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("events", EventDao.doRetrieveAll());
+		request.setAttribute("events", EventDao.doRetrieveAllActiveEvent());
 		request.setAttribute("tags", TagDao.doRetrieveAll());
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/event/page.jsp");
