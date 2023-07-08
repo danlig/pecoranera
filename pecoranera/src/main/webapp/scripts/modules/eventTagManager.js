@@ -7,8 +7,8 @@ function tagsToHtml(el) {
     return `<span id="${el.key}" class="filter-tag">${el.value}</span>`;
 }
 
-let ajaxTagRequest = function(loadDestination){
-    $.ajax({
+let ajaxTagRequest = async function(loadDestination){
+    return $.ajax({
         url: 'TagRetrieveController',
 
         dataType: 'json',
@@ -31,8 +31,6 @@ let ajaxTagRequest = function(loadDestination){
             }
         }
     });
-
-    return;
 }
 
 //Load tags with ajax
