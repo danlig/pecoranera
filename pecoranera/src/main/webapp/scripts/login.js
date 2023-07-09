@@ -34,7 +34,6 @@ $(document).ready(function(){
             },
 
             success: function(){
-                alert('LOGGATO!!!!');
                 loadingWheel.fadeOut(500);
                 window.location.replace(`account.jsp#panoramica`);
             },

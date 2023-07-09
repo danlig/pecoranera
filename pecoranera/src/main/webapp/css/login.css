@@ -147,6 +147,12 @@
 
 #loading-wheel-wrapper{
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: inherit;
     background-color: var(--dark-background);
     z-index: 5;
 }

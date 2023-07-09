@@ -1,3 +1,6 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -19,31 +22,40 @@
         <jsp:param name="active_page" value="carrello" />
     </jsp:include>
 
-    <c:if test="${sessionScope.isAdmin == null || empty sessionScope.isAdmin}">
-       <c:redirect url="./index.jsp"/>
-    </c:if>
 
     <section id="cart-list">
-        <div class="event">
-            <img src="" alt="">
-
-            <div class="event-details">
-                <h3 class="event-header"></h3>
-                <h4 class="event-date"></h4>
-
-                <div class="tag-list">
-
-                </div>
-            </div>
-
-        </div>
+        
     </section>
 
     <section id="confirm-cart">
         <div id="price-total">
-            Totale provvisorio: € <span></span>
+            Totale: €<span>0.00</span>
         </div>
+
+        <c:choose>
+         
+         <c:when test= "${sessionScope.isAdmin == null || empty sessionScope.isAdmin}">
+            <div id="call-to-log">Registrati o Accedi per procedere agli acquisti</div>
+         </c:when>
+         
+         <c:otherwise>
+            <div id="cart-buttons">
+                <button id="empty-cart">Svuota Carrello</button>
+
+                <button id="buy-button">Acquista</button>
+            </div>
+         </c:otherwise>
+
+      </c:choose>
+
     </section>
+
+    <div id="shopping-acknowledgement" style="display: none;">
+        <div>
+            <i class="fa-solid fa-cart-shopping fa-beat"></i>
+            <span>Acquisto avvenuto con successo!</span>
+        </div>
+    </div>
 
 
     <jsp:include page="./assets/footer.jsp"></jsp:include>
