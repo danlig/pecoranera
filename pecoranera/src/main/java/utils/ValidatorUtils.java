@@ -1,8 +1,43 @@
 package utils;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dao.UserDao;
+import model.Order;
+import model.User;
+
 public class ValidatorUtils {
+	public static boolean CheckOrder(HttpServletRequest request, HttpServletResponse response, Order order) throws IOException {
+		// Ottieni utente in sessione
+		int idUser = Integer.parseInt(request.getSession().getAttribute("user").toString());
+		User user = UserDao.doRetrieveByKey(idUser);
+		
+		// l'ordine appartiene all'utente?
+		if (order.getUser().getId() != user.getId()) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "l'ordine non appartiene all'utente in sessione");
+			return false;
+		}	
+		
+		// evento futuro?	
+		if (order.getEvent().getDate().compareTo(new Date()) < 0) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "l'evento è già avvenuto");
+			return false;
+		}
+		
+		// evento è attivo?
+		if (order.getEvent().getCancellation() != null) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "l'evento è stato cancellato");
+			return false;
+		}
+		
+		return true;
+	}
+	
 	private static boolean RegexValidation(String regex, String str) {
 		if (str == null) return false;
 		return Pattern.compile(regex)
