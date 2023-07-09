@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import model.Event;
 import model.Tag;
-import utils.FileManager;
+import utils.EventImageUpload;
 
 
 @MultipartConfig
@@ -135,11 +134,17 @@ public class AddController extends HttpServlet {
 		if (filePart == null || filePart.getSize() == 0) {
 			messages.add("Insert Image");
 		} else {
-			String fileExtesion = FileManager.getFileExtension(filePart);
-			if (!(fileExtesion.equals(".jpeg") || fileExtesion.equals(".png"))) {
-				messages.add("Extansion Not Allowed");
-				return ;
+			// Controllo per il file
+
+			if (filePart != null) {
+				try {
+					if (!EventImageUpload.isImage(filePart))
+						messages.add("Extension Not Allowed");					
+				} catch (Exception e) {
+					filePart = null;
+				}
 			}
+			
 		}
 		
 		if (!messages.isEmpty()) {
@@ -158,9 +163,10 @@ public class AddController extends HttpServlet {
 		event.setCancellation(null);
 		
 		event = EventDao.doSave(event);
+
+		if (filePart != null)
+			EventImageUpload.upload(getServletContext().getRealPath("/"), filePart, event.getId());
 		
-		// TODO:: Fare l'upload dell'immagine
 		response.sendRedirect("list");
 	}
-
 }

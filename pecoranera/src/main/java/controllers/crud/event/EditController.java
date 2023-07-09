@@ -24,7 +24,7 @@ import dao.EventDao;
 import dao.TagDao;
 import model.Event;
 import model.Tag;
-import utils.FileManager;
+import utils.EventImageUpload;
 
 
 @MultipartConfig
@@ -146,11 +146,9 @@ public class EditController extends HttpServlet {
 
 		if (filePart != null) {
 			try {
-				String fileExtesion = FileManager.getFileExtension(filePart);
-				if (!(fileExtesion.equals(".jpeg") || fileExtesion.equals(".png"))) {
-					messages.add("Extansion Not Allowed");
-				}							
-			} catch (StringIndexOutOfBoundsException e) {
+				if (!EventImageUpload.isImage(filePart))
+					messages.add("Extension Not Allowed");					
+			} catch (Exception e) {
 				filePart = null;
 			}
 		}
@@ -192,7 +190,8 @@ public class EditController extends HttpServlet {
 		
 		EventDao.doSave(event);
 		
-		// TODO:: Fare l'upload dell'immagine se il file inviato non è null
+		if (filePart != null)
+			EventImageUpload.upload(getServletContext().getRealPath("/"), filePart, event.getId());
 		
 		response.sendRedirect("list");
 	}

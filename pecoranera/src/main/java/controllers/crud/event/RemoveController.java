@@ -38,8 +38,6 @@ public class RemoveController extends HttpServlet {
 			event.setCancellation(new Date());
 			EventDao.doSave(event);
 			
-			// TODO:: Rimuovere ogni file con l'id del evento cancellato
-			
 			response.sendRedirect("list");
 		} catch (NumberFormatException ex) {
 			message.add("Id Format Not Allowed");
