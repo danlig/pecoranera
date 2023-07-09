@@ -9,6 +9,7 @@ body{
 #cart-list{
     padding-top: calc(8rem + 7vh);
     width: 100vw;
+    min-height: 40vh;
 }
 
 .event{

@@ -155,6 +155,35 @@ $(document).ready(function(){
         })
     });
 
-    
+    $("#buy-button").on("click", function(){
+        $(".event").each(function(){
+            let quantity = parseInt($(this).find(".quantity").first().val());
+
+            $.ajax({
+                url: "OrderAddController",
+
+                data:{
+                    event: $(this).attr("id"),
+                    tickets: quantity
+                },
+
+                success: () => {
+                    $("#shopping-acknowledgement").show();
+
+                    $(".event").remove();
+
+                    setTimeout(function () {
+                        $("#shopping-acknowledgement").fadeOut(750);
+                    }, 4000);
+
+                    refreshCost();
+                },
+
+                error: () => {
+                    alert("Errore con l'acquisto");
+                }
+            });
+        });
+    });
 
 });

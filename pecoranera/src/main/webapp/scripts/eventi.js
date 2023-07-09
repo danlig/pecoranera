@@ -79,7 +79,7 @@ $(document).ready(function(){
                 name: $("#name-search").val(),
                 tags: JSON.stringify(selectedTags),
                 offset: offsetPage,
-                pageSize: 1
+                pageSize: 3
             },
 
             dataType: "json",
