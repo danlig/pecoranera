@@ -1,7 +1,9 @@
 package controllers.crud.tag;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import dao.ProductTypeDao;
 import dao.TagDao;
 import model.Tag;
 
@@ -25,34 +30,34 @@ public class EditController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String> messages = new HashMap<>();
+		List<String> messages = new ArrayList<>();
 		String name = (String) request.getParameter("name");
 		String id_tag = request.getParameter("id_tag");
 		
 		Tag tag = null;
-		if (id_tag != null) {
-			
-			tag = TagDao.doRetrieveByKey(Integer.parseInt(id_tag));
-			
-			if (name == null || name.trim().equals("")) {
-				messages.put("error", "Inserire il nome");
-			} 
-		} else {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+		try {
+			if (id_tag != null) {			
+				tag = TagDao.doRetrieveByKey(Integer.parseInt(id_tag));
+				
+				if (name == null || name.trim().equals("")) {
+					messages.add("Inserire il nome");
+				} 
+			} else {
+				messages.add("Inserisci id_tag");
+			}
+		} catch (NumberFormatException ex) {
+			messages.add("id_tag Format Not Allowed");
 		}
 		
 		if (!messages.isEmpty()) {
-			request.setAttribute("tags", TagDao.doRetrieveAll());
-			request.setAttribute("messages", messages);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/tag/page.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			tag.setName(name);
-			TagDao.doSave(tag);
-			
-			response.sendRedirect("list");
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
+			return ;
 		}
+			
+		tag.setName(name);
+		TagDao.doSave(tag);
 		
+		response.sendRedirect("list");
 	}
 
 }
