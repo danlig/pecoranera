@@ -28,9 +28,10 @@ public class RemoveController extends HttpServlet {
 		
 		try {
 			if (request.getParameter("id_artist") == null) {
-				messages.add("Artist Not Found");
+				messages.add("Id Artist Null");
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, new Gson().toJson(messages));
-			}
+				return ;
+			}	
 			
 			ArtistDao.doDeleteByKey(Integer.parseInt(request.getParameter("id_artist")));
 			response.sendRedirect("list");

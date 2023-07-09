@@ -34,14 +34,13 @@ public class EditController extends HttpServlet {
 		Artist artist = null;
 		
 		try {
-			if (request.getParameter("id_artist") == null) {
+			artist = ArtistDao.doRetrieveByKey(Integer.parseInt(request.getParameter("id_artist")));
+						
+			if (artist == null) {
 				messages.add("Artist Not Found");
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, new Gson().toJson(messages));
 				return ;
 			}
-			
-			artist = ArtistDao.doRetrieveByKey(Integer.parseInt(request.getParameter("id_artist")));
-			
 		} catch (NumberFormatException e) {
 			messages.add("Id Artist Format Not Allowed");
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
@@ -49,16 +48,11 @@ public class EditController extends HttpServlet {
 		}
 		
 		
-		if (name == null || name.trim().equals("")) {
-			artist.setName(artist.getName());
-		} else {
+		if (name != null && name.trim().equals("")) {
 			artist.setName(name);
 		}
 		
-		
-		if (description == null || description.trim().equals("")) {
-			artist.setDescription(artist.getDescription());
-		} else {
+		if (description != null && description.trim().equals("")) {
 			artist.setDescription(description);
 		}
 		
