@@ -47,7 +47,6 @@ public class LoginController extends HttpServlet {
         	request.setAttribute("errors", errors);
         	dispatcherToLoginPage.forward(request, response);
 		} else if (user.isAdmin()) {
-			System.out.println("FATTOOOO");
 			request.getSession().setAttribute("isAdmin", Boolean.TRUE);
 			response.sendRedirect("admin/personal-page.jsp");
 		} else {
