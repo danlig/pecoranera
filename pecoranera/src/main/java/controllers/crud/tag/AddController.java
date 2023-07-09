@@ -1,15 +1,15 @@
 package controllers.crud.tag;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.ArrayList;
+import java.util.List;
 import model.Tag;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import dao.TagDao;
 
@@ -26,25 +26,22 @@ public class AddController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String> messages = new HashMap<>();
+		List<String> messages = new ArrayList<>();
 		String name = (String) request.getParameter("name");
 		
 		if (name == null || name.trim().equals("")) {
-			messages.put("error", "Inserire il nome");
-			
-			request.setAttribute("tags", TagDao.doRetrieveAll());
-			request.setAttribute("messages", messages);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/tag/page.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			Tag tag = new Tag();
-			tag.setName(name);
-			TagDao.doSave(tag);
-			
-			response.sendRedirect("list");
+			messages.add("Inserire il nome");
+		} 
+		
+		if (!messages.isEmpty()) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
+			return ;
 		}
 		
+		Tag tag = new Tag();
+		tag.setName(name);
+		TagDao.doSave(tag);
 		
+		response.sendRedirect("list");
 	}
-
 }
