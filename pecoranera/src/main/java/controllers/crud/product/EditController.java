@@ -1,14 +1,15 @@
 package controllers.crud.product;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import dao.ProductDao;
 import dao.ProductTypeDao;
@@ -27,85 +28,70 @@ public class EditController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String> messages = new HashMap<>();
-		String id_product_string = request.getParameter("id_product");
+		List<String> messages = new ArrayList<>();
+		
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
-		String price_string = request.getParameter("price");
-		String id_product_type_string = request.getParameter("id_product_type");
 		
-		double price = 0.0;
-		int id_product_type = -1;
-		int id_product = -1;
+		Product product = null;
+		ProductType product_type = null;
 		
-		if (id_product_string == null || id_product_string.trim().equals("")) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-		} else {
-			try {
-				id_product = Integer.parseInt(id_product_string);
-			} catch(NumberFormatException e) {
-				response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
+		try {
+			product = ProductDao.doRetrieveByKey(Integer.parseInt(request.getParameter("id_artist")));
+			
+			if (product == null) {
+				messages.add("Product Not Found");
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, new Gson().toJson(messages));
+				return ;
 			}
+		} catch (NumberFormatException e) {
+			messages.add("Id Artist Format Not Allowed Or Null");
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
+			return ;
+		}
+		
+		if (name != null && name.trim().equals("")) {
+			product.setName(name);
+		}
+		
+		if (description != null && description.trim().equals("")) {
+			product.setDescription(description);
+		}
+		
+		try {
+			if (request.getParameter("price") != null) {
+				product.setPrice(Double.parseDouble(request.getParameter("price")));
+			}
+		} catch (NumberFormatException e) {
+			messages.add("Price Format Not Allowed");
 		}
 
-		Product product = ProductDao.doRetrieveByKey(id_product);
-		
-		if (product == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-		} else {
-			
-			if (name == null || name.trim().equals("")) {
-				name = product.getName();
-			}
-			
-			if (description == null || description.trim().equals("")) {
-				description = product.getDescription();
-			}
-			
-			if (price_string == null || price_string.trim().equals("")) {
-				price = product.getPrice();
-			} else {
-				try {
-					price = Double.parseDouble(price_string);
-				} catch(NumberFormatException e) {
-					response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
-				}
-			}
-
-			if (id_product_type_string == null || id_product_type_string.trim().equals("")) {
-				id_product_type = product.getType().getId();
-			} else {
-				try {
-					id_product_type = Integer.parseInt(id_product_type_string);
-				} catch(NumberFormatException e) {
-					response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
-				}
-			}
-
-					
-			if (!messages.isEmpty()) {
-				request.setAttribute("messages", messages);
-				request.setAttribute("products", ProductDao.doRetrieveAll());
-				request.setAttribute("product_types", ProductTypeDao.doRetrieveAll());
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/product/page.jsp");
-				dispatcher.forward(request, response);
-			} else {
-				ProductType product_type = ProductTypeDao.doRetrieveByKey(id_product_type);
+		try {
+			if (request.getParameter("id_product_type") != null) {
+				product_type = ProductTypeDao.doRetrieveByKey(Integer.parseInt(request.getParameter("id_product_type")));
 				
 				if (product_type == null) {
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+					messages.add("ProductType not found");
+					response.sendError(HttpServletResponse.SC_NOT_FOUND, new Gson().toJson(messages));
+					return ;
+				} else {
+					product.setType(product_type);
 				}
 				
-				product.setName(name);
-				product.setDescription(description);
-				product.setPrice(price);
-				product.setType(product_type);
-				ProductDao.doSave(product);
-				
-				response.sendRedirect("list"); 
 			}
+		} catch(NumberFormatException e) {
+			messages.add("Id ProductType Format Not Allowed Or Null");
 		}
+
+				
+		if (!messages.isEmpty()) {
+			response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, new Gson().toJson(messages));
+		} 
+		
+		
+		ProductDao.doSave(product);
+		
+		response.sendRedirect("list");
 	}
 
 }

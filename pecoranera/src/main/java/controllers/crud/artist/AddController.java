@@ -1,14 +1,15 @@
 package controllers.crud.artist;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import dao.ArtistDao;
 import model.Artist;
@@ -25,35 +26,30 @@ public class AddController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String> messages = new HashMap<>();
+		List<String> messages = new ArrayList<>();
 
 		String name = (String) request.getParameter("name");
 		String description = (String) request.getParameter("description");
 
 		if (name == null || name.trim().equals("")) {
-			messages.put("error", "Insert Name");
+			messages.add("Insert Name");
 		}
 		
 		if (description == null || description.trim().equals("")) {
-			messages.put("error", "Insert Description");
+			messages.add("Insert Description");
 		}
 		
 		if (!messages.isEmpty()) {
-			request.setAttribute("messages", messages);
-			request.setAttribute("artists", ArtistDao.doRetrieveAll());
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/artist/page.jsp");			
-			dispatcher.forward(request, response);
-			
-		} else {
-			Artist artist = new Artist();
-			
-			artist.setName(name);
-			artist.setDescription(description);
-			
-			ArtistDao.doSave(artist);
-			
-			response.sendRedirect("list");
+			response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, new Gson().toJson(messages));
+			return ;
 		}
+		
+		Artist artist = new Artist();
+		artist.setName(name);
+		artist.setDescription(description);
+		ArtistDao.doSave(artist);
+		
+		response.sendRedirect("list");
 	}
 
 }
