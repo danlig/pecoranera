@@ -21,8 +21,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "event")
 public class Event {
-	public static final String UPLOAD_DIR = "event";
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_event")

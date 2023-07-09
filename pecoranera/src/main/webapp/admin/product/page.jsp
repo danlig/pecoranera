@@ -57,7 +57,7 @@
 					</td>
 					
 					<td>
-						<select name="id_product_type">
+						<select name="type">
 							<c:forEach var="product_type" items="${product_types}">
 								<option value="${product_type.id}">
 									<c:out value="${product_type.name}"/>
@@ -93,7 +93,7 @@
 						</td>
 						
 						<td>
-							<select name="id_product_type">
+							<select name="type">
 								<c:forEach var="product_type" items="${product_types}">
 									<c:if test="${product_type.name == product.type.name}">
 										<option value="${product_type.id}" selected>
