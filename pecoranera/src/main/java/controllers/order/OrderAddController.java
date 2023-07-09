@@ -12,15 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CartDao;
 import dao.EventDao;
 import dao.OrderDao;
 import dao.UserDao;
+import model.Cart;
+import model.CartEvent;
 import model.Event;
 import model.Order;
 import model.User;
 
 /*
- * Aggiunge un nuovo ordine all'utente in sessione
+ * Per ogni elemento nel carrello dell'utente in sessione, crea un ordine
+ * e svuota il carrello
  *  */
 
 @WebServlet("/OrderAddController")
@@ -34,25 +38,28 @@ public class OrderAddController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idUser = Integer.parseInt(request.getSession().getAttribute("user").toString());
 		User user = UserDao.doRetrieveByKey(idUser);
+		Cart cart = UserDao.doRetrieveByKey(idUser).getCart();
 		
-		int tickets;
-        try {
-        	tickets = Integer.parseInt(request.getParameter("tickets"));
-        } catch (Exception e) { tickets = 1; }
-        
-		int idEvento = Integer.parseInt(request.getParameter("event"));
-		Event event = EventDao.doRetrieveByKey(idEvento);
-        
-        Order order = new Order();
-        order.setUser(user);
-        order.setDate(new Date());
-        order.setPrice(event.getPrice());
-        order.setEvent(event);
-        order.setTickets(tickets);
-        
-        boolean success = OrderDao.doSave(order);
-        
-        if (!success) response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		for (CartEvent ce : cart.getCartEvents()) {
+			Event event = ce.getEvent();
+			
+	        Order order = new Order();
+	        order.setUser(user);
+	        order.setDate(new Date());
+	        order.setPrice(event.getPrice());
+	        order.setEvent(event);
+	        order.setTickets(ce.getTickets());
+	        
+	        boolean success = OrderDao.doSave(order);
+	        
+	        if (!success) response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		}
+		
+		// Svuota carrello
+		CartDao.doDeleteByKey(cart.getId());
+		cart = new Cart();
+		cart.setUser(user);
+		CartDao.doSave(cart);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

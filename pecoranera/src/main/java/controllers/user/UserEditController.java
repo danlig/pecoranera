@@ -55,6 +55,11 @@ public class UserEditController extends HttpServlet {
 			
 			
 		if (newPassword != null && oldPassword != null) {
+			if (!ValidatorUtils.CheckPassword(newPassword)) {
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "newPassword");
+				return;
+			}
+			
 			if (!user.getPassword().equals(LoginUtils.toHash(oldPassword))) {
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "password");
 				return;
@@ -65,6 +70,9 @@ public class UserEditController extends HttpServlet {
 		}
 				
 		UserDao.doSave(user);
+		
+		request.getSession().setAttribute("username", user.getUsername());
+		request.getSession().setAttribute("email", user.getEmail());
 		
 		response.setStatus(200);
 	}

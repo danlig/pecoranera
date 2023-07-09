@@ -40,10 +40,11 @@ public class LoginController extends HttpServlet {
 			response.setStatus(200);
 			request.getSession().setAttribute("isAdmin", Boolean.TRUE);
 			
-		} else {
+		} else {			
 			response.setStatus(200);
-			request.getSession().setAttribute("username", user.getUsername());
 			request.getSession().setAttribute("user", user.getId());
+			request.getSession().setAttribute("email", user.getEmail());
+			request.getSession().setAttribute("username", user.getUsername());
 			request.getSession().setAttribute("isAdmin", Boolean.FALSE);
 		}
 
