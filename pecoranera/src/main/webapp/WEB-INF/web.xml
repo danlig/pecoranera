@@ -65,6 +65,16 @@
  	<description></description>
  	<servlet-class>controllers.crud.artist.EditController</servlet-class>
  </servlet>
+  
+ <servlet>
+ 	<servlet-name>RemoveArtistController</servlet-name>
+ 	<display-name>RemoveArtistController</display-name>
+ 	<description></description>
+ 	<servlet-class>controllers.crud.artist.RemoveController</servlet-class>
+ </servlet>
+  
+ <!-- Servlet per i prodotti -->
+  
  <servlet>
  	<description>
  	</description>
@@ -72,6 +82,7 @@
  	<servlet-name>ReadProductController</servlet-name>
  	<servlet-class>controllers.crud.product.ReadController</servlet-class>
  </servlet>
+  
  <servlet>
  	<description>
  	</description>
@@ -79,6 +90,7 @@
  	<servlet-name>AddProductController</servlet-name>
  	<servlet-class>controllers.crud.product.AddController</servlet-class>
  </servlet>
+  
  <servlet>
  	<description>
  	</description>
@@ -86,20 +98,14 @@
  	<servlet-name>EditProductController</servlet-name>
  	<servlet-class>controllers.crud.product.EditController</servlet-class>
  </servlet>
+  
  <servlet>
  	<description>
  	</description>
  	<display-name>RemoveProductController</display-name>
  	<servlet-name>RemoveProductController</servlet-name>
  	<servlet-class>controllers.crud.product.RemoveController</servlet-class>
- </servlet>
- 
- <servlet>
- 	<servlet-name>RemoveArtistController</servlet-name>
- 	<display-name>RemoveArtistController</display-name>
- 	<description></description>
- 	<servlet-class>controllers.crud.artist.RemoveController</servlet-class>
- </servlet>
+  </servlet>
  
  <!-- Servlet per i tag -->
  
@@ -153,6 +159,72 @@
  	<servlet-class>controllers.crud.product_type.RemoveController</servlet-class>
  </servlet>
  
+ <!-- Servlet per gli event -->
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>AddEventController</display-name>
+ 	<servlet-name>AddEventController</servlet-name>
+ 	<servlet-class>controllers.crud.event.AddController</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>ReadEventController</display-name>
+ 	<servlet-name>ReadEventController</servlet-name>
+ 	<servlet-class>controllers.crud.event.ReadController</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>EditEventController</display-name>
+ 	<servlet-name>EditEventController</servlet-name>
+ 	<servlet-class>controllers.crud.event.EditController</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>RemoveEventController</display-name>
+ 	<servlet-name>RemoveEventController</servlet-name>
+ 	<servlet-class>controllers.crud.event.RemoveController</servlet-class>
+ </servlet> 
+ 
+ <!-- Servlet per gli eventi-artisti -->
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>ReadEventArtistController</display-name>
+ 	<servlet-name>ReadEventArtistController</servlet-name>
+ 	<servlet-class>controllers.crud.event_artist.ReadController</servlet-class>
+ </servlet> 
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>AddEventArtistController</display-name>
+ 	<servlet-name>AddEventArtistController</servlet-name>
+ 	<servlet-class>controllers.crud.event_artist.AddController</servlet-class>
+ </servlet> 
+ 
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>RemoveEventArtistController</display-name>
+ 	<servlet-name>RemoveEventArtistController</servlet-name>
+ 	<servlet-class>controllers.crud.event_artist.RemoveController</servlet-class>
+ </servlet> 
+ 
+ 
+ 
+  <servlet-mapping>
+ 	<servlet-name>TestServlet</servlet-name>
+ 	<url-pattern>/test</url-pattern>
+ </servlet-mapping>
  
  <servlet-mapping>
  	<servlet-name>RegisterController</servlet-name>
@@ -234,6 +306,48 @@
  	<servlet-name>RemoveProductTypeController</servlet-name>
  	<url-pattern>/admin/product-type/delete</url-pattern>
  </servlet-mapping>
+  
+ <!-- Servlet-mapping per gli eventi -->
+ 
+ <servlet-mapping>
+ 	<servlet-name>AddEventController</servlet-name>
+ 	<url-pattern>/admin/event/add</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>ReadEventController</servlet-name>
+ 	<url-pattern>/admin/event/list</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>EditEventController</servlet-name>
+ 	<url-pattern>/admin/event/edit</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>RemoveEventController</servlet-name>
+ 	<url-pattern>/admin/event/delete</url-pattern>
+ </servlet-mapping>
+ 
+ <!-- Servlet-mapping per gli eventi-artisti -->
+ 
+ <servlet-mapping>
+ 	<servlet-name>ReadEventArtistController</servlet-name>
+ 	<url-pattern>/admin/event-artist/list</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>AddEventArtistController</servlet-name>
+ 	<url-pattern>/admin/event-artist/add</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+ 	<servlet-name>RemoveEventArtistController</servlet-name>
+ 	<url-pattern>/admin/event-artist/delete</url-pattern>
+ </servlet-mapping>
+
+ <!-- Servlet-mapping per i prodotti --> 
+  
  <servlet-mapping>
  	<servlet-name>ReadProductController</servlet-name>
  	<url-pattern>/admin/product/list</url-pattern>

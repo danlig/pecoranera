@@ -1,8 +1,7 @@
-package controllers;
+package controllers.crud.event;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,31 +9,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ArtistDao;
 import dao.EventDao;
-import dao.UserDao;
-import model.Artist;
-import model.Event;
-import model.User;
+import dao.TagDao;
 
-public class TestServlet extends HttpServlet {
+public class ReadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public TestServlet() {
+       
+    public ReadController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+		request.setAttribute("events", EventDao.doRetrieveAllActiveEvent());
+		request.setAttribute("tags", TagDao.doRetrieveAll());
 		
-		for (User item : UserDao.doRetrieveAll()) {
-			out.println(item);
-		}
-		
-//		User user = UserDao.doRetrieveByEmail("example@mail.com");
-//		out.println(user);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/event/page.jsp");
+		dispatcher.forward(request, response);
 	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
