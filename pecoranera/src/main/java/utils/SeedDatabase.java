@@ -1,14 +1,13 @@
 package utils;
 
 import model.Artist;
+import model.Cart;
 import model.Event;
-import model.EventArtist;
 import model.Product;
 import model.Tag;
-import model.keys.EventArtistKey;
+import model.User;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -20,10 +19,12 @@ import model.ProductType;
 import com.github.javafaker.Faker;
 
 import dao.ArtistDao;
+import dao.CartDao;
 import dao.EventDao;
 import dao.ProductDao;
 import dao.ProductTypeDao;
 import dao.TagDao;
+import dao.UserDao;
 	
 public class SeedDatabase {
 	private static final Faker faker = new Faker();
@@ -70,10 +71,11 @@ public class SeedDatabase {
 			product.setName(faker.beer().name());
 			product.setDescription(
 					"Luppolo: " + faker.beer().hop() + 
-					"\nMalto: " + faker.beer().malt() + 
-					"\nStyle: " + faker.beer().style() + 
-					"\nGradazione (%): " + faker.number().numberBetween(3, 15)
+					" - Malto: " + faker.beer().malt() + 
+					" - nStyle: " + faker.beer().style() + 
+					" - Gradazione (%): " + faker.number().numberBetween(3, 15)
 					);
+			product.setPrice(generateRandomPrice(3.00, 6.00));
 			product.setType(beer_type);
 			ProductDao.doSave(product);
 		}
@@ -87,7 +89,7 @@ public class SeedDatabase {
 			product.setName(faker.music().instrument() + " Burger");
 			product.setDescription(faker.lorem().sentence(10, 6));			
 			product.setPrice(generateRandomPrice(7.00, 12.00));
-			product.setType(beer_type);
+			product.setType(burger_type);
 			ProductDao.doSave(product);
 		}
 		
@@ -100,7 +102,7 @@ public class SeedDatabase {
 			product.setName(faker.food().dish());
 			product.setDescription(faker.lorem().sentence(10, 6));			
 			product.setPrice(generateRandomPrice(2.00, 20.00));
-			product.setType(beer_type);
+			product.setType(special_type);
 			ProductDao.doSave(product);
 		}
 	}
@@ -134,8 +136,43 @@ public class SeedDatabase {
 		}
 	}
 	
+	private static void seedUser() {
+		/**
+		 * Username: admin
+		 * Email: admin@pecoranera.it
+		 * Password: Password@10
+		 */
+		User admin = new User();
+		admin.setEmail("admin@pecoranera.it");
+		admin.setUsername("admin");
+		admin.setPassword(LoginUtils.toHash("Password@10"));
+		admin.setAdmin(true);
+		UserDao.doSave(admin);
+		
+		/**
+		 * Username: RickSanchez
+		 * Email: ricksancez@gmail.com
+		 * Password: Morty_Rick_102
+		 */
+		User user = new User();
+		user.setEmail("ricksancez@gmail.com");
+		user.setUsername("RickSanchez");
+		user.setPassword(LoginUtils.toHash("Morty_Rick_102"));
+		user.setAdmin(false);
+		
+		UserDao.doSave(user);
+		user = UserDao.doRetrieveByEmail("ricksancez@gmail.com");
+		
+		// Crea carrello
+		Cart cart = new Cart();
+		cart.setUser(user);
+		CartDao.doSave(cart);
+		
+	}
+	
 	public static void seed() {
 		seedArtist();
+		seedUser();
 		seedProduct();
 		seedTag();
 		seedEvent();
