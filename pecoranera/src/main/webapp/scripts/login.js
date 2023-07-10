@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     $(".close-login").on("click", function(e){
         e.preventDefault();
-
+        
         $("#login-wrapper").toggle();
     });
 

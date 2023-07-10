@@ -5,7 +5,7 @@
         <button class="close-login"><i class="fa-solid fa-xmark"></i></button>
 
         <form id="login" method="post" action="">
-            <button class="close-login"><i class="fa-solid fa-xmark"></i></button>
+            <button type="button" class="close-login"><i class="fa-solid fa-xmark"></i></button>
 
             <div>
                 <h3>Log In</h3>
@@ -21,7 +21,7 @@
         </form>
 
         <form id="signup" method="post" action="">
-            <button class="close-login"><i class="fa-solid fa-xmark"></i></button>
+            <button type="button" class="close-login"><i class="fa-solid fa-xmark"></i></button>
 
             <div>
                 <h3>Registrazione</h3>
