@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.OrderDao;
 import dao.UserDao;
 import model.User;
+import utils.ValidatorUtils;
 import model.Order;
 
 /*
@@ -27,28 +28,11 @@ public class OrderDeleteController extends HttpServlet{
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json");
-
-		int idUser = Integer.parseInt(request.getSession().getAttribute("user").toString());
-		User user = UserDao.doRetrieveByKey(idUser);
-		
 		int idOrder =  Integer.parseInt(request.getParameter("idOrder"));
 		Order order = OrderDao.doRetrieveByKey(idOrder);
 		
-		// Verifica se l'ordine appartiene all'utente
-		if (!user.getOrders().stream().anyMatch(o -> o.getId() == idOrder)) {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "l'ordine non è dell'utente in sessione");
-			return;
-		}
-		
-		// Verifica se la data l'evento è già avvenuto		
-		if (order.getEvent().getDate().compareTo(new Date()) < 0) {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "l'evento è già avvenuto");
-			return;
-		}
-			
-		// Elimina l'ordine
-		OrderDao.doDeleteByKey(idOrder);
+		if (ValidatorUtils.CheckOrder(request, response, order))
+			OrderDao.doDeleteByKey(idOrder);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

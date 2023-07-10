@@ -21,6 +21,7 @@ import model.CartEvent;
 import model.Event;
 import model.Order;
 import model.User;
+import utils.ValidatorUtils;
 
 /*
  * Per ogni elemento nel carrello dell'utente in sessione, crea un ordine
@@ -49,10 +50,14 @@ public class OrderAddController extends HttpServlet{
 	        order.setPrice(event.getPrice());
 	        order.setEvent(event);
 	        order.setTickets(ce.getTickets());
+     
+	        if (!ValidatorUtils.CheckOrder(request, response, order))
+	        	return;
 	        
-	        boolean success = OrderDao.doSave(order);
-	        
-	        if (!success) response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+	        if (!OrderDao.doSave(order)) {
+	        	response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Numero di ticket invalido");
+	        	return;
+	        }
 		}
 		
 		// Svuota carrello
