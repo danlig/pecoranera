@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controllers.GenericCrudController;
-import dao.ProductTypeDao;
-import model.Product;
 import model.ProductType;
 
 public class AddController extends HttpServlet {

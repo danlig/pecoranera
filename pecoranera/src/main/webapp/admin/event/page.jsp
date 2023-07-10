@@ -36,7 +36,6 @@
 				<th>Description</th>
 				<th>Price</th>
 				<th>Date</th>
-				<th>Cancellation Date</th>
 				<th>Max Tickets</th>
 				<th>Available Tickets</th>
 				<th>Photo</th>
@@ -65,11 +64,9 @@
 					
 					<td>
 						<input type="date" name="date">
+						<input type="hidden" name="cancellation" value="2024-02-02">
 					</td>
 					
-					<td>
-						<input type="date" name="cancellation">
-					</td>
 					
 					<td>
 						<input type="number" name="maxTickets" placeholder="Insert Max Tickets">
@@ -103,7 +100,7 @@
 			
 			<c:forEach var="event" items="${events}">
 				<tr>
-					<form method="POST" action="${pageContext.request.contextPath}/admin/event/edit?id_event=${event.id}" enctype="multipart/form-data">
+					<form method="POST" action="${pageContext.request.contextPath}/admin/event/edit?id=${event.id}" enctype="multipart/form-data">
 						<td>
 							<c:out value="${event.id}" />
 						</td>
@@ -153,7 +150,7 @@
 						</td>
 						
 						<td>
-							<a href="${pageContext.request.contextPath}/admin/event/delete?id_event=${event.id}">Elimina</a>
+							<a href="${pageContext.request.contextPath}/admin/event/delete?id=${event.id}">Elimina</a>
 						</td>
 					</form>
 				</tr>

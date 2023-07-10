@@ -3,7 +3,6 @@ package controllers.crud.event;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -25,7 +24,7 @@ public class RemoveController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<String> message = new ArrayList<>();
-		String id_event = request.getParameter("id_event");
+		String id_event = request.getParameter("id");
 		
 		try {
 			Event event = EventDao.doRetrieveByKey(Integer.parseInt(id_event));
@@ -33,6 +32,7 @@ public class RemoveController extends HttpServlet {
 			if (event == null) {
 				message.add("Event Not Found");
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, new Gson().toJson(message));
+				return ;
 			}
 			
 			event.setCancellation(new Date());
@@ -42,6 +42,7 @@ public class RemoveController extends HttpServlet {
 		} catch (NumberFormatException ex) {
 			message.add("Id Format Not Allowed");
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(message));
+			return ;
 		}
 	}
 

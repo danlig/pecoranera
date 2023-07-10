@@ -1,20 +1,14 @@
 package controllers.crud.product_type;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import controllers.GenericCrudController;
 import model.ProductType;
-import model.Tag;
-import dao.ProductTypeDao;
 
 public class EditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
