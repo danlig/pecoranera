@@ -1,7 +1,10 @@
 package controllers.order;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +20,7 @@ import model.Order;
 import model.User;
 
 /*
- * Restituisce ordini dell'utente corrente
+ * Restituisce ordini dell'utente corrente ordinati per data
  *  */
 
 @WebServlet("/OrderRetrieveController")
@@ -33,13 +36,16 @@ public class OrderRetrieveController extends HttpServlet{
 
 		int idUser = Integer.parseInt(request.getSession().getAttribute("user").toString());
 		User user = UserDao.doRetrieveByKey(idUser);
-		Set<Order> orders = user.getOrders();
 		
-		for (Order o : orders) {
+		SortedSet<Order> orders = new TreeSet<>(Comparator.comparing(Order::getDate).reversed());
+		
+		for (Order o : user.getOrders()) {
 			o.setUser(null);
 			
 			Event e = o.getEvent();
 			e.setEventArtists(null);
+			
+			orders.add(o);
 		}
 
 		response.getWriter().write(new Gson().toJson(orders));

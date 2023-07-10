@@ -78,7 +78,8 @@ public class EventDao {
 		    	condition3 = builder.in(tagJoin.get("id"), tags);
 		    }
 		    
-		    criteriaQuery.where(builder.and(condition1, condition2, condition3));
+		    criteriaQuery.where(builder.and(condition1, condition2, condition3, 
+		    		builder.isNull(root.get("cancellation"))));
 		    
 		    criteriaQuery.orderBy(builder.asc(root.get("date")));
 		    
@@ -113,16 +114,12 @@ public class EventDao {
 		
 		Root<Event> root = query.from(Event.class);
 		query.select(root);
-		query.where(builder.greaterThan(root.get("date"), LocalDate.now()));
-		
-		/*
-		 * query.where(
+		query.where(
 				    builder.and(
 				        builder.greaterThan(root.get("date"), LocalDate.now()),
-				        builder.isNotNull(root.get("cancellationDate"))
+				        builder.isNull(root.get("cancellation"))
 				    )
 				);
-		 * */
 		
 		query.orderBy(builder.asc(root.get("date")));
 		
