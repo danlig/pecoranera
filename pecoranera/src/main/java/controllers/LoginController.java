@@ -11,7 +11,6 @@ import utils.LoginUtils;
 import utils.ValidatorUtils;
 import dao.CartDao;
 import dao.UserDao;
-import dao.CartDao;
 import model.Cart;
 import model.CartEvent;
 import model.User;
@@ -26,7 +25,7 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-    
+
 		if (!ValidatorUtils.CheckEmail(email)) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			return; 
