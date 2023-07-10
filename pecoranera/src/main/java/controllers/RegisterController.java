@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.CartDao;
 import dao.UserDao;
 import model.Cart;
+import model.CartEvent;
 import model.User;
 import utils.ValidatorUtils;
 import utils.LoginUtils;
@@ -58,19 +59,27 @@ public class RegisterController extends HttpServlet {
 		user.setAdmin(false);
 		UserDao.doSave(user);
 		
-		// Salva carrello in sessione
-		Cart cart = (Cart) request.getSession().getAttribute("cart");
+		user = UserDao.doRetrieveByEmail(email);
+		
+		// Crea carrello
+		Cart cart = new Cart();
     	
-    	if (cart == null) {
-    		cart = new Cart();
-    	}
-    	
-    	
-		cart.setUser(UserDao.doRetrieveByEmail(email));
+		cart.setUser(user);
 		CartDao.doSave(cart);
 		
+		// Ottieni carrello creato
+		cart = UserDao.doRetrieveByEmail(email).getCart();
 		
-		request.getSession().setAttribute("user", user.getId()); // TODO: non restituisce id
+		// Salva carrello della sessione
+		Cart cartSession = (Cart) request.getSession().getAttribute("cart");
+
+		if (cartSession != null) {
+    		for (CartEvent ce : cartSession.getCartEvents()) {
+    			CartDao.addEvent(cart, ce.getEvent(), ce.getTickets(), false);
+    		}
+    	}
+				
+		request.getSession().setAttribute("user", user.getId());
 		request.getSession().setAttribute("username", username);
 		request.getSession().setAttribute("email", user.getEmail());
 		request.getSession().setAttribute("isAdmin", Boolean.FALSE);
