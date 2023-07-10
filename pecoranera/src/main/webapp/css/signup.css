@@ -1,0 +1,163 @@
+@import "variables.css";
+
+body{
+    background-color: var(--page-background);
+    min-height: 100vh
+}
+
+#nav-spacer{
+    width: 100vw;
+    height: calc(var(--nav-height) + 8vh);
+}
+
+#goback-link{
+    color: var(--neon-light);
+    font-size: 1.1rem;
+    font-family: var(--main-font);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    transition: .5s ease;
+}
+
+#goback-link:hover, #goback-link:focus{
+    color: var(--neon-color);
+}
+
+#registration h2{
+    font-family: var(--header-font);
+    font-size: 2.25rem;
+    text-align: center;
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+#registration-form{
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#name-fields{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+input:not(input[type=submit]){
+    display: block;
+    background: transparent;
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+    outline: none;
+    margin-bottom: 1rem;
+    font-family: var(--main-font);
+    font-size: 1.1rem;
+    padding: .5rem;
+    box-sizing: border-box;
+    width: calc(1.25rem * 20);
+}
+
+#password, #confirm-password{
+    border: none;
+    width: calc(1.25rem * 17);
+    margin-bottom: 0;
+}
+
+#password-field, #confpassword-field{
+    border: 1px solid var(--main-color);
+    width: calc(1.25rem * 20);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
+
+#see-password, #see-confpassword{
+    width: 2.5rem;
+    font-size: 1.5rem;
+    color: var(--main-color);
+    background-color: var(--dark-background);
+}
+
+#see-password i, #see-confpassword i{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-sizing: border-box;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+#password-wrapper span{
+    font-size: 1rem;
+    color: var(--main-color);
+    font-family: var(--main-font);
+}
+
+.pwd-check, #confpassword-wrapper>span{
+    color: #ff6961;
+    font-size: .9rem;
+    font-family: var(--main-font);
+}
+
+.valid{
+    color: #69ff61 !important;
+}
+
+#name, #surname{
+    width: calc(1.25rem * 9);
+}
+
+input[type=submit]{
+    display: block;
+    font-size: 1.75rem;
+    font-family: var(--header-font);
+    padding: .5rem;
+    border-radius: 10px;
+    box-sizing: border-box;
+    width: fit-content;
+    outline: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    transition: color .5s ease, background-color .5s ease;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+label{
+    font-family: var(--header-font);
+    font-size: 1.1rem;
+    color: var(--neon-light);
+}
+
+#loading-wheel{
+    position: fixed;
+    width: fit-content;
+    height: fit-content;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40vh;
+    padding: 3.5rem;
+    border-radius: 30px;
+    background-color: var(--dark-background);
+    z-index: 3;
+}
+
+#loading-wheel-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
+    background-color: rgba(0,0,0, 0.25);
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}

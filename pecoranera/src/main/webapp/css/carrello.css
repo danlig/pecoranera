@@ -1,0 +1,287 @@
+@import "variables.css";
+
+body{
+    background-color: var(--page-background);
+    color: var(--main-color);
+    font-family: var(--main-font);
+}
+
+#cart-list{
+    padding-top: calc(8rem + 7vh);
+    width: 100vw;
+    min-height: 40vh;
+}
+
+.event{
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+    border: 2px solid var(--neon-light);
+    border-radius: 30px;
+}
+
+.event>img{
+    width: 40%;
+    height: inherit;
+    object-fit: cover;
+    object-position: center;
+    background: url("../images/armstrong.jpg");
+    background-size: cover;
+}
+
+.event-details{
+    font-family: var(--header-font);
+}
+
+.event-header{
+    margin-top: 1rem;
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+    font-size: 2rem;
+}
+
+.event-date{
+    color: var(--neon-light);
+    font-size: 1.5rem;
+}
+
+.event-tag{
+    display: inline-block;
+    cursor: pointer;
+    border: 2px solid var(--neon-light);
+    border-radius: 20px;
+    font-family: var(--main-font);
+    font-size: 1.1rem;
+    padding: .5rem .75rem;
+    text-decoration: none;
+    transition: .5s ease-out;
+    background-color: var(--page-background);
+    color: var(--main-color);
+    margin-right: .5rem;
+    margin-bottom: 1rem;
+}
+
+.event-tag:hover{
+    background-color: var(--neon-light);
+    color: var(--main-color);
+}
+
+.ticket-data{
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ticket-data label{
+    font-size: 1.25rem;
+    margin-right: .75rem;
+}
+
+.quantity{
+    outline: none;
+    background-color: transparent;
+    color: var(--neon-color);
+    border: 2px solid var(--neon-color);
+    box-shadow: 0 0 5px var(--neon-light);
+    font-size: 1rem;
+}
+
+.quantity>option{
+    background-color: var(--dark-background);
+    font-size: 1rem;
+}
+
+.ticket-data>span{
+    font-size: 1.7rem;
+    margin: 1rem 0;
+    font-family: var(--header-font);
+}
+
+#confirm-cart{
+    width: 100vw;
+    padding-top: 2.5rem;
+    background-color: var(--dark-background);
+}
+
+#cart-buttons{
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 2rem;
+}
+
+#buy-button{
+    outline: none;
+    font-family: var(--header-font);
+    font-size: 2rem;
+    color: var(--main-color);
+    background-color: var(--dark-background);
+    border: 1px solid var(--neon-light);
+    border-radius: 10px;
+    padding: .5rem;
+    box-shadow: .25rem .25rem var(--neon-light);
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+#buy-button:hover{
+    box-shadow: .4rem .4rem var(--neon-light);
+}
+
+#buy-button:active{
+    box-shadow: 0 0 var(--neon-light);
+    border: 1px solid transparent;
+    background-color: black;
+    color: white;
+    transition: .25s;
+}
+
+#empty-cart{
+    outline: none;
+    font-family: var(--header-font);
+    font-size: 2rem;
+    color: lightgray;
+    background-color: var(--dark-background);
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: .5rem;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+#empty-cart:hover{
+    background-color: var(--main-color);
+    color: var(--dark-background);
+}
+
+#empty-cart:active{
+    background-color: gray;
+    border: 1px solid transparent;
+}
+
+#price-total{
+    text-align: right;
+    font-size: 1.8rem;
+    margin-right: 15vw;
+    margin-bottom: 1.5rem;
+}
+
+#price-total>span{
+    font-family: var(--header-font);
+}
+
+#call-to-log{
+    font-size: 2rem;
+    text-align: center;
+    color: tomato;
+    padding-bottom: 1.5rem;
+}
+
+.remove-event{
+    outline: none;
+    font-family: var(--header-font);
+    font-size: 1.4rem;
+    color: var(--main-color);
+    background-color: var(--dark-background);
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: .5rem .25rem;
+    box-shadow: .25rem .25rem crimson;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.remove-event:hover{
+    box-shadow: .4rem .4rem crimson;
+}
+
+.remove-event:active{
+    box-shadow: 0 0 crimson;
+    background-color: crimson;
+    transition: .1s;
+}
+
+#shopping-acknowledgement{
+    position: fixed;
+    width: 25vw;
+    height: 25vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--dark-background);
+    font-size: 1.25rem;
+    border: 2px solid var(--neon-light);
+    box-shadow: 0 0 0 2px var(--neon-color),
+                0 0 0 4px var(--neon-light),
+                0 0 10px var(--neon-light),
+                0 0 5px var(--neon-light);
+    border-radius: 25px;
+    padding: 2rem;
+}
+
+#shopping-acknowledgement>div{
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#shopping-acknowledgement>div i{
+    display: block;
+    color: var(--neon-light);
+    padding-bottom: 1.5rem;
+    font-size: 5rem;
+}
+
+@media only screen and (max-aspect-ratio: 3/2){
+    .event{
+        flex-wrap: wrap;
+    }  
+
+    .event>img{
+        width: 100%;
+        height: 25vh;
+    }
+
+    .event-details{
+        padding-left: 1rem;
+    }
+
+    #shopping-acknowledgement{
+        width: 45vw;
+        height: 45vw;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .event{
+        flex-direction: column;
+    }  
+
+    .event-details{
+        padding-left: 0;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .ticket-data{
+        margin: 0;
+        padding-top: 1.5rem;
+        text-align: center;
+    }
+
+    .remove-event{
+        padding: 1.25rem;
+    }
+}

@@ -1,0 +1,49 @@
+@import "variables.css";
+
+html, body{
+    min-height: 100vh;
+    background-color: var(--page-background);
+    color: var(--main-color);
+}
+
+#profile-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#display-data{
+    width: 73vw;
+    padding-left: 2vw;
+    margin: 0;
+}
+
+#display-data section{
+    margin-top: calc(var(--nav-height) + 11vh);
+    max-height: 75vh;
+    margin-right: 1rem;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    border-bottom: 4px solid var(--dark-background);
+}
+
+#no-order>a{
+    color: var(--neon-light);
+    font-family: inherit;
+    transition: .5s;
+}
+
+#no-order>a:hover{
+    color: var(--neon-color);
+}
+
+@media only screen and ((max-width: 600px) or (max-aspect-ratio: 1)){
+    #profile-section{
+        min-height: 80vh;
+        flex-direction: column;
+    }
+
+    #display-data{
+        width: 95vw;
+    }
+}

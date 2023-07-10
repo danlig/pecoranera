@@ -2,7 +2,6 @@ package model;
 
 import java.util.Date;
 import java.util.Set;
-
 import java.util.HashSet;
 
 import jakarta.persistence.CascadeType;
@@ -39,13 +38,13 @@ public class Event {
 
 	@Column(name = "max_tickets")
 	private int maxTickets;
-
+	
 	private Date date;
 	private String name;
 	private String description;
 	private double price;
 	private Date cancellation;
-
+	
 	public Event() {
 		super();
 	}

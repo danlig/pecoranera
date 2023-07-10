@@ -23,9 +23,9 @@ public class ProductType {
 	@Column(name = "id_product_type")
 	private int id;
 
-	@OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
+	/*@OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.SET_NULL)
-	private Set<Product> products = new HashSet<>();;
+	private Set<Product> products = new HashSet<>();*/
 
 	private String name;
 
@@ -54,11 +54,11 @@ public class ProductType {
 		this.id = id;
 	}
 
-	public Set<Product> getProducts() {
+	/*public Set<Product> getProducts() {
 		return products;
 	}
 
 	public void setProducts(Set<Product> products) {
 		this.products = products;
-	}
+	}*/
 }
