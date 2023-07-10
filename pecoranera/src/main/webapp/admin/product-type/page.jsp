@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 	<head>	
 		<meta charset="UTF-8">
 		<title>Product type</title>
@@ -30,6 +30,8 @@
 		</c:forEach>
 		
 		<table>
+		<caption>Tabella di inserimento tipo prodotto</caption>
+		
 		<tr>
 			<th>Id</th>
 			<th>Nome</th>

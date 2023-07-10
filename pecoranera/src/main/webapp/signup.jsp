@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@taglib prefix="e" uri="https://www.owasp.org/index.php/OWASP_Java_Encoder_Project" %>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -25,10 +26,10 @@
         <h2>Registrazione</h2>
         <form id="registration-form" method="post" action="">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" pattern="^[a-zA-Z0-9_]{4,15}$" title="Inserisci solo lettere, numeri e underscore, lunghezza tra i 4 e 15 caratteri" value='<%= request.getParameter("username")%>'>
+            <input type="text" name="username" id="username" pattern="^[a-zA-Z0-9_]{4,15}$" title="Inserisci solo lettere, numeri e underscore, lunghezza tra i 4 e 15 caratteri" value='${e:forHtml(param.username)}'>
             
             <label for="email">E-mail</label>
-            <input type="email" name="email" id="email" value='<%= request.getParameter("signup-email")%>'>
+            <input type="email" name="email" id="email" value='${e:forHtml(param.signup-email)}'>
             
             <label for="password">Password</label>
             <div id="password-wrapper">

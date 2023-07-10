@@ -10,7 +10,7 @@ import javax.servlet.http.Part;
 import org.apache.tika.Tika;
 
 public class EventImageUpload {
-    public static boolean upload(String contextPath, Part filePart, int idEvent)  {
+    public static boolean upload(String contextPath, Part filePart, int idEvent) throws IOException  {
         final String filePath = contextPath
         		+ File.separator + "images" 
         		+ File.separator + "events"
@@ -42,18 +42,12 @@ public class EventImageUpload {
         }  
         // finally section will close all the open classes  
         finally {  
-        	try {
-        		if (otpStream != null) {  
-        			otpStream.close();  
-        		}  
-        		if (iptStream != null) {  
-        			iptStream.close();  
-        		}
-        		
-        	}
-        	catch (IOException e) {
-        		return false;
-        	}  
+    		if (otpStream != null) {  
+    			otpStream.close();  
+    		}  
+    		if (iptStream != null) {  
+    			iptStream.close();  
+    		}
         }
         
         return true;
