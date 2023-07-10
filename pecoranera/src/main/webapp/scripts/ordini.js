@@ -30,7 +30,7 @@ $(document).ready(function(){
         return $.ajax({
             url: "OrderRetrieveController",
 
-            type: "POST",
+            
 
             success: (orders) => {
                 if(offsetPage == 0){
@@ -55,14 +55,14 @@ $(document).ready(function(){
         $.ajax({
             url: "OrderDeleteController",
 
-            type: "POST",
+            
 
             data:{
                 idOrder: id
             },
 
             success: function(){
-                $(this).closest(".event");
+                $(`#${id}`).remove();
             },
 
             error: () =>{

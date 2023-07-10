@@ -35,7 +35,7 @@ $(document).ready(function(){
         $.ajax({
             url: 'TagSaveController',
 
-            type: "POST",
+            
 
             data:{
                 ids: JSON.stringify(selectedTags)

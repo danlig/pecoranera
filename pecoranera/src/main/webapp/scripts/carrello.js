@@ -60,7 +60,7 @@ $(document).ready(function(){
                     return $.ajax({
                         url: "SingleEventController",
 
-                        type: "POST",
+                        
 
                         dataType:"json",
 
@@ -95,7 +95,7 @@ $(document).ready(function(){
         $.ajax({
             url: "CartDeleteController",
 
-            type: "POST",
+            
 
             data:{
                 event: eventID
@@ -120,7 +120,7 @@ $(document).ready(function(){
         $.ajax({
             url: "CartAddController",
 
-            type: "POST",
+            
 
             data: {
                 tickets: parseInt($(this).val()),
@@ -133,7 +133,7 @@ $(document).ready(function(){
             },
 
             error: () => {
-               alert("errore modifica quantità");
+               alert("errore modifica quantità ");
             }  
         })
     });
@@ -144,7 +144,7 @@ $(document).ready(function(){
             $.ajax({
                 url: "CartDeleteController",
 
-                type:"POST",
+                
     
                 data:{
                     event: $(this).attr("id")
@@ -170,7 +170,7 @@ $(document).ready(function(){
             $.ajax({
                 url: "OrderAddController",
 
-                type:"POST",
+                
 
                 data:{
                     event: $(this).attr("id"),
@@ -189,8 +189,8 @@ $(document).ready(function(){
                     refreshCost();
                 },
 
-                error: () => {
-                    alert("Errore con l'acquisto");
+                error: (xhr, status, error) => {
+                    alert("Errore con l'acquisto " +xhr.responseText );
                 }
             });
         });
