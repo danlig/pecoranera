@@ -5,7 +5,6 @@ import dao.EventDao;
 import dao.TagDao;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 import javax.servlet.ServletException;
@@ -14,20 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.text.SimpleDateFormat;
-
-import com.google.gson.Gson;
 
 import model.Event;
 import model.Tag;
 import utils.EventImageUpload;
-
-import java.util.List;
-import java.util.Locale;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-
 
 @MultipartConfig
 public class AddController extends HttpServlet {
@@ -43,23 +32,26 @@ public class AddController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		// TODO: TAGS
-		/*Set<Tag> tags = new HashSet<>();
+		Set<Tag> tags = new HashSet<>();
 		
 		// Controllo dei tag
 		try {
-			
-			Gson gson = new Gson();	
-			int array[] = Arrays.stream(gson.fromJson(request.getParameter("tags"), String[].class)).mapToInt(Integer::parseInt).toArray();
-			
-			tags = new HashSet<>();
-			for (int x : array) {
-				tags.add(TagDao.doRetrieveByKey(x));
+			for (String tag_id : request.getParameterValues("tags")) {
+				Tag tag = TagDao.doRetrieveByKey(Integer.parseInt(tag_id));
+				if (tag != null) {
+					tags.add(tag);
+				} else {
+					response.sendError(HttpServletResponse.SC_NOT_FOUND, "Tag Non Trovato");
+				}
 			}
-		}
-		catch (Exception e){
+		} catch (Exception e){
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore inserimento dei tag");
-		}*/
+		}
+		
+		System.out.println("Tags");
+		for (String name : request.getParameterValues("tags")) {
+			System.out.println("Tag: " + name);
+		}
 		
 		// Controllo dei file
 		Part filePart = request.getPart("photo");
@@ -86,7 +78,7 @@ public class AddController extends HttpServlet {
 		if (!GenericCrudController.Validate(event, false, request, response))
 			return;
 		
-		//event.setTags(tags.isEmpty() ? null : tags);
+		event.setTags(tags.isEmpty() ? null : tags);
 		event.setCancellation(null);
 		
 		event = EventDao.doSave(event);
