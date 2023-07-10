@@ -36,9 +36,18 @@ $(document).ready(function(){
 
             success: (orders) =>{
 
-                $.each(orders, function(key, order) {
-                    $("#last-orders>div").append(orderToHTML(order));
-                });
+                if(orders.length == 0){
+                    $("#last-orders>div").append(`<p id='no-order'>
+                                                Non hai nessun ordine, 
+                                                per acquistare un biglietto 
+                                                <a href='eventi.jsp'>clicca qui</a>
+                                            </p>`);
+                } else {
+
+                    $.each(orders, function(key, order) {
+                        $("#last-orders>div").append(orderToHTML(order));
+                    });
+                }
             },
 
             error: () =>{
@@ -51,6 +60,8 @@ $(document).ready(function(){
 
             success: function(data) {
                 let userLikes = [];
+
+                
                 $.each(data, function(key, val) {
                     let el = {"key": val.id, "value": val.name};
 

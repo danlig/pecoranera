@@ -69,8 +69,8 @@ $(document).ready(function(){
                 url: "UserEditController",
 
                 data:{
-                    password: $("#old-password").val(),
-                    newPassword: $("#new-passoword").val()
+                    oldPassword: $("#old-password").val(),
+                    newPassword: $("#new-password").val()
                 },
 
                 success: () => {
@@ -88,7 +88,7 @@ $(document).ready(function(){
                             break;
                         
                         default:
-                            alert("Errore di modifica");
+                            alert("Password vecchia errata");
                             break;
                     }
                 }

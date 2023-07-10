@@ -164,18 +164,8 @@ $(document).ready(function(){
     });
 
     $("#buy-button").on("click", function(){
-        $(".event").each(function(){
-            let quantity = parseInt($(this).find(".quantity").first().val());
-
             $.ajax({
                 url: "OrderAddController",
-
-                
-
-                data:{
-                    event: $(this).attr("id"),
-                    tickets: quantity
-                },
 
                 success: () => {
                     $("#shopping-acknowledgement").show();
@@ -193,7 +183,6 @@ $(document).ready(function(){
                     alert("Errore con l'acquisto " +xhr.responseText );
                 }
             });
-        });
     });
 
 });

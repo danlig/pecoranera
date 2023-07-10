@@ -53,4 +53,18 @@
     #dati{
         padding-left: 15vw;
     }
+
+    #old-password-field, #new-password-field{
+        border: 1px solid var(--main-color);
+        width: calc(1.25rem * 13);
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        margin-bottom: 1rem;
+    }
+
+    #user,
+    #email{
+        width: calc(1.25rem * 13);
+    }
 }

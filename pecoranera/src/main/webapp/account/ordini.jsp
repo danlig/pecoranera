@@ -7,5 +7,4 @@
         
     </div>
 
-    <button id="load-more" type="button">Mostra più Ordini</button>
 </section>

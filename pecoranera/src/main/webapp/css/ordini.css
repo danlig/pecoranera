@@ -120,6 +120,11 @@
     transition: .25s ease;
 }
 
+#no-order{
+    font-size: 1.25rem;
+    font-family: var(--main-font);
+}
+
 @media only screen and (max-aspect-ratio: 3/2){
     .order{
         flex-wrap: wrap;

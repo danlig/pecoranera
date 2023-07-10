@@ -26,7 +26,7 @@
             <div id="see-old-password"><i class="fa-regular fa-eye fa-eye-slash"></i></div>
         </div>
 
-        <label for="new-password">Nuova</label>
+        <label for="new-password">Nuova Password</label>
         <div id="new-password-field">
             
             <input type="password" name="new-password" id="new-password">

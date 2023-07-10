@@ -38,7 +38,11 @@ $(document).ready(function(){
                 }
 
                 if(orders.length == 0){
-                    $("#load-more").hide();
+                    $("#order-list").append(`<p id='no-order'>
+                                                Non hai nessun ordine, 
+                                                per acquistare un biglietto 
+                                                <a href='eventi.jsp'>clicca qui</a>
+                                            </p>`);
                 } else {
                     $.each(orders, function(key, order) {
                         $("#order-list").append(orderToHTML(order));
