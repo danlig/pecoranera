@@ -2,15 +2,16 @@ package controllers;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.BasicCrudDao;
-import dao.ProductTypeDao;
-import model.ProductType;
 
 public class GenericController {
 	public static <T> boolean Add(Class<T> cls, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -46,6 +47,7 @@ public class GenericController {
 	    	   
 	    	   // Controllo se il parametro è stato inserito
 	    	   if (param == null || param.trim().equals("")) {
+	    		   // Controllo solo per eventi	    		   
 	    		   response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Inserisci parametro: " + fieldName);
 	    		   return false;
 	    	   }
@@ -87,6 +89,23 @@ public class GenericController {
 					}
 	    		   
 	    		   callSetter(obj, setMethod, paramInt);
+	    		   continue;
+	    	   }
+	    	   
+	    	   // Parametro data
+	    	   if (fieldType.contains("Date")) {
+	    		   Date paramDate;
+	    		   SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN);
+	    		   
+		   	   		try {
+						paramDate = formatter.parse(request.getParameter("date"));
+					} catch (ParseException e) {
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST, 
+								"Errore formato del parametro: " + fieldName);
+						return false;
+					}
+		   	   		
+	    		   callSetter(obj, setMethod, paramDate);
 	    		   continue;
 	    	   }
 	    	   

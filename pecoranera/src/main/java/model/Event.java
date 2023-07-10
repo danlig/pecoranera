@@ -69,7 +69,7 @@ public class Event {
 		return availableTickets;
 	}
 
-	public void setAvailableTickets(int availableTickets) {
+	public void setAvailableTickets(Integer availableTickets) {
 		this.availableTickets = availableTickets;
 	}
 
@@ -77,7 +77,7 @@ public class Event {
 		return maxTickets;
 	}
 
-	public void setMaxTickets(int maxTickets) {
+	public void setMaxTickets(Integer maxTickets) {
 		this.maxTickets = maxTickets;
 	}
 
@@ -109,7 +109,7 @@ public class Event {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 

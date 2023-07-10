@@ -23,9 +23,9 @@
 				<th>Role</th>
 			</tr>
 			<tr>
-				<form method="POST" action="${pageContext.request.contextPath}/admin/event-artist/add?id_event=${id_event}">
+				<form method="POST" action="${pageContext.request.contextPath}/admin/event-artist/add?event=${id_event}">
 					<td>
-						<select name="id_artist">
+						<select name="artist">
 							<c:forEach var="artist" items="${artists}">
 								<option value="${artist.id}">${artist.name}</option>
 							</c:forEach>

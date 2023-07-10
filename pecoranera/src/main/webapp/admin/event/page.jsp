@@ -28,7 +28,7 @@
 		<c:forEach var="message" items="${messages}">
 			<p class="${message.key}">${message.value}</p>
 		</c:forEach>
-		
+
 		<table>
 			<tr>
 				<th>Id</th>
@@ -41,40 +41,40 @@
 				<th>Artist</th>
 				<th>Tag</th>
 			</tr>
-			
+
 			<tr>
-				
+
 				<form method="POST" action="${pageContext.request.contextPath}/admin/event/add" enctype="multipart/form-data">
 					<td>
 						#
 					</td>
-					
+
 					<td>
 						<input type="text" name="name" placeholder="Insert Name">
 					</td>
-					
+
 					<td>
 						<input type="text" name="description" placeholder="Insert Description">
 					</td>
-					
+
 					<td>
 						<input type="text" name="price" placeholder="Insert Price">
 					</td>
-					
+
 					<td>
 						<input type="date" name="date">
 					</td>
-					
+
 					<td>
 						<input type="number" name="max_tickets" placeholder="Insert Max Tickets">
 					</td>
-					
+
 					<td>
 						<input type="file" name="photo">
 					</td>
-					
+
 					<td></td>
-					
+
 					<td>
 						<select style="height: 30px" name="tags" multiple>
 							<c:forEach var="tag" items="${tags}">
@@ -82,49 +82,49 @@
 							</c:forEach>
 						</select>
 					</td>
-					
+
 					<td colspan="2">
 						<input type="submit" value="Crea">
 					</td>
 				</form>
-				
+
 			</tr>
-			
+
 			<c:forEach var="event" items="${events}">
 				<tr>
 					<form method="POST" action="${pageContext.request.contextPath}/admin/event/edit?id_event=${event.id}" enctype="multipart/form-data">
 						<td>
 							<c:out value="${event.id}" />
 						</td>
-						
+
 						<td>
 							<input type="text" name="name" value="${event.name}">
 						</td>
-						
+
 						<td>
 							<input type="text" name="description" value="${event.description}">
 						</td>
-						
+
 						<td>
 							<input type="text" name="price" value="${event.price}">
 						</td>
-						
+
 						<td>
 							<input type="date" name="date" value="${event.date}">
 						</td>
-						
+
 						<td>
 							<input type="number" name="max_tickets" value="${event.maxTickets}">
 						</td>
-						
+
 						<td>
 							<input type="file" name="photo">
 						</td>
-						
+
 						<td>
 							<a href="${pageContext.request.contextPath}/admin/event-artist/list?id_event=${event.id}">artisti</a>
 						</td>	
-						
+
 						<td>
 							<select style="height: 30px" name="tags" multiple>
 								<c:forEach var="tag" items="${tags}">
@@ -136,7 +136,7 @@
 						<td>
 							<input type="submit" value="Modifica">
 						</td>
-						
+
 						<td>
 							<a href="${pageContext.request.contextPath}/admin/event/delete?id_event=${event.id}">Elimina</a>
 						</td>
