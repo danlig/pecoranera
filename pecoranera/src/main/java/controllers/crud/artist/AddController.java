@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controllers.GenericController;
 import dao.ArtistDao;
+import dao.ProductDao;
 import model.Artist;
+import model.Product;
 
 public class AddController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,35 +28,10 @@ public class AddController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String> messages = new HashMap<>();
-
-		String name = (String) request.getParameter("name");
-		String description = (String) request.getParameter("description");
-
-		if (name == null || name.trim().equals("")) {
-			messages.put("error", "Insert Name");
-		}
+		if (!GenericController.Add(Artist.class, request, response))
+			return;
 		
-		if (description == null || description.trim().equals("")) {
-			messages.put("error", "Insert Description");
-		}
-		
-		if (!messages.isEmpty()) {
-			request.setAttribute("messages", messages);
-			request.setAttribute("artists", ArtistDao.doRetrieveAll());
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/artist/page.jsp");			
-			dispatcher.forward(request, response);
-			
-		} else {
-			Artist artist = new Artist();
-			
-			artist.setName(name);
-			artist.setDescription(description);
-			
-			ArtistDao.doSave(artist);
-			
-			response.sendRedirect("list");
-		}
+		response.sendRedirect("list");  
 	}
 
 }

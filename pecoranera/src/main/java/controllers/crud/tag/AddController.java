@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Product;
 import model.ProductType;
 import model.Tag;
 import javax.servlet.ServletException;
@@ -30,13 +31,9 @@ public class AddController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		Tag tag = new Tag();
-		
-		if (!GenericController.Add(tag, request, response))
+		if (!GenericController.Add(Tag.class, request, response))
 			return;
-	
-		TagDao.doSave(tag);
-
-		response.sendRedirect("list");
+		
+		response.sendRedirect("list"); 
 	}
 }

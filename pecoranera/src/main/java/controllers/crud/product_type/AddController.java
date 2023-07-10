@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controllers.GenericController;
 import dao.ProductTypeDao;
+import model.Product;
 import model.ProductType;
 
 public class AddController extends HttpServlet {
@@ -22,13 +23,9 @@ public class AddController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProductType product_type = new ProductType();
-		
-		if (!GenericController.Add(product_type, request, response))
+		if (!GenericController.Add(ProductType.class, request, response))
 			return;
-	
-		ProductTypeDao.doSave(product_type);
-
-		response.sendRedirect("list");
+		
+		response.sendRedirect("list"); 
 	}
 }
