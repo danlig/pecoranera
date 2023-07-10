@@ -3,6 +3,9 @@ package model.keys;
 import java.io.Serializable;
 import java.util.Objects;
 
+import model.Event;
+import model.Artist;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
@@ -20,6 +23,12 @@ public class EventArtistKey implements Serializable {
 		super();
 		this.idEvent = idEvent;
 		this.idArtist = idArtist;
+	}
+	
+	public EventArtistKey(Event event, Artist artist) {
+		super();
+		this.idEvent = event.getId();
+		this.idArtist = artist.getId();
 	}
 
 	public EventArtistKey() {

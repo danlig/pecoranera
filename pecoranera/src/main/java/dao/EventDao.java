@@ -19,12 +19,13 @@ import model.Event;
 import model.EventArtist;
 import model.Tag;
 import utils.HibernateUtils;
+import model.keys.EventArtistKey;
 
 public class EventDao {
 	private static BasicCrudDao<Event> crud = new BasicCrudDao<>(Event.class);
 
-	public static void doSave(Event item) {
-		crud.doSave(item);
+	public static Event doSave(Event item) {
+		return crud.doSave(item);
 	}
 
 	public static void doDeleteByKey(int id) {
@@ -43,6 +44,7 @@ public class EventDao {
 		BasicCrudDao<EventArtist> crudEA = new BasicCrudDao<>(EventArtist.class);
 		
 		EventArtist event_artist = new EventArtist();
+		event_artist.setId(new EventArtistKey(event, artist));
 		event_artist.setEvent(event);
 		event_artist.setArtist(artist);
 		event_artist.setRole(role);
