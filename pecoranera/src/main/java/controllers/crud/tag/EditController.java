@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import controllers.GenericCrudController;
 import dao.ProductTypeDao;
 import dao.TagDao;
 import model.Tag;
@@ -30,34 +31,10 @@ public class EditController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> messages = new ArrayList<>();
-		String name = (String) request.getParameter("name");
-		String id_tag = request.getParameter("id_tag");
+		if (!GenericCrudController.Edit(Tag.class, request, response))
+			return;
 		
-		Tag tag = null;
-		try {
-			if (id_tag != null) {			
-				tag = TagDao.doRetrieveByKey(Integer.parseInt(id_tag));
-				
-				if (name == null || name.trim().equals("")) {
-					messages.add("Inserire il nome");
-				} 
-			} else {
-				messages.add("Inserisci id_tag");
-			}
-		} catch (NumberFormatException ex) {
-			messages.add("id_tag Format Not Allowed");
-		}
-		
-		if (!messages.isEmpty()) {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
-			return ;
-		}
-			
-		tag.setName(name);
-		TagDao.doSave(tag);
-		
-		response.sendRedirect("list");
+		response.sendRedirect("list"); 
 	}
 
 }

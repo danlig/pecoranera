@@ -24,21 +24,10 @@ public class RemoveController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> messages = new ArrayList<>();
+		String id_artist = request.getParameter("id");
 		
-		try {
-			if (request.getParameter("id_artist") == null) {
-				messages.add("Id Artist Null");
-				response.sendError(HttpServletResponse.SC_NOT_FOUND, new Gson().toJson(messages));
-				return ;
-			}	
-			
-			ArtistDao.doDeleteByKey(Integer.parseInt(request.getParameter("id_artist")));
-			response.sendRedirect("list");
-			
-		} catch(NumberFormatException e) {
-			messages.add("Id Artist Format Not Allowed");
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
+		if (id_artist == null) {
+			response.sendError(HttpServletResponse.SC_BAD_GATEWAY, "id_artist formato non valido");
 		}
 
 	}

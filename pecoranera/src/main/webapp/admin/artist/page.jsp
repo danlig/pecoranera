@@ -56,7 +56,7 @@
 		</tr>
 		<c:forEach var="artist" items="${artists}">
 			<tr>
-				<form method="POST" action="${pageContext.request.contextPath}/admin/artist/edit?id_artist=${artist.id}">
+				<form method="POST" action="${pageContext.request.contextPath}/admin/artist/edit?id=${artist.id}">
 					<td>
 						<c:out value="${artist.id}"/>
 					</td>
@@ -70,7 +70,7 @@
 						<input type="submit" value="Modifica">
 					</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/admin/artist/delete?id_artist=${artist.id}">Cancella</a>
+						<a href="${pageContext.request.contextPath}/admin/artist/delete?id=${artist.id}">Cancella</a>
 					</td>
 				</form>
 			</tr>

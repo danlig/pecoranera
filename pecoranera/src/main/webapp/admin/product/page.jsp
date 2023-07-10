@@ -57,7 +57,7 @@
 					</td>
 					
 					<td>
-						<select name="id_product_type">
+						<select name="type">
 							<c:forEach var="product_type" items="${product_types}">
 								<option value="${product_type.id}">
 									<c:out value="${product_type.name}"/>
@@ -75,7 +75,7 @@
 			<c:forEach var="product" items="${products}">
 				<tr>
 					
-					<form method="POST" action="${pageContext.request.contextPath}/admin/product/edit?id_product=${product.id}">
+					<form method="POST" action="${pageContext.request.contextPath}/admin/product/edit?id=${product.id}">
 						<td>
 							<c:out value="${product.id}"/>
 						</td>
@@ -93,7 +93,7 @@
 						</td>
 						
 						<td>
-							<select name="id_product_type">
+							<select name="type">
 								<c:forEach var="product_type" items="${product_types}">
 									<c:if test="${product_type.name == product.type.name}">
 										<option value="${product_type.id}" selected>
@@ -112,7 +112,7 @@
 						</td>
 										
 						<td>
-							<a href="${pageContext.request.contextPath}/admin/product/delete?id_product=${product.id}">Cancella</a>
+							<a href="${pageContext.request.contextPath}/admin/product/delete?id=${product.id}">Cancella</a>
 						</td>
 						
 					</form>

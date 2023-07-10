@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dao.ProductDao;
+import dao.ProductTypeDao;
+import model.Product;
 
 public class RemoveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,23 +23,17 @@ public class RemoveController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> messages = new ArrayList<>();
+		String id_product = request.getParameter("id");
 		
 		try {
-			if (request.getParameter("id_product") == null) {
-				messages.add("Id Product null");
-				response.sendError(HttpServletResponse.SC_NOT_FOUND, new Gson().toJson(messages));
-				return ;
-			}	
-			
-			ProductDao.doDeleteByKey(Integer.parseInt(request.getParameter("id_product")));
-			response.sendRedirect("list");
-			
-		} catch(NumberFormatException e) {
-			messages.add("Id Product Format Not Allowed");
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
-			return;
+			ProductDao.doDeleteByKey(Integer.parseInt(id_product));		
 		}
+		catch (NumberFormatException ex) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "id_product Format Not Allowed");
+			return ;
+		}
+		
+		response.sendRedirect("list");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

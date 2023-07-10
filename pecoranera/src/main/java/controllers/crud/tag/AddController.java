@@ -3,6 +3,9 @@ package controllers.crud.tag;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Product;
+import model.ProductType;
 import model.Tag;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import controllers.GenericCrudController;
+import dao.ProductTypeDao;
 import dao.TagDao;
 
 
@@ -25,23 +30,10 @@ public class AddController extends HttpServlet {
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> messages = new ArrayList<>();
-		String name = (String) request.getParameter("name");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		if (!GenericCrudController.Add(Tag.class, request, response))
+			return;
 		
-		if (name == null || name.trim().equals("")) {
-			messages.add("Inserire il nome");
-		} 
-		
-		if (!messages.isEmpty()) {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
-			return ;
-		}
-		
-		Tag tag = new Tag();
-		tag.setName(name);
-		TagDao.doSave(tag);
-		
-		response.sendRedirect("list");
+		response.sendRedirect("list"); 
 	}
 }

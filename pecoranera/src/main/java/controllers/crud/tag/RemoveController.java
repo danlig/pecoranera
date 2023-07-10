@@ -21,18 +21,13 @@ public class RemoveController extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> messages = new ArrayList<>();
 		String id_tag = request.getParameter("id_tag");
 		
 		try {
 			TagDao.doDeleteByKey(Integer.parseInt(id_tag));			
 		}
 		catch (NumberFormatException ex) {
-			messages.add("id_tag Format Not Allowed");
-		}
-		
-		if (!messages.isEmpty()) {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "id_tag Format Not Allowed");
 			return ;
 		}
 

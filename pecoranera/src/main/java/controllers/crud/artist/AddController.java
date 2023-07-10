@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
+import controllers.GenericCrudController;
 import dao.ArtistDao;
+import dao.ProductDao;
 import model.Artist;
+import model.Product;
 
 public class AddController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,30 +27,10 @@ public class AddController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> messages = new ArrayList<>();
-
-		String name = (String) request.getParameter("name");
-		String description = (String) request.getParameter("description");
-
-		if (name == null || name.trim().equals("")) {
-			messages.add("Insert Name");
-		}
+		if (!GenericCrudController.Add(Artist.class, request, response))
+			return;
 		
-		if (description == null || description.trim().equals("")) {
-			messages.add("Insert Description");
-		}
-		
-		if (!messages.isEmpty()) {
-			response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, new Gson().toJson(messages));
-			return ;
-		}
-		
-		Artist artist = new Artist();
-		artist.setName(name);
-		artist.setDescription(description);
-		ArtistDao.doSave(artist);
-		
-		response.sendRedirect("list");
+		response.sendRedirect("list");  
 	}
 
 }

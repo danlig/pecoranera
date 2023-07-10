@@ -36,7 +36,9 @@
 				<th>Description</th>
 				<th>Price</th>
 				<th>Date</th>
+				<th>Cancellation Date</th>
 				<th>Max Tickets</th>
+				<th>Available Tickets</th>
 				<th>Photo</th>
 				<th>Artist</th>
 				<th>Tag</th>
@@ -66,7 +68,16 @@
 					</td>
 					
 					<td>
-						<input type="number" name="max_tickets" placeholder="Insert Max Tickets">
+						<input type="date" name="cancellation">
+					</td>
+					
+					<td>
+						<input type="number" name="maxTickets" placeholder="Insert Max Tickets">
+					</td>
+					
+					
+					<td>
+						<input type="number" name="availableTickets">
 					</td>
 					
 					<td>
@@ -114,7 +125,11 @@
 						</td>
 						
 						<td>
-							<input type="number" name="max_tickets" value="${event.maxTickets}">
+							<input type="number" name="maxTickets" value="${event.maxTickets}">
+						</td>
+						
+						<td>
+							<input type="number" name="availableTickets" value="${event.availableTickets}">
 						</td>
 						
 						<td>
