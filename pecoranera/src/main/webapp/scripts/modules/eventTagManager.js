@@ -104,4 +104,4 @@ let resetTags = function(resetButton, fromElem, toElem){
     });
 }
 
-export {loadTags, moveToListAndSort, resetTags, ajaxTagRequest, selectedTags, tags};
+export {tagsToHtml ,loadTags, moveToListAndSort, resetTags, ajaxTagRequest, selectedTags, tags};

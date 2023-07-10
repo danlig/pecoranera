@@ -46,8 +46,14 @@ $(document).ready(function(){
     });
 
     $(".account-link").on("click", function(e){
+        let href = $(this).attr("href");
         e.preventDefault();
 
-        loadPage($(this).attr("href").replace("#", ""));
+        window.location.hash = href;
+        loadPage(href.replace("#", ""));
+
+        if(href == "#panoramica"){
+            location.reload();
+        }
     });
 });
