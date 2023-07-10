@@ -72,7 +72,7 @@ public class SeedDatabase {
 			product.setDescription(
 					"Luppolo: " + faker.beer().hop() + 
 					" - Malto: " + faker.beer().malt() + 
-					" - nStyle: " + faker.beer().style() + 
+					" - Style: " + faker.beer().style() + 
 					" - Gradazione (%): " + faker.number().numberBetween(3, 15)
 					);
 			product.setPrice(generateRandomPrice(3.00, 6.00));
