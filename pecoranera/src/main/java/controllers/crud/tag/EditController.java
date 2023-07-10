@@ -1,4 +1,4 @@
-package controllers.crud.product_type;
+package controllers.crud.tag;
 
 import java.io.IOException;
 
@@ -8,25 +8,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controllers.GenericCrudController;
-import model.ProductType;
+import model.Tag;
 
-public class RemoveController extends HttpServlet {
+public class EditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public RemoveController() {
+    
+    public EditController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (!GenericCrudController.Remove(ProductType.class, request, response)) {
-			return ;
-		}
-		
-		response.sendRedirect("list");
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		if (!GenericCrudController.Edit(Tag.class, request, response))
+			return;
+		
+		response.sendRedirect("list"); 
 	}
 
 }

@@ -39,8 +39,9 @@ public class LoginController extends HttpServlet {
 		User user = UserDao.doRetrieveByEmail(email);
 		if (user == null || !user.getPassword().equals(LoginUtils.toHash(password))) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+			
 		} else if (user.isAdmin()) {
-			response.setStatus(200);
 			request.getSession().setAttribute("isAdmin", Boolean.TRUE);
 			
 		} else {			

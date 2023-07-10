@@ -13,7 +13,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import utils.HibernateUtils;
 
-class BasicCrudDao<T> {
+public class BasicCrudDao<T> {
 	private Class<T> cls;
 	private SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 

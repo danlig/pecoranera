@@ -4,22 +4,27 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import java.util.List;
-import java.util.ArrayList;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import org.hibernate.query.criteria.JpaPredicate;
-
-import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
+
 import jakarta.persistence.criteria.Root;
 import model.Artist;
 import model.Event;
 import model.EventArtist;
-import model.Tag;
-import utils.HibernateUtils;
+
 import model.keys.EventArtistKey;
+import utils.HibernateUtils;
+
+import model.Tag;
+
 
 public class EventDao {
 	private static BasicCrudDao<Event> crud = new BasicCrudDao<>(Event.class);
@@ -50,6 +55,52 @@ public class EventDao {
 		event_artist.setRole(role);
 		
 		crudEA.doSave(event_artist);
+	}
+		
+	public static void deleteArtist(Event event, Artist artist) {
+		Session session = null;
+        Transaction transaction = null;
+        
+        try {
+            session = HibernateUtils.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            
+            EventArtistKey eventArtistKey = new EventArtistKey(event.getId(), artist.getId());
+            EventArtist eventArtist = session.get(EventArtist.class, eventArtistKey);
+            
+            if (eventArtist != null) {
+                session.remove(eventArtist);
+                transaction.commit();
+            }
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+	
+	public static List<Event> doRetrieveAllActiveEvent() {
+	    Session session = null;
+	    try {
+	        session = HibernateUtils.getSessionFactory().openSession();
+	        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+	        CriteriaQuery<Event> criteriaQuery = criteriaBuilder.createQuery(Event.class);
+	        Root<Event> root = criteriaQuery.from(Event.class);
+
+	        Predicate cancellationDateNotNullPredicate = criteriaBuilder.isNull(root.get("cancellation"));
+	        criteriaQuery.where(cancellationDateNotNullPredicate);
+
+	        return session.createQuery(criteriaQuery).getResultList();
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
 	}
 	
 	public static List<Event> doRetrieveFilter(String titolo, Date dataInizio, Date dataFine, Set<Integer> tags, int pageSize, int offset) {

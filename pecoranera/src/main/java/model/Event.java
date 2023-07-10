@@ -2,7 +2,6 @@ package model;
 
 import java.util.Date;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.HashSet;
 
 import jakarta.persistence.CascadeType;
@@ -17,7 +16,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "event")
@@ -32,7 +30,7 @@ public class Event {
 			@JoinColumn(name = "id_tag") })
 	private Set<Tag> tags = new HashSet<>();
 
-	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
 	private Set<EventArtist> eventArtists = new HashSet<>();
 
 	@Column(name = "available_tickets")
@@ -70,7 +68,7 @@ public class Event {
 		return availableTickets;
 	}
 
-	public void setAvailableTickets(int availableTickets) {
+	public void setAvailableTickets(Integer availableTickets) {
 		this.availableTickets = availableTickets;
 	}
 
@@ -78,7 +76,7 @@ public class Event {
 		return maxTickets;
 	}
 
-	public void setMaxTickets(int maxTickets) {
+	public void setMaxTickets(Integer maxTickets) {
 		this.maxTickets = maxTickets;
 	}
 
@@ -110,7 +108,7 @@ public class Event {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 

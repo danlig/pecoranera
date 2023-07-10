@@ -1,4 +1,4 @@
-package controllers.crud.product_type;
+package controllers.crud.event_artist;
 
 import java.io.IOException;
 
@@ -8,21 +8,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controllers.GenericCrudController;
-import model.ProductType;
+import dao.EventDao;
+import model.EventArtist;
 
 public class RemoveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     public RemoveController() {
-        super();
+    	super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (!GenericCrudController.Remove(ProductType.class, request, response)) {
-			return ;
-		}
+		EventArtist ea = new EventArtist();
+		if (!GenericCrudController.Validate(ea, GenericCrudController.operation.REMOVE_MODE, request, response))
+			return;
 		
-		response.sendRedirect("list");
+		System.out.println(ea.toString());
+		
+		EventDao.deleteArtist(ea.getEvent(), ea.getArtist());
+		response.sendRedirect("list?id_event=" + ea.getEvent().getId());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

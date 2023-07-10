@@ -1,4 +1,4 @@
-package controllers.crud.product_type;
+package controllers.crud.product;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controllers.GenericCrudController;
-import model.ProductType;
+import model.Product;
 
 public class RemoveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -18,7 +18,7 @@ public class RemoveController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (!GenericCrudController.Remove(ProductType.class, request, response)) {
+		if (!GenericCrudController.Remove(Product.class, request, response)) {
 			return ;
 		}
 		
