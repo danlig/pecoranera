@@ -1,4 +1,4 @@
-import {showPassword, showPasswordSafety, checkRegex} from "./signup.js";
+import {showPassword, showPasswordSafety, checkRegex} from "./modules/passwordFunctionalities.js";
 
 $(document).ready(function(){
 

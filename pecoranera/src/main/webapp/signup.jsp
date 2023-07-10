@@ -11,7 +11,7 @@
     <link rel="icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
-    <script src="${pageContext.request.contextPath}/scripts/signup.js" charset="utf-8"></script>
+    <script type="module" src="${pageContext.request.contextPath}/scripts/signup.js" charset="utf-8"></script>
 </head>
 <body>
     <jsp:include page="./assets/navbar.jsp">
@@ -25,7 +25,7 @@
         <h2>Registrazione</h2>
         <form id="registration-form" method="post" action="">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" value='<%= request.getParameter("username")%>'>
+            <input type="text" name="username" id="username" pattern="^[a-zA-Z0-9_]{4,15}$" title="Inserisci solo lettere, numeri e underscore, lunghezza tra i 4 e 15 caratteri" value='<%= request.getParameter("username")%>'>
             
             <label for="email">E-mail</label>
             <input type="email" name="email" id="email" value='<%= request.getParameter("signup-email")%>'>
