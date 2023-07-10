@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
     
 		if (!ValidatorUtils.CheckEmail(email)) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-			return;
+			return; 
 		}
 		
 		if (!ValidatorUtils.CheckPassword(password)) {
