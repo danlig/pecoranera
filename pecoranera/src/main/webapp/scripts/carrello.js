@@ -60,6 +60,8 @@ $(document).ready(function(){
                     return $.ajax({
                         url: "SingleEventController",
 
+                        type: "POST",
+
                         dataType:"json",
 
                         data:{
@@ -93,6 +95,8 @@ $(document).ready(function(){
         $.ajax({
             url: "CartDeleteController",
 
+            type: "POST",
+
             data:{
                 event: eventID
             },
@@ -115,7 +119,9 @@ $(document).ready(function(){
 
         $.ajax({
             url: "CartAddController",
-    
+
+            type: "POST",
+
             data: {
                 tickets: parseInt($(this).val()),
                 event: eventID,
@@ -137,6 +143,8 @@ $(document).ready(function(){
         $(".event").each(function(){
             $.ajax({
                 url: "CartDeleteController",
+
+                type:"POST",
     
                 data:{
                     event: $(this).attr("id")
@@ -161,6 +169,8 @@ $(document).ready(function(){
 
             $.ajax({
                 url: "OrderAddController",
+
+                type:"POST",
 
                 data:{
                     event: $(this).attr("id"),

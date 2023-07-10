@@ -19,12 +19,16 @@ html, body{
 }
 
 #display-data section{
-    padding-top: calc(var(--nav-height) + 3rem);
+    margin-top: calc(var(--nav-height) + 11vh);
 }
 
 @media only screen and ((max-width: 600px) or (max-aspect-ratio: 1)){
     #profile-section{
         min-height: 80vh;
         flex-direction: column;
+    }
+
+    #display-data{
+        width: 95vw;
     }
 }

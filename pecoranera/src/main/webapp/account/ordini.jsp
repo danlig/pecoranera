@@ -4,31 +4,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ordini.css">
 
     <div id="order-list">
-        <div id="${ticket.id}" class="order">
-            <img class="event-img" src="" alt="">
-    
-            <div>
-                <div class="order-details">
-                    <h3 class="order-header">{ticket.name}</h3>
-                    <h4 class="order-date">{new Date(Date.parse(ticket.date)).toLocaleDateString("it-IT", {day:"2-digit", month:"2-digit", year:"numeric"})}</h4>
-                </div>
         
-                <div class="ticket-data">
-                    <span> {ticket.tickets} </span>
-                    
-                    <span class="price">€ <span>{(parseFloat(ticket.price) * ticket.tickets).toFixed(2)}</span></span>
-        
-                    <div>
-                        <a href="event_details.jsp?id=${ticket.id}">Visualizza Evento</a>
-                        <button value="${ticket.id}" class="remove-order">Cancella Ordine</button>
-                    </div>
-                </div>
-            </div>
-
-            <img class="ticket-qr" src="" alt="">
-    
-        </div>
     </div>
 
-    
+    <button id="load-more" type="button">Mostra più Ordini</button>
 </section>

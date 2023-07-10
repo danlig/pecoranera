@@ -13,13 +13,6 @@ $(document).ready(function(){
                 $.each(data, function(key, val) {
                     selectedTags.push(val.id);
                 });
-
-                /*$(".filter-tag").each(function() {
-                    if(selectedTags.includes(parseInt($(this).attr("id")))){
-                        $(this).remove();
-                        $("#selected-filter div").append($(this));
-                    }
-                });*/
         
             },
         });
