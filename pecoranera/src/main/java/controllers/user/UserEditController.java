@@ -53,21 +53,25 @@ public class UserEditController extends HttpServlet {
 			user.setUsername(username);
 		}
 			
-			
 		if (newPassword != null && oldPassword != null) {
+			if (newPassword == null || oldPassword == null) {
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Inserire la nuova e la vecchia password");
+				return;
+			}
+			
 			if (!ValidatorUtils.CheckPassword(newPassword)) {
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "newPassword");
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "La nuova password è invalida");
 				return;
 			}
 			
 			if (!user.getPassword().equals(LoginUtils.toHash(oldPassword))) {
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "password");
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "La password non è corretta");
 				return;
 			}
 			
 			user.setPassword(LoginUtils.toHash(newPassword));
-			
 		}
+		
 				
 		UserDao.doSave(user);
 		
