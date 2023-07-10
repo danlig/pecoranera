@@ -44,6 +44,8 @@ h1,h2{
 }
 
 .upcoming-event>img{
+    background-size: cover;
+    background: url(../images/armstrong.jpg);
     position: absolute;
     object-position: center;
     object-fit: cover;
@@ -348,7 +350,7 @@ input[type=submit]:hover, input[type=submit]:focus{
 
 .small-event{
     background-color: black;
-    background: url(../images/tizia123.jpg);
+    background: url(../images/armstrong.jpg);
     background-position: center;
     background-size: cover;
     padding-top: calc(15rem/4);

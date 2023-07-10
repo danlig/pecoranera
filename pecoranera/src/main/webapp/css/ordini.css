@@ -13,14 +13,25 @@
     border-radius: 30px;
 }
 
-.order>a,
-.order .event-img{
+.event-img{
+    height: 100%;
+    width: 100%;
+    background: url(../images/armstrong.jpg);
+    background-size: cover;
+    position: absolute;
+    object-position: center;
+    object-fit: cover;
+}
+
+.order>a{
     width: 40%;
+    position: relative;
     height: inherit;
     object-fit: cover;
     object-position: center;
-    background-color: var(--dark-background);
 }
+
+
 
 .order-details{
     font-family: var(--header-font);

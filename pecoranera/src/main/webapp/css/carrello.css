@@ -30,7 +30,8 @@ body{
     height: inherit;
     object-fit: cover;
     object-position: center;
-    background-color: var(--dark-background);
+    background: url("../images/armstrong.jpg");
+    background-size: cover;
 }
 
 .event-details{

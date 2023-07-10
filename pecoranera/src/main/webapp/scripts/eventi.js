@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     let upcomingEventHTML = function(event){
         return `<a class="upcoming-event" href="event_details.jsp?id=${event.id}">
-                    <img src="./images/lellopetrarca.jpg" alt="">
+                    <img src="" alt="">
 
                     <div>
                             <h2>${event.name}</h2>

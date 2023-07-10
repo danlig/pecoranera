@@ -30,7 +30,9 @@ section.event>div{
 #left-div>img{
     width: 35vw;
     height: 22vw;
+    background: url("../images/armstrong.jpg");
     object-fit: cover;
+    background-size: cover;
     background-color: black;
 }
 
