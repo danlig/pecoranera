@@ -1,0 +1,83 @@
+@import "variables.css";
+
+#preferenze h2{
+    font-family: var(--header-font);
+    font-size: 1.75rem;
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+}
+
+.filter-tag{
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid var(--main-color);
+    border-radius: 20px;
+    font-family: var(--main-font);
+    font-size: 1.1rem;
+    padding: .5rem .75rem;
+    text-decoration: none;
+    transition: .5s ease-out;
+    background-color: var(--page-background);
+    color: var(--main-color);
+    margin-right: .5rem;
+    margin-bottom: 1rem;
+}
+
+.filter-tag:hover{
+    background-color: var(--main-color);
+    color: var(--page-background);
+}
+
+#save-changes{
+    outline: none;
+    font-family: var(--header-font);
+    font-size: 1.4rem;
+    color: var(--main-color);
+    background-color: var(--dark-background);
+    border: 1px solid lawngreen;
+    border-radius: 10px;
+    padding: .5rem .25rem;
+    margin: 2rem 3rem 1rem 0;
+    box-shadow: .25rem .25rem lawngreen;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+#save-changes:hover{
+    box-shadow: .4rem .4rem lawngreen;
+}
+
+#save-changes:active{
+    box-shadow: 0 0 lawngreen;
+    background-color: lawngreen;
+    transition: .1s;
+}
+
+#reset{
+    font-size: 1.25rem;
+    font-family: var(--header-font);
+    padding: .5rem;
+    color: crimson;
+    border-radius: 10px;
+    background-color: var(--page-background);
+    border: 1px solid crimson;
+    box-sizing: border-box;
+    width: fit-content;
+    margin-left: auto;
+    outline: none;
+    cursor: pointer;
+    transition: color .5s ease, background-color .5s ease;
+    margin-bottom: 2.5rem;
+}
+
+#reset:hover{
+    background-color: crimson;
+    color: white;
+}
+
+@media only screen and ((max-width: 600px) or (max-aspect-ratio: 1)){
+    #preferenze{
+        padding-left: 12vw;
+    }
+}

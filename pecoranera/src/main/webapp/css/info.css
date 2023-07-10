@@ -1,0 +1,194 @@
+@import "variables.css";
+
+body{
+    --slide-size: 20vw;
+    background-color: var(--page-background);
+    color: var(--main-color);
+    font-family: var(--main-font);
+}
+
+section{
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+#pecoranera{
+    padding-top: calc(var(--nav-height) + 9vh);
+    display: flex;
+    flex-direction: row;
+    margin-bottom: calc(5vw + 4rem);
+}
+
+.side-text{
+    width: 50vw;
+}
+
+.side-text h2{
+    font-size: 2rem;
+    font-family: var(--header-font);
+    padding-right: 4rem;
+    width: fit-content;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.side-text h3{
+    font-size: 1.75rem;
+    font-family: var(--header-font);
+    width: fit-content;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.side-text p{
+    font-size: 1.1rem;
+}
+
+#slideshow{
+    position: relative;
+}
+
+#slideshow img{
+    position: absolute;
+    left: 0;
+    background-color: var(--dark-background);
+    width: var(--slide-size);
+    height: var(--slide-size);
+    object-fit: cover;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+    box-shadow: .5rem .5rem 15px rgba(0, 0, 0, .75);
+}
+
+#slideshow img:hover{   
+    box-shadow: 0 0 15px .5rem rgba(0, 0, 0, .75);
+}
+
+#aldo-fucile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#aldo-fucile img{
+    width: calc(10rem + 10vw);
+    height: calc(10rem + 10vw);
+    float: left;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+#contacts{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around; 
+   margin-top: 2rem;
+}
+
+#contacts a,
+#location a{
+    display: block;
+    color: var(--main-color);
+    font-family: var(--main-font);
+    font-size: 1.2rem;
+    text-decoration: none;
+    width: fit-content;
+    margin: 1rem auto;
+}
+
+#contacts a>i{
+    font-size: 1.75rem;
+}
+
+#location{
+    margin-top: 2.5rem;
+    margin-bottom: 5rem;
+}
+
+#location h2{
+    display: block;
+    font-size: 2rem;
+    font-family: var(--header-font);
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    border-bottom: 2px solid var(--main-color);
+}
+
+@media screen and (max-aspect-ratio: 3/2){
+    body{
+        --slide-size: 35vw;
+    }
+
+    #pecoranera{
+        flex-direction: column;
+        margin-bottom: calc(var(--slide-size) + 10rem);
+    }
+
+    .side-text{
+        margin-left: auto;
+        margin-right: auto;
+        width: 90vw;
+    }
+    
+    .side-text h2{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    
+    .side-text p{
+        text-align: center;
+    }
+
+    #slideshow{
+        width: calc(var(--slide-size) * 1.5);
+        top: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #aldo-fucile{
+        flex-direction: column-reverse;
+    }
+
+    #aldo-fucile img{
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media only screen and ((max-width: 600px) or (max-aspect-ratio: 1)){
+
+    #pecoranera{
+        margin-bottom: 5rem;
+    }
+
+    #slideshow{
+        position: static;
+        transform: none;
+        width: 90vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #slideshow img{
+        width: 30vw;
+        position: static;
+    }
+
+    #contacts{
+        flex-direction: column;
+    }
+
+    #location a{
+        text-align: center;
+    }
+}

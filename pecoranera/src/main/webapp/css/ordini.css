@@ -1,0 +1,179 @@
+@import "variables.css";
+
+.order{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: hidden;
+    border: 2px solid var(--neon-light);
+    border-radius: 30px;
+}
+
+.event-img{
+    height: 100%;
+    width: 100%;
+    background: url(../images/armstrong.jpg);
+    background-size: cover;
+    position: absolute;
+    object-position: center;
+    object-fit: cover;
+}
+
+.order>a{
+    width: 40%;
+    position: relative;
+    height: inherit;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+
+.order-details{
+    font-family: var(--header-font);
+}
+
+.order-header{
+    margin-top: 1rem;
+    margin-bottom: 0;
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+    font-size: 2rem;
+}
+
+.event-date{
+    color: var(--neon-light);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.ticket-data{
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ticket-data>span{
+    font-size: 1.25rem;
+    margin-right: .75rem;
+}
+
+.ticket-data>.price{
+    font-size: 1.7rem;
+    margin: 1rem 0;
+    font-family: var(--header-font);
+}
+
+.remove-order{
+    outline: none;
+    font-family: var(--header-font);
+    font-size: 1.4rem;
+    color: var(--main-color);
+    background-color: var(--dark-background);
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: .5rem .25rem;
+    margin-bottom: 2rem;
+    box-shadow: .25rem .25rem crimson;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.remove-order:hover{
+    box-shadow: .4rem .4rem crimson;
+}
+
+.remove-order:active{
+    box-shadow: 0 0 crimson;
+    background-color: crimson;
+    transition: .1s;
+}
+
+.ticket-qr{
+    height: inherit;
+    width: 20%;
+    object-fit: contain;
+    background-color: white;
+}
+
+#load-more{
+    display: block;
+    outline: none;
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+    box-shadow: .25rem .25rem black;
+    font-family: var(--header-font);
+    font-size: 2rem;
+    width: fit-content;
+    margin-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .75rem 1rem;
+    background-color: var(--dark-background);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+#load-more:hover{
+    box-shadow: .5rem .5rem black;
+}
+
+#load-more:active{
+    box-shadow: none;
+    background-color: black;
+    transition: .25s ease;
+}
+
+#no-order{
+    font-size: 1.25rem;
+    font-family: var(--main-font);
+}
+
+@media only screen and (max-aspect-ratio: 3/2){
+    .order{
+        flex-wrap: wrap;
+    }  
+
+    .order>div{
+        order: 3;
+        flex: 100%;
+    }
+
+    .order>a{
+        order: 1;
+        flex: 70%;
+    }
+
+    .order>img{
+        order: 2;
+        flex: 30%;
+        height: 25vh;
+    }
+
+    .remove-order{
+        margin-bottom: 0;
+        padding: 1.5rem;
+    }
+
+    .order-header,
+    .order-date,
+    .event-date{
+        text-align: center;
+    }
+
+    .ticket-data{
+        margin-right: 0;
+        text-align: center;
+    }
+
+    .event-details{
+        padding-left: 1rem;
+    }
+}

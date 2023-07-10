@@ -289,7 +289,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id_user` int NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
-  `password` varchar(64) NOT NULL,
+  `password` char(128) NOT NULL,
   `username` varchar(45) NOT NULL,
   `is_admin` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_user`),

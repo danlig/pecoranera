@@ -1,0 +1,239 @@
+@import "variables.css";
+
+body{
+    background-color: var(--page-background);
+    color: var(--main-color);
+    font-family: var(--main-font);
+}
+
+section.event{
+    width: 100vw;
+    padding-top: calc(8rem + 8vh);
+    padding-bottom: 5rem;
+}
+
+section.event>div{
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#mobile-title{
+    display: none;
+}
+
+.columns{
+    padding: 0 1rem;
+}
+
+#left-div>img{
+    width: 35vw;
+    height: 22vw;
+    background: url("../images/armstrong.jpg");
+    object-fit: cover;
+    background-size: cover;
+    background-color: black;
+}
+
+#artist-list{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.artist{
+    color: lightgray;
+    font-size: .85rem;
+    padding: 0 .5rem;
+}
+
+#center-div{
+    max-width: 35vw;
+}
+
+.event-header{
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-family: var(--header-font);
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+}
+
+.event-date{
+    color: var(--neon-light);
+    font-size: 1.4rem;
+    font-family: var(--header-font);
+}
+
+#tag-list{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.filter-tag{
+    display: inline-block;
+    cursor: pointer;
+    border: 2px solid var(--neon-light);
+    border-radius: 20px;
+    font-family: var(--main-font);
+    font-size: 1.1rem;
+    padding: .5rem .75rem;
+    text-decoration: none;
+    transition: .5s ease-out;
+    background-color: var(--page-background);
+    color: var(--main-color);
+    margin-right: .5rem;
+    margin-bottom: 1rem;
+}
+
+.filter-tag:hover{
+    background-color: var(--neon-light);
+    color: var(--page-background);
+}
+
+#event-description{
+    color: lightgray;
+    font-size: .9rem;
+    word-spacing: .15rem;
+}
+
+#right-div{
+    margin-right: 2.5vw;
+    height: 15rem;
+    border-radius: 10px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid var(--neon-light);
+    box-shadow: 0 0 0 3px var(--neon-color),
+                0 0 0 5px var(--neon-light),
+                0 0 15px var(--neon-light),
+                inset 0 0 10px var(--neon-light);
+}
+
+#ticket-price{
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-family: var(--header-font);
+    color: var(--neon-color);
+    text-shadow: var(--neon-effect);
+}
+
+.out-of-tickets{
+    color: crimson;
+}
+
+#ticket-availability label{
+    margin-right: 1.25rem;
+}
+
+#ticket-number{
+    outline: none;
+    background-color: transparent;
+    color: var(--neon-color);
+    border: 2px solid var(--neon-color);
+    box-shadow: 0 0 5px var(--neon-light);
+    font-size: 1rem;
+}
+
+#ticket-number>option{
+    background-color: var(--dark-background);
+    font-size: 1rem;
+}
+
+#add-to-cart{
+    outline: none;
+    font-family: var(--header-font);
+    font-size: 1.25rem;
+    color: var(--main-color);
+    background-color: var(--dark-background);
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: .5rem;
+    box-shadow: .25rem .25rem var(--neon-light);
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+#add-to-cart:hover{
+    box-shadow: .4rem .4rem var(--neon-light);
+}
+
+#add-to-cart:active{
+    box-shadow: 0 0 var(--neon-light);
+    background-color: black;
+    color: white;
+    transition: .25s;
+}
+
+#wheel-wrapper{
+    position: fixed;
+    width: 20vw;
+    height: 20vw;
+    background-color: var(--dark-background);
+    border: 1px solid black;
+    border-radius: 25px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10vw;
+}
+
+#wheel-wrapper>div{
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+@media only screen and ((max-width: 600px) or (max-aspect-ratio: 1)){
+    section.event{
+        padding-top: calc(8rem + 4vh);
+    }
+    
+    section.event>div{
+        flex-direction: column;
+    }
+
+    #mobile-title{
+        display: block;
+        text-align: center;
+    }
+
+    .columns{
+        margin-bottom: 3rem;
+    }
+    
+    #left-div>img{
+        width: 80vw;
+        height: 50vw;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    #center-div{
+        order: 3;
+        max-width: 100%;
+    }
+
+    .desktop{
+        display: none;
+    }
+
+    #right-div{
+        margin-left: 2.5rem;
+        margin-right: 2.5rem;
+    }
+
+}
