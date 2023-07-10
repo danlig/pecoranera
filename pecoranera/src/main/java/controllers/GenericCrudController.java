@@ -34,6 +34,24 @@ public class GenericCrudController {
 		return true;
 	}
 	
+	public static <T> boolean Remove(Class<T> cls, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// Converti id in int
+		int id;
+		
+		try {
+			id = Integer.parseInt(request.getParameter("id"));
+		} catch(NumberFormatException e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore formato id");
+			return false;
+		}
+		
+		// Cancella l'oggetto
+		BasicCrudDao<T> dao = new BasicCrudDao<>(cls);
+		dao.doDeleteByKey(id);
+		
+		return true;
+	}
+	
 	public static <T> boolean Edit(Class<T> cls, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// Converti id in int
 	    int id;
