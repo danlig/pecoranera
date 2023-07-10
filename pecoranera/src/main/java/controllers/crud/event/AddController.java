@@ -48,11 +48,6 @@ public class AddController extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore inserimento dei tag");
 		}
 		
-		System.out.println("Tags");
-		for (String name : request.getParameterValues("tags")) {
-			System.out.println("Tag: " + name);
-		}
-		
 		// Controllo dei file
 		Part filePart = request.getPart("photo");
 		
@@ -75,7 +70,7 @@ public class AddController extends HttpServlet {
 
 		Event event = new Event();
 		
-		if (!GenericCrudController.Validate(event, false, request, response))
+		if (!GenericCrudController.Validate(event, GenericCrudController.operation.ADD_MODE, request, response))
 			return;
 		
 		event.setTags(tags.isEmpty() ? null : tags);

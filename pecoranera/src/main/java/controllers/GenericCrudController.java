@@ -14,6 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import dao.BasicCrudDao;
 
 public class GenericCrudController {
+	
+	// Tipi di operazioni CRUD
+	public static enum operation {
+		ADD_MODE, EDIT_MODE, REMOVE_MODE
+	}
+	
 	public static <T> boolean Add(Class<T> cls, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// Istanzia oggetto
 		T obj = null;
@@ -24,7 +30,7 @@ public class GenericCrudController {
 		}
 		
 		// Verifica validità di tutti i parametri
-		if (!Validate(obj, false, request, response))
+		if (!Validate(obj, operation.ADD_MODE, request, response))
 			return false;
 	
 		// Salva oggetto
@@ -73,7 +79,7 @@ public class GenericCrudController {
 		}
 		
 		// Verifica validità di tutti i parametri
-		if (!Validate(obj, true, request, response))
+		if (!Validate(obj, operation.EDIT_MODE, request, response))
 			return false;
 	
 		// Salva oggetto
@@ -82,7 +88,7 @@ public class GenericCrudController {
 		return true;
 	}
 	
-	public static <T> boolean Validate(Object obj, boolean edit, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public static <T> boolean Validate(Object obj, operation mode, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		for (Field field : obj.getClass().getDeclaredFields()) {
 	    	   String fieldName = field.getName();
 	    	   String fieldType = field.getType().toString();
@@ -95,7 +101,9 @@ public class GenericCrudController {
 	    	   
 	    	   // Controllo se il parametro è stato inserito
 	    	   if (param == null || param.trim().equals("")) {
-	    		   if (edit) continue;
+	    		   if (mode == operation.EDIT_MODE) continue;
+	    		   
+	    		   if (mode == operation.REMOVE_MODE && fieldType.contains("String")) continue;
 	    		   
 	    		   // Controllo solo per eventi	    		   
 	    		   response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Inserisci parametro: " + fieldName);
@@ -169,7 +177,6 @@ public class GenericCrudController {
 		
 		return true;
 	}
-	
 	
 	public static <T> Object doRetrieveByKeyAndValidate(Class<?> cls, String value, HttpServletResponse response) throws IOException {
 		Object obj = null;

@@ -1,14 +1,7 @@
 package controllers.crud.event;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -18,8 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.google.gson.Gson;
-
+import controllers.GenericCrudController;
 import dao.EventDao;
 import dao.TagDao;
 import model.Event;
@@ -39,156 +31,55 @@ public class EditController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> messages = new ArrayList<>();
-		
-		String id_event = (String) request.getParameter("id_event");
-		String name = (String) request.getParameter("name");
-		
-		String description = (String) request.getParameter("description");
-		
 		Set<Tag> tags = new HashSet<>();
-		double price = 0;
-		int max_tickets = 0;
-		int available_tickets = 0;
-		Date date = null;
 		
-		Part filePart = request.getPart("photo");
-		
-		// Dichiarazione e init del Evento
-		Event event = null;
-		
-		try {
-			event = EventDao.doRetrieveByKey(Integer.parseInt(id_event));
-			
-			if (event == null) {
-				messages.add("Event not Found");
-				response.sendError(HttpServletResponse.SC_NOT_FOUND, new Gson().toJson(messages));
+		// Controllo dei tag 
+		if (request.getParameterValues("tags") != null) {
+			try {
+				for (String tag_id : request.getParameterValues("tags")) {
+					Tag tag = TagDao.doRetrieveByKey(Integer.parseInt(tag_id));
+					if (tag != null) {
+						tags.add(tag);
+					} else {
+						response.sendError(HttpServletResponse.SC_NOT_FOUND, "Tag Non Trovato");
+						return ;
+					}
+				}
+			} catch (Exception e){
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore inserimento dei tag");
 				return ;
 			}
-			
-		} catch(NumberFormatException ex) {
-			messages.add("Id Event Format Not Allowed");
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
-			return ;
 		}
 		
-		// Controllo sul nome
+		// Controllo dei file
+		Part filePart = request.getPart("photo");
 		
-		if (name == null || name.trim().equals("")) {
-			name = event.getName();
-		} 
-		
-		
-		// Controllo sul cognome
-
-		if (description == null || description.trim().equals("")) {
-			description = event.getDescription();
-		}
-
-		
-		// Controllo sul prezzo
-		
-		try {
-			if (request.getParameter("price") == null) {
-				price = event.getPrice();
-			}
-			price = Double.parseDouble(request.getParameter("price"));
-		} catch (NumberFormatException ex) {
-			messages.add("Price Format Not Allowed");
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
-			return ;
-		}
-		
-		
-		// Controllo per il max ticket
-
-		try {
-			if (request.getParameter("max_tickets") == null) {
-				max_tickets = event.getMaxTickets();
-				available_tickets = event.getAvailableTickets();
-			} else {
-				max_tickets = Integer.parseInt(request.getParameter("max_tickets"));
-				
-				if (max_tickets < event.getMaxTickets()) {
-					messages.add("Max Ticket cannot be less than the max ticket stored");
-					response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
-					return ;
-				} else if (max_tickets > event.getMaxTickets()) {
-					available_tickets = max_tickets - (event.getMaxTickets() - event.getAvailableTickets());
-				} else {
-					available_tickets = event.getAvailableTickets();
+		if (filePart != null && filePart.getSize() != 0) {
+			if (filePart != null) {
+				try {
+					if (!EventImageUpload.isImage(filePart)) {
+						response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Estensione file non valida");					
+						return;
+					}
+				} catch (Exception e) {
+					filePart = null;
 				}
 			}
-		} catch (NumberFormatException ex) {
-			messages.add("Max Tickets Format Not Allowed");
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
-			return ;
-		}
-
-		
-		// Controllo per la data
-		
-		try {
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN);
-			date = formatter.parse(request.getParameter("date"));
 			
-		} catch (NullPointerException e) {
-			date = event.getDate();
+		}
 		
-		} catch (ParseException e) {
-			messages.add("Date Format Not Allowed");
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
+		if (!GenericCrudController.Edit(Event.class, request, response))
 			return ;
-		}
 		
-		// Controllo per il file
-
-		if (filePart != null) {
-			try {
-				if (!EventImageUpload.isImage(filePart))
-					messages.add("Extension Not Allowed");					
-			} catch (Exception e) {
-				filePart = null;
-			}
-		}
+		// Evitiamo il controllo sulla request.getParameter("id") 
+		// perché già è stata effettuato il controllo nel GenericCrudController
+		Event event = EventDao.doRetrieveByKey(Integer.parseInt(request.getParameter("id")));
 		
-		
-		// Controllo dei tag
-		
-		List<String> tags_string = request.getParameterValues("tags") != null ? 
-				Arrays.asList(request.getParameterValues("tags")) : null;
-
-		try {
-			
-			if (request.getParameterValues("tags") != null) {
-				for (String tag : request.getParameterValues("tags")) {
-					if (tag == null) {
-						tags.add(TagDao.doRetrieveByKey(Integer.parseInt(tag)));
-					}
-				}	
-				
-			} else {
-				tags = event.getTags();
-			}
-			
-		} catch(NumberFormatException e) {
-			messages.add("ID Tag Format Not Allowed");
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
-			return ;
-		}
-		
-		
-		event.setName(name);
-		event.setDescription(description);
-		event.setPrice(price);
-		event.setMaxTickets(max_tickets);
-		event.setAvailableTickets(available_tickets);
-		event.setDate(date);
-		event.setTags(tags);
+		event.setTags(tags.isEmpty() ? null : tags);
 		event.setCancellation(null);
 		
-		EventDao.doSave(event);
-		
+		event = EventDao.doSave(event);
+
 		if (filePart != null)
 			EventImageUpload.upload(getServletContext().getRealPath("/"), filePart, event.getId());
 		
