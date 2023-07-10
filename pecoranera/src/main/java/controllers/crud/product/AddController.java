@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controllers.GenericController;
+import controllers.GenericCrudController;
 import model.Product;
 
 public class AddController extends HttpServlet {
@@ -21,7 +21,7 @@ public class AddController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		if (!GenericController.Add(Product.class, request, response))
+		if (!GenericCrudController.Add(Product.class, request, response))
 			return;
 		
 		response.sendRedirect("list"); 

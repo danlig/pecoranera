@@ -53,7 +53,7 @@
 		
 		<c:forEach var="tag" items="${tags}">
 			<tr>
-				<form method="POST" action="${pageContext.request.contextPath}/admin/tag/edit?id_tag=${tag.id}">
+				<form method="POST" action="${pageContext.request.contextPath}/admin/tag/edit?id=${tag.id}">
 					<td> 
 						<c:out value="${ tag.id }"/>
 					</td>
@@ -64,7 +64,7 @@
 						<input type="submit" value="Modifica">
 					</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/admin/tag/delete?id_tag=${tag.id}">Cancella</a>
+						<a href="${pageContext.request.contextPath}/admin/tag/delete?id=${tag.id}">Cancella</a>
 					</td>
 				</form>
 			<tr>

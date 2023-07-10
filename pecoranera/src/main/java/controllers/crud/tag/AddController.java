@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import controllers.GenericController;
+import controllers.GenericCrudController;
 import dao.ProductTypeDao;
 import dao.TagDao;
 
@@ -31,7 +31,7 @@ public class AddController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		if (!GenericController.Add(Tag.class, request, response))
+		if (!GenericCrudController.Add(Tag.class, request, response))
 			return;
 		
 		response.sendRedirect("list"); 

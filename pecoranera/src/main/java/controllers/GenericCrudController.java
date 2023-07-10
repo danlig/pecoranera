@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.BasicCrudDao;
 
-public class GenericController {
+public class GenericCrudController {
 	public static <T> boolean Add(Class<T> cls, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// Istanzia oggetto
 		T obj = null;
@@ -24,7 +24,7 @@ public class GenericController {
 		}
 		
 		// Verifica validità di tutti i parametri
-		if (!Validate(obj, request, response))
+		if (!Validate(obj, false, request, response))
 			return false;
 	
 		// Salva oggetto
@@ -34,7 +34,37 @@ public class GenericController {
 		return true;
 	}
 	
-	public static <T> boolean Validate(Object obj, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public static <T> boolean Edit(Class<T> cls, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// Converti id in int
+	    int id;
+	   
+		try {
+			id = Integer.parseInt(request.getParameter("id"));
+		} catch(NumberFormatException e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore formato id");
+			return false;
+		}
+	
+		// Ottieni oggetto
+		BasicCrudDao<T> dao = new BasicCrudDao<>(cls);
+		T obj = dao.doRetrieveByKey(id);
+		
+		if (obj == null) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "l'elemento non esiste");
+			return false;
+		}
+		
+		// Verifica validità di tutti i parametri
+		if (!Validate(obj, true, request, response))
+			return false;
+	
+		// Salva oggetto
+		dao.doSave(obj);
+		
+		return true;
+	}
+	
+	public static <T> boolean Validate(Object obj, boolean edit, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		for (Field field : obj.getClass().getDeclaredFields()) {
 	    	   String fieldName = field.getName();
 	    	   String fieldType = field.getType().toString();
@@ -47,6 +77,8 @@ public class GenericController {
 	    	   
 	    	   // Controllo se il parametro è stato inserito
 	    	   if (param == null || param.trim().equals("")) {
+	    		   if (edit) continue;
+	    		   
 	    		   // Controllo solo per eventi	    		   
 	    		   response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Inserisci parametro: " + fieldName);
 	    		   return false;
@@ -110,7 +142,7 @@ public class GenericController {
 	    	   }
 	    	   
 	    	   // Parametro oggetto custom
-	    	   Object paramObj = GenericController.doRetrieveByKeyAndValidate(field.getType(), param, response);
+	    	   Object paramObj = GenericCrudController.doRetrieveByKeyAndValidate(field.getType(), param, response);
 	    	   if (paramObj == null) 
 	    		   return false;
 	    	   

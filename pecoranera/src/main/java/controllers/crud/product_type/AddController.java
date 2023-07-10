@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controllers.GenericController;
+import controllers.GenericCrudController;
 import dao.ProductTypeDao;
 import model.Product;
 import model.ProductType;
@@ -23,7 +23,7 @@ public class AddController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (!GenericController.Add(ProductType.class, request, response))
+		if (!GenericCrudController.Add(ProductType.class, request, response))
 			return;
 		
 		response.sendRedirect("list"); 

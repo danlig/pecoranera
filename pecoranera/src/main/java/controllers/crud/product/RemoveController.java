@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProductDao;
+import dao.ProductTypeDao;
 import model.Product;
 
 public class RemoveController extends HttpServlet {
@@ -17,26 +18,16 @@ public class RemoveController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id_product_string = request.getParameter("id_product");
+		String id_product = request.getParameter("id");
 		
-		int id_product = -1;
-		
-		if (id_product_string == null || id_product_string.trim().equals("")) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-		} else {
-			try {
-				id_product = Integer.parseInt(id_product_string);
-			} catch(NumberFormatException e) {
-				response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
-			}
+		try {
+			ProductDao.doDeleteByKey(Integer.parseInt(id_product));		
 		}
-
-		Product product = ProductDao.doRetrieveByKey(id_product);
-		if (product == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+		catch (NumberFormatException ex) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "id_product Format Not Allowed");
+			return ;
 		}
 		
-		ProductDao.doDeleteByKey(product.getId());
 		response.sendRedirect("list");
 	}
 

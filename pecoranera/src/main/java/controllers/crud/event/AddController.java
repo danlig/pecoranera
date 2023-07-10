@@ -1,6 +1,6 @@
 package controllers.crud.event;
 
-import controllers.GenericController;
+import controllers.GenericCrudController;
 import dao.EventDao;
 import dao.TagDao;
 
@@ -42,8 +42,9 @@ public class AddController extends HttpServlet {
 		getServletContext();
 	}
 	
-	protected void doaPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		Set<Tag> tags = new HashSet<>();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		// TODO: TAGS
+		/*Set<Tag> tags = new HashSet<>();
 		
 		// Controllo dei tag
 		try {
@@ -58,7 +59,7 @@ public class AddController extends HttpServlet {
 		}
 		catch (Exception e){
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore inserimento dei tag");
-		}
+		}*/
 		
 		// Controllo dei file
 		Part filePart = request.getPart("photo");
@@ -82,10 +83,10 @@ public class AddController extends HttpServlet {
 
 		Event event = new Event();
 		
-		if (!GenericController.Validate(event, request, response))
+		if (!GenericCrudController.Validate(event, false, request, response))
 			return;
 		
-		event.setTags(tags.isEmpty() ? null : tags);
+		//event.setTags(tags.isEmpty() ? null : tags);
 		event.setCancellation(null);
 		
 		event = EventDao.doSave(event);

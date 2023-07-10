@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controllers.GenericController;
+import controllers.GenericCrudController;
 import dao.EventDao;
 import model.EventArtist;
 
@@ -22,10 +22,8 @@ public class AddController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// CAMBIA PARAMETRI IN JSP
-		
 		EventArtist ea = new EventArtist();
-		if (!GenericController.Validate(ea, request, response))
+		if (!GenericCrudController.Validate(ea, false, request, response))
 			return;
 
 		EventDao.addArtist(ea.getEvent(), ea.getArtist(), ea.getRole());

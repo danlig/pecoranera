@@ -75,7 +75,7 @@
 			<c:forEach var="product" items="${products}">
 				<tr>
 					
-					<form method="POST" action="${pageContext.request.contextPath}/admin/product/edit?id_product=${product.id}">
+					<form method="POST" action="${pageContext.request.contextPath}/admin/product/edit?id=${product.id}">
 						<td>
 							<c:out value="${product.id}"/>
 						</td>
@@ -112,7 +112,7 @@
 						</td>
 										
 						<td>
-							<a href="${pageContext.request.contextPath}/admin/product/delete?id_product=${product.id}">Cancella</a>
+							<a href="${pageContext.request.contextPath}/admin/product/delete?id=${product.id}">Cancella</a>
 						</td>
 						
 					</form>

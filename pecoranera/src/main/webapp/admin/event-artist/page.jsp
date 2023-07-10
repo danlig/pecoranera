@@ -23,7 +23,7 @@
 				<th>Role</th>
 			</tr>
 			<tr>
-				<form method="POST" action="${pageContext.request.contextPath}/admin/event-artist/add?event=${id_event}">
+				<form method="POST" action="${pageContext.request.contextPath}/admin/event-artist/add?event=${id}">
 					<td>
 						<select name="artist">
 							<c:forEach var="artist" items="${artists}">
@@ -51,7 +51,7 @@
 						<c:out value="${eventArtist.role}"></c:out>
 					</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/admin/event-artist/delete?id_event=${id_event}&id_artist=${eventArtist.artist.id}">Elimina</a>
+						<a href="${pageContext.request.contextPath}/admin/event-artist/delete?id=${id}&id_artist=${eventArtist.artist.id}">Elimina</a>
 					</td>
 				</tr>
 			</c:forEach>

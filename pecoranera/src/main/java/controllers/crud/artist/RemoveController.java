@@ -23,10 +23,10 @@ public class RemoveController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id_artist = request.getParameter("id_artist");
+		String id_artist = request.getParameter("id");
 		
 		if (id_artist == null) {
-			response.sendError(HttpServletResponse.SC_BAD_GATEWAY);
+			response.sendError(HttpServletResponse.SC_BAD_GATEWAY, "id_artist formato non valido");
 		}
 		
 		ArtistDao.doDeleteByKey(Integer.parseInt(id_artist));

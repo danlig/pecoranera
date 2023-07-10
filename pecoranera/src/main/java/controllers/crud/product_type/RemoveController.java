@@ -27,18 +27,13 @@ public class RemoveController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> messages = new ArrayList<>();
-		String id_product_type = request.getParameter("id_product_type");
+		String id_product_type = request.getParameter("id");
 		
 		try {
 			ProductTypeDao.doDeleteByKey(Integer.parseInt(id_product_type));		
 		}
 		catch (NumberFormatException ex) {
-			messages.add("id_product_type Format Not Allowed");
-		}
-		
-		if (!messages.isEmpty()) {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "id_product_type Format Not Allowed");
 			return ;
 		}
 		

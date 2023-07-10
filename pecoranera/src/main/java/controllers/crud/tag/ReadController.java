@@ -21,7 +21,6 @@ public class ReadController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Tag> tags = TagDao.doRetrieveAll();
-		System.out.println("tags number" + tags.stream().count());
 		request.setAttribute("tags", tags);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/tag/page.jsp");
 		dispatcher.forward(request, response);
