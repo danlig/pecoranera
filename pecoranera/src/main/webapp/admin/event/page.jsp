@@ -36,7 +36,6 @@
 				<th>Description</th>
 				<th>Price</th>
 				<th>Date</th>
-				<th>Cancellation Date</th>
 				<th>Max Tickets</th>
 				<th>Available Tickets</th>
 				<th>Photo</th>
@@ -65,11 +64,9 @@
 					
 					<td>
 						<input type="date" name="date">
+						<input type="hidden" name="cancellation" value="2024-02-02">
 					</td>
 					
-					<td>
-						<input type="date" name="cancellation">
-					</td>
 					
 					<td>
 						<input type="number" name="maxTickets" placeholder="Insert Max Tickets">
