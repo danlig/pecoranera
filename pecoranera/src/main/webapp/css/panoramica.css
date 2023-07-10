@@ -1,14 +1,6 @@
 @import "variables.css";
 @import "ordini.css";
 
-#panoramica{
-    max-height: 75vh;
-    margin-right: 1rem;
-    box-sizing: border-box;
-    overflow-y: scroll;
-    border-bottom: 4px solid var(--dark-background);
-}
-
 #page-header{
     font-size: 2rem;
     font-family: var(--header-font);

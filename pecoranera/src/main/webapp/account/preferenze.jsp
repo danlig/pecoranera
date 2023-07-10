@@ -19,5 +19,5 @@
     </div>
 
     <input id="save-changes" type="submit" value="Salva">
-    <input type="reset" value="Rimuovi tutti">
+    <input id="reset" type="reset" value="Rimuovi tutti">
 </section>

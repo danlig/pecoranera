@@ -8,26 +8,27 @@
     <div>
         <label for="user">Nome utente</label>
         <input type="text" name="user" id="user" value="${sessionScope.username}">
-        <button id="modify-user">Modifica</button>
+        <button id="modify-user" class="modify">Modifica</button>
     </div>
 
     <div>
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="${sessionScope.email}">
-        <button id="modify-email">Modifica</button>
+        <button id="modify-email" class="modify">Modifica</button>
     </div>
 
     <div>
-        
+        <label for="old-password">Password Precedente</label>
         <div id="old-password-field">
-            <label for="old-password">Password Precedente</label>
+            
             <input type="password" name="old-password" id="old-password">
 
             <div id="see-old-password"><i class="fa-regular fa-eye fa-eye-slash"></i></div>
         </div>
 
+        <label for="new-password">Nuova</label>
         <div id="new-password-field">
-            <label for="new-password">Nuova Password</label>
+            
             <input type="password" name="new-password" id="new-password">
 
             <div id="see-new-password"><i class="fa-regular fa-eye fa-eye-slash"></i></div>
@@ -43,6 +44,6 @@
             <li id="pwd-special" class="pwd-check">Un carattere speciale <i class="fa-solid fa-xmark"></i></li>
         </ul>
 
-        <button id="modify-password">Modifica Password</button>
+        <button id="modify-password" class="modify">Modifica Password</button>
     </div>
 </section>
