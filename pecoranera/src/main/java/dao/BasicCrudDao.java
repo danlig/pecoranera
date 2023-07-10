@@ -44,10 +44,9 @@ class BasicCrudDao<T> {
 		return result;
 	}
 	
-	public void doSave(T item) {
-		executeTransaction(session -> {
-			session.merge(item);
-			return null;
+	public T doSave(T item) {
+		return executeTransaction(session -> {
+			return session.merge(item);
 		});
 	}
 

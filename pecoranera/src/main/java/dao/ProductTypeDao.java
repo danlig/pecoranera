@@ -9,8 +9,8 @@ import model.ProductType;
 public class ProductTypeDao {
 	private static BasicCrudDao<ProductType> crud = new BasicCrudDao<>(ProductType.class);
 
-	public static void doSave(ProductType item) {
-		crud.doSave(item);
+	public static ProductType doSave(ProductType item) {
+		return crud.doSave(item);
 	}
 
 	public static void doDeleteByKey(int id) {
