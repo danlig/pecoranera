@@ -72,7 +72,7 @@ public class SeedDatabase {
 			product.setDescription(
 					"Luppolo: " + faker.beer().hop() + 
 					" - Malto: " + faker.beer().malt() + 
-					" - nStyle: " + faker.beer().style() + 
+					" - Style: " + faker.beer().style() + 
 					" - Gradazione (%): " + faker.number().numberBetween(3, 15)
 					);
 			product.setPrice(generateRandomPrice(3.00, 6.00));
@@ -112,7 +112,10 @@ public class SeedDatabase {
 			Event event = new Event();
 			event.setName(faker.zelda().character() + " " + faker.color().name());
 			event.setDescription(faker.lorem().sentence(10, 100));
-			event.setDate(faker.date().future(90, TimeUnit.DAYS));
+			if (i < 1) 
+				event.setDate(faker.date().past(90, TimeUnit.DAYS));
+			else
+				event.setDate(faker.date().future(90, TimeUnit.DAYS));
 			event.setPrice(generateRandomPrice(2.00, 20.00));
 			event.setCancellation(null);
 			
