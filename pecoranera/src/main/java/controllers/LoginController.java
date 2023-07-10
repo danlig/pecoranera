@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import utils.LoginUtils;
 import utils.ValidatorUtils;
+import dao.CartDao;
 import dao.UserDao;
+import dao.CartDao;
+import model.Cart;
+import model.CartEvent;
 import model.User;
 
 public class LoginController extends HttpServlet {
@@ -41,7 +45,17 @@ public class LoginController extends HttpServlet {
 			request.getSession().setAttribute("isAdmin", Boolean.TRUE);
 			
 		} else {			
-			response.setStatus(200);
+			response.setStatus(200);	
+			
+			// Salva carrello in sessione
+			Cart cart = (Cart) request.getSession().getAttribute("cart");
+	    	
+	    	if (cart != null) {
+	    		for (CartEvent ce : cart.getCartEvents()) {
+	    			CartDao.addEvent(user.getCart(), ce.getEvent(), ce.getTickets(), true);
+	    		}
+	    	}
+
 			request.getSession().setAttribute("user", user.getId());
 			request.getSession().setAttribute("email", user.getEmail());
 			request.getSession().setAttribute("username", user.getUsername());

@@ -25,7 +25,7 @@ public class Cart {
 	@Column(name = "id_cart")
 	private int id;
 
-	@OneToOne//(cascade = CascadeType.)
+	@OneToOne
 	@JoinColumn(name = "id_user", referencedColumnName = "id_user")
 	private User user;
 
