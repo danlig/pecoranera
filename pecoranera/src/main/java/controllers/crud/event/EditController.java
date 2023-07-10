@@ -26,7 +26,6 @@ import model.Event;
 import model.Tag;
 import utils.EventImageUpload;
 
-
 @MultipartConfig
 public class EditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
