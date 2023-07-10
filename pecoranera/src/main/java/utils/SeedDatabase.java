@@ -112,7 +112,10 @@ public class SeedDatabase {
 			Event event = new Event();
 			event.setName(faker.zelda().character() + " " + faker.color().name());
 			event.setDescription(faker.lorem().sentence(10, 100));
-			event.setDate(faker.date().future(90, TimeUnit.DAYS));
+			if (i < 1) 
+				event.setDate(faker.date().past(90, TimeUnit.DAYS));
+			else
+				event.setDate(faker.date().future(90, TimeUnit.DAYS));
 			event.setPrice(generateRandomPrice(2.00, 20.00));
 			event.setCancellation(null);
 			
