@@ -1,3 +1,5 @@
+import {tagsToHtml} from "./modules/eventTagManager.js";
+
 $(document).ready(function(){
     let orderToHTML= function(order){
         return `<div id="${order.id}" class="order">
@@ -17,61 +19,52 @@ $(document).ready(function(){
                             
                             <span class="price">€ <span>${(parseFloat(order.price) * parseInt(order.tickets)).toFixed(2)}</span></span>
                 
-                            <button value="${order.id}" class="remove-order">Cancella Ordine</button>
                         </div>
                     </div>
 
                     <img class="ticket-qr" src="https://chart.googleapis.com/chart?cht=qr&chs=450x450&chl=${user}+${order.event.id}+${order.event.date}" alt="">
     
                 </div>`;
-    }
-
-    let loadUserOrder = async function(offsetPage){
-        return $.ajax({
-            url: "OrderRetrieveController",
-
-            
-
-            success: (orders) => {
-                if(offsetPage == 0){
-                    $("#order-list").children(".order").remove();
-                }
-
-                if(orders.length == 0){
-                    $("#load-more").hide();
-                } else {
-                    $.each(orders, function(key, order) {
-                        $("#order-list").append(orderToHTML(order));
-                    });
-                }
-                
-            }
-        });
-    }
-
-    $("#order-list").on("click", ".remove-order", function(){
-        let id = $(this).attr("value");
-
+    };
+    
+    //caricamento tag e ultimi ordini
+    let loadPanoramica = () =>{
         $.ajax({
-            url: "OrderDeleteController",
+            url: "LastOrdersController",
 
-            
+            dataType: "json",
 
-            data:{
-                idOrder: id
-            },
+            success: (orders) =>{
 
-            success: function(){
-                $(`#${id}`).remove();
+                $.each(orders, function(key, order) {
+                    $("#last-orders>div").append(orderToHTML(order));
+                });
             },
 
             error: () =>{
-                alert("Errore con l'eliminazione dell'ordine");
+                alert("Errore caricamento ordini");
             }
         });
-    });
 
-    loadUserOrder(0);
+        $.ajax({
+            url: 'TagUserController',
 
+            success: function(data) {
+                let userLikes = [];
+                $.each(data, function(key, val) {
+                    let el = {"key": val.id, "value": val.name};
 
+                    $("#likes>div").append(tagsToHtml(el));
+                });
+        
+            },
+
+            error: () =>{
+                alert("Errore caricamento tag");
+            }
+        });
+        
+    };
+
+    loadPanoramica();
 });

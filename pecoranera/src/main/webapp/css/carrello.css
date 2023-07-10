@@ -67,7 +67,7 @@ body{
 
 .event-tag:hover{
     background-color: var(--neon-light);
-    color: var(--page-background);
+    color: var(--main-color);
 }
 
 .ticket-data{

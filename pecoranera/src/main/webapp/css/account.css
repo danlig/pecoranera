@@ -19,12 +19,21 @@ html, body{
 }
 
 #display-data section{
-    padding-top: calc(var(--nav-height) + 3rem);
+    margin-top: calc(var(--nav-height) + 11vh);
+    max-height: 75vh;
+    margin-right: 1rem;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    border-bottom: 4px solid var(--dark-background);
 }
 
 @media only screen and ((max-width: 600px) or (max-aspect-ratio: 1)){
     #profile-section{
         min-height: 80vh;
         flex-direction: column;
+    }
+
+    #display-data{
+        width: 95vw;
     }
 }

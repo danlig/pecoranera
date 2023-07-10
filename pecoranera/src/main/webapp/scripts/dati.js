@@ -10,11 +10,13 @@ $(document).ready(function(){
     });
 
     $("#modify-user").on("click", function(){
+        let user = $("#user").val();
+
         $.ajax({
             url: "UserEditController",
 
             data:{
-                username: $("#user").val()
+                username: user
             },
 
             success: () => {

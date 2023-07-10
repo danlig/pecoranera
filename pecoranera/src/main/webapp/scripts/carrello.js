@@ -60,6 +60,8 @@ $(document).ready(function(){
                     return $.ajax({
                         url: "SingleEventController",
 
+                        
+
                         dataType:"json",
 
                         data:{
@@ -93,6 +95,8 @@ $(document).ready(function(){
         $.ajax({
             url: "CartDeleteController",
 
+            
+
             data:{
                 event: eventID
             },
@@ -115,7 +119,9 @@ $(document).ready(function(){
 
         $.ajax({
             url: "CartAddController",
-    
+
+            
+
             data: {
                 tickets: parseInt($(this).val()),
                 event: eventID,
@@ -127,7 +133,7 @@ $(document).ready(function(){
             },
 
             error: () => {
-               alert("errore modifica quantità");
+               alert("errore modifica quantità ");
             }  
         })
     });
@@ -137,6 +143,8 @@ $(document).ready(function(){
         $(".event").each(function(){
             $.ajax({
                 url: "CartDeleteController",
+
+                
     
                 data:{
                     event: $(this).attr("id")
@@ -162,6 +170,8 @@ $(document).ready(function(){
             $.ajax({
                 url: "OrderAddController",
 
+                
+
                 data:{
                     event: $(this).attr("id"),
                     tickets: quantity
@@ -179,8 +189,8 @@ $(document).ready(function(){
                     refreshCost();
                 },
 
-                error: () => {
-                    alert("Errore con l'acquisto");
+                error: (xhr, status, error) => {
+                    alert("Errore con l'acquisto " +xhr.responseText );
                 }
             });
         });
