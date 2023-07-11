@@ -28,19 +28,17 @@
             </tr>
             
             <tr>
-                <form method="POST" action="${pageContext.request.contextPath}/admin/tag/add">
+                <form id="add-form" method="POST" action="${pageContext.request.contextPath}/admin/tag/add"></tr>
                     <td>
                         #
                     </td>
                     <td>
-                        <input type="text" name="name" placeholder="Name of tag">
+                        <input type="text" name="name" placeholder="Name of tag" form="add-form" required>
                     </td>
-                    <td colspan="2" style="text-align: center">
+                    <td colspan="2">
                         <input type="submit" value="Crea">
                     </td>
-                </form>
             </tr>
-            
         </table>
     </section>
 

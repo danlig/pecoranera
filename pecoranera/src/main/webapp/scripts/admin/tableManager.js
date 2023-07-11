@@ -1,6 +1,6 @@
-let fillTable = function(_formatter){
+let fillTable = function(_formatter, controller){
     $.ajax({
-        url: `${context}/TagRetrieveController`,
+        url: `${context}/${controller}`,
 
         dataType: "json",
 
@@ -12,4 +12,71 @@ let fillTable = function(_formatter){
     });
 };
 
-export {fillTable};
+let editRow = function(elem){
+    $(elem).on("submit", ".edit", function(e){
+        e.preventDefault();
+
+        $.ajax({
+            url: $(this).attr("action"),
+
+            data : $(this).serialize(),
+
+            statusCode:{
+
+                200: () =>{
+                    location.reload();
+                },
+
+                401: () =>{
+                    alert("error");
+                }
+
+            }
+
+        });
+    });
+}
+
+let removeRow = function(elem){
+    $(elem).on("click", ".delete", function(e){
+        e.preventDefault();
+
+        $.ajax({
+            url: $(this).attr("href"),
+
+            success: () =>{
+                location.reload();
+            },
+
+            error: () =>{
+                alert("error");
+            }
+        });
+    });
+}
+
+let addRow = function(elem){
+    $(elem).on("submit", function(e){
+        e.preventDefault();
+
+        $.ajax({
+            url: $(this).attr("action"),
+
+            data: $(this).serialize(),
+
+            statusCode:{
+
+                200: () =>{
+                    location.reload();
+                },
+
+                401: () =>{
+                    alert("error");
+                }
+
+            }
+        });
+    })
+}
+
+export {fillTable, editRow, removeRow, addRow};

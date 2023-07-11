@@ -1,6 +1,8 @@
 package controllers.crud.event;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import com.google.gson.Gson;
 import dao.EventDao;
 import dao.ProductDao;
 import dao.TagDao;
+import model.Event;
 
 public class ReadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,7 +24,15 @@ public class ReadController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().write(new Gson().toJson(EventDao.doRetrieveAll()));
+		List<Event> events = EventDao.doRetrieveAll();
+
+		// Nascondi event-artists
+		for (Event e : events) {
+			e.setEventArtists(null);
+		}
+		
+
+		response.getWriter().write(new Gson().toJson(events));
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
