@@ -20,7 +20,6 @@ public class RemoveController extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GenericCrudController.Remove(Tag.class, request, response);
-
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

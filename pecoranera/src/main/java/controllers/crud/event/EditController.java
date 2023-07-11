@@ -82,8 +82,6 @@ public class EditController extends HttpServlet {
 
 		if (filePart != null)
 			EventImageUpload.upload(getServletContext().getRealPath("/"), filePart, event.getId());
-		
-		response.sendRedirect("list");
 	}
 }
 

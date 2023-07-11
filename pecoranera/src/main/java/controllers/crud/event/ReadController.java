@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dao.EventDao;
+import dao.ProductDao;
 import dao.TagDao;
 
 public class ReadController extends HttpServlet {
@@ -18,15 +21,10 @@ public class ReadController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("events", EventDao.doRetrieveAllActiveEvent());
-		request.setAttribute("tags", TagDao.doRetrieveAll());
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/event/page.jsp");
-		dispatcher.forward(request, response);
+		response.getWriter().write(new Gson().toJson(EventDao.doRetrieveAll()));
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

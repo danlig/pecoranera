@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import dao.ArtistDao;
 import dao.EventDao;
+import dao.ProductDao;
 import model.Event;
 
 public class ReadController extends HttpServlet {
@@ -41,14 +42,8 @@ public class ReadController extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(messages));
 			return ;			
 		}
-			
-		request.setAttribute("id_event", Integer.parseInt(id_event));
-		request.setAttribute("artists", ArtistDao.doRetrieveAll());
-		request.setAttribute("eventArtists", event.getEventArtists());
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/event-artist/page.jsp");
-		dispatcher.forward(request, response);
-			
+		response.getWriter().write(new Gson().toJson(event.getEventArtists()));	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
