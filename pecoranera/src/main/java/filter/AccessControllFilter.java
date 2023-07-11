@@ -31,13 +31,14 @@ public class AccessControllFilter extends HttpFilter implements Filter {
 		Boolean isAdmin = (Boolean) httpServletRequest.getSession().getAttribute("isAdmin");
 		String path = httpServletRequest.getServletPath();
 		
-		if (path.contains("/common/") && isAdmin==null) {
-			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login.jsp");
-			return;
-		} else if (path.contains("/admin/") && (isAdmin==null || !isAdmin)) {
+		boolean condition1 = path.contains("/common/") && isAdmin==null;
+		boolean condition2 = path.contains("/admin/") && (isAdmin==null || !isAdmin);
+		
+		if (condition1 || condition2) {
 			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login.jsp");
 			return;
 		}
+
 		chain.doFilter(request, response);
 	}
 

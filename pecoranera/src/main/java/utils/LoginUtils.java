@@ -4,7 +4,16 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class LoginUtils {
+	private static final Logger LOGGER = LogManager.getLogger(LoginUtils.class);
+	
+	private LoginUtils() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static String toHash(String password) {
         String hashString = null;
         try {
@@ -15,7 +24,7 @@ public class LoginUtils {
                 hashString += Integer.toHexString((hash[i]&0xFF)|0x100).toLowerCase().substring(1,3);
             }
         } catch (NoSuchAlgorithmException e) {
-            System.out.println(e);
+        	LOGGER.error("Error occurred in context", e);
         }
         return hashString;
     }

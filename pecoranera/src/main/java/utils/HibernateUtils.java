@@ -1,18 +1,24 @@
 package utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtils {
-	
 	private static final SessionFactory sessionFactory;
+	private static final Logger LOGGER = LogManager.getLogger(HibernateUtils.class);
+	
+	private HibernateUtils() {
+		throw new IllegalStateException("Utility class");
+	}
 	
     static {
         try {
             sessionFactory = new Configuration().configure()
                     .buildSessionFactory();
         } catch (Throwable ex) {
-            System.err.println("Initial SessionFactory creation failed." + ex);
+        	LOGGER.error("Error occurred in context", ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

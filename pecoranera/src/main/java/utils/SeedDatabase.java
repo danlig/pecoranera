@@ -37,6 +37,10 @@ public class SeedDatabase {
 	private static final int event_artist_number = 3;
 	private static SecureRandom random = new SecureRandom();
 	
+	private SeedDatabase() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	private static double generateRandomPrice(double min, double max) {
 		DecimalFormat df2 = new DecimalFormat("0.0");
 	    double rand = random.nextDouble();

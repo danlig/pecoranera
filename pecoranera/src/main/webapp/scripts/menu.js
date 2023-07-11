@@ -96,7 +96,7 @@ $(document).ready(function(){
              });
         }
         
-		return;
+		return true;
     }
     
     //click dei link categoria consegue un caricamento del prodotto del tipo scelto

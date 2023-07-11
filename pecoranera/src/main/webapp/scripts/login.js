@@ -19,10 +19,6 @@ $(document).ready(function(){
         $("#form-wrapper").removeClass("register");
     });
 
-    /*$("form").on("submit", function(e){
-        e.preventDefault();
-    })*/
-
     $("#login").on("submit", function(e){
         $.ajax({
             type: 'POST',
@@ -39,9 +35,7 @@ $(document).ready(function(){
             },
 
             statusCode: {
-                //ERROR DISPLAY DO
                 401: function(){
-                    //alert("ERRORE BRO");
                     $("#login-error").css("opacity", "1");
                     loadingWheel.fadeOut(500);
                 }

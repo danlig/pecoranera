@@ -23,8 +23,6 @@ public class RemoveController extends HttpServlet {
 		if (!GenericCrudController.Validate(ea, GenericCrudController.operation.REMOVE_MODE, request, response))
 			return;
 		
-		System.out.println(ea.toString());
-		
 		EventDao.deleteArtist(ea.getEvent(), ea.getArtist());
 		response.sendRedirect("list?id_event=" + ea.getEvent().getId());
 	}

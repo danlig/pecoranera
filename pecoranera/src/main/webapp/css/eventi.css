@@ -5,14 +5,11 @@ body{
 
 #upcoming{
     padding-top: calc(var(--nav-height) + 5vh);
+    padding-bottom: 10vh;
 }
 
 h1,h2{
     font-family: var(--header-font);
-}
-
-#upcoming{
-    padding-bottom: 10vh;
 }
 
 #upcoming h1{

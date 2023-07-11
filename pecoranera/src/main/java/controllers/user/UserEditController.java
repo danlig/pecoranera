@@ -37,7 +37,7 @@ public class UserEditController extends HttpServlet {
 		
 		if (email != null) {
 			if (!ValidatorUtils.CheckEmail(email) || UserDao.doRetrieveByEmail(email) != null) {
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "email");
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "email invalida");
 				return;
 			}
 
@@ -46,7 +46,7 @@ public class UserEditController extends HttpServlet {
 		
 		if (username != null) {
 			if (!ValidatorUtils.CheckUsername(username)) {
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "username");
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "username invalido");
 				return;
 			}
 			
