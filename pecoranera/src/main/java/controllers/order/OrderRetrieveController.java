@@ -2,9 +2,8 @@ package controllers.order;
 
 import java.io.IOException;
 import java.util.Comparator;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,10 +35,11 @@ public class OrderRetrieveController extends HttpServlet{
 
 		int idUser = Integer.parseInt(request.getSession().getAttribute("user").toString());
 		User user = UserDao.doRetrieveByKey(idUser);
-		
-		SortedSet<Order> orders = new TreeSet<>(Comparator.comparing(Order::getDate).reversed());
+
+		List<Order> orders = new ArrayList<>();
 		
 		for (Order o : user.getOrders()) {
+			System.out.println(o.toString());
 			o.setUser(null);
 			
 			Event e = o.getEvent();
@@ -47,6 +47,8 @@ public class OrderRetrieveController extends HttpServlet{
 			
 			orders.add(o);
 		}
+		
+		orders.sort(Comparator.comparing(Order::getDate).reversed());
 
 		response.getWriter().write(new Gson().toJson(orders));
 	}
