@@ -1,36 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.util.List"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><!DOCTYPE html>
+
 <html lang="it">
-	<head>
-		<meta charset="ISO-8859-1">
-		<title>Event</title>
-		<style type="text/css">
-			table, th, td {
-				border: 1px solid black; 
-				border-collapse: collapse;
-			}
-			th, td {
-				padding: 5px 10px;
-			}
-			
-			.successfully-color {
-				color: green;
-			}
-			
-			.error-color {
-				color: red;
-			}
-		</style>
-	</head>
-	<body>
-		<c:forEach var="message" items="${messages}">
-			<p class="${message.key}">${message.value}</p>
-		</c:forEach>
-		
-		<table>
-		<caption>Tabella di inserimento evento</caption>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pecoranera Jazz Art Bistrot</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-eventi.css">
+</head>
+<body>
+    <jsp:include page="../../assets/navbar.jsp">
+        <jsp:param name="active_page" value="eventi" />
+    </jsp:include>
+
+    <jsp:include page="../../assets/show-navbar.jsp">
+        <jsp:param name="active_page" value="eventi" />
+    </jsp:include>
+
+    <section id="eventi">
+        <table>
+        <caption>Tabella eventi</caption>
 			<tr>
 				<th>Id</th>
 				<th>Name</th>
@@ -75,7 +65,7 @@
 					
 					
 					<td>
-						<input type="number" name="availableTickets">
+						<input type="number" name="availableTickets" placeholder="Insert Available Tickets">
 					</td>
 					
 					<td>
@@ -157,5 +147,8 @@
 				</tr>
 			</c:forEach>
 		</table>
-	</body>
+    </section>
+
+    <jsp:include page="../../assets/footer.jsp"></jsp:include>
+</body>
 </html>

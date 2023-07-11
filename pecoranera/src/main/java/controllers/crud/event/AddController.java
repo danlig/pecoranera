@@ -77,5 +77,7 @@ public class AddController extends HttpServlet {
 
 		if (filePart != null)
 			EventImageUpload.upload(getServletContext().getRealPath("/"), filePart, event.getId());
+	
+		response.sendRedirect("list");
 	}
 }

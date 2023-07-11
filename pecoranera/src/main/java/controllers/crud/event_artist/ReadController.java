@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import dao.ArtistDao;
 import dao.EventDao;
 import model.Event;
 
@@ -40,7 +42,12 @@ public class ReadController extends HttpServlet {
 			return ;			
 		}
 		
-		response.getWriter().write(new Gson().toJson(event.getEventArtists()));	
+		request.setAttribute("event", event);
+		request.setAttribute("artists", ArtistDao.doRetrieveAll());
+		request.setAttribute("eventArtists", event.getEventArtists());
+
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/admin/event-artist/page.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
