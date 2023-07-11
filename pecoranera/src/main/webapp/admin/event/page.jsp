@@ -20,6 +20,7 @@
 
     <section id="eventi">
         <table>
+        <caption>Tabella eventi</caption>
 			<tr>
 				<th>Id</th>
 				<th>Name</th>
