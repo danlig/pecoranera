@@ -25,18 +25,33 @@ $(document).ready(function(){
                 </div>`;
     }
     
-    let loadUserOrder = async function(offsetPage){
+    let loadOrders = async function(info){
         return $.ajax({
             url: "order/list",   
-    
+            
+            data: info,
+
             success: (orders) => {
-                $.each(orders, function(key, order) {
-                    $("#orders>div").append(orderToHTML(order));
-                });
+                console.log(orders)
+                if(orders.length == 0){
+                    $("#orders>div").append("<p>Nessun ordine da visualizzare</p>");
+                }else {
+                    $("#orders>div").children().remove();
+
+                    $.each(orders, function(key, order) {
+                        $("#orders>div").append(orderToHTML(order));
+                    });
+                }
                 
             }
         });
     }
+
+    $("#filters").on("submit", function(e){
+        e.preventDefault();
+
+        loadOrders($(this).serialize());
+    });
     
-    loadUserOrder();
+    loadOrders();
 })

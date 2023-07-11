@@ -1,0 +1,52 @@
+@import "variables.css";
+
+body{
+    background-color: var(--page-background);
+    color: white;
+    font-family: var(--main-font);
+}
+
+#orders{
+    padding-top: 11rem;
+    min-height: 60vh;
+}
+
+#filters{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 2rem 0;
+    background-color: var(--dark-background);
+    border: 1px solid black;
+}
+
+input{
+    background-color: var(--dark-background);
+    border: 1px solid white;
+    font-size: 1.1rem;
+    color: var(--main-color);
+}
+
+input[type=number]{
+    width: 3rem;
+}
+
+input[type=submit]{
+    padding: 1rem;
+    border: 1px solid var(--neon-light);
+    border-radius: 10px;
+    box-shadow: .25rem .25rem var(--neon-light);
+    transition: .5s ease;
+    cursor: pointer;
+}
+
+input[type=submit]:hover{
+    box-shadow: .5rem .5rem var(--neon-light);
+}
+
+input[type=submit]:active{
+    box-shadow: 0 0 var(--neon-light);
+    background-color: var(--neon-light);
+    color: var(--main-color);
+}
