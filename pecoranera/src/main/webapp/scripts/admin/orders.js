@@ -27,11 +27,11 @@ $(document).ready(function(){
     
     let loadUserOrder = async function(offsetPage){
         return $.ajax({
-            url: "admin/order/list",   
+            url: "order/list",   
     
             success: (orders) => {
                 $.each(orders, function(key, order) {
-                    $("#order-list").append(orderToHTML(order));
+                    $("#orders>div").append(orderToHTML(order));
                 });
                 
             }

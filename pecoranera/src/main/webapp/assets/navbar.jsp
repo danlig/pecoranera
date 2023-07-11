@@ -40,7 +40,7 @@
                     <li id="nav-icons">
                         <a href="account.jsp" class="nav-links ${param.active_page == 'account'  ? 'active_link' : ''}">
                             <c:choose>
-                                <c:when test= "${sessionScope.isAdmin == null || empty sessionScope.isAdmin}">
+                                <c:when test= "${sessionScope.isAdmin == null || empty sessionScope.isAdmin || sessionScope.isAdmin == false}">
                                     <i class="fa-regular fa-circle-user"></i>
                                 </c:when>
                                 
