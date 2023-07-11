@@ -22,7 +22,10 @@ public class EditController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GenericCrudController.Edit(Product.class, request, response);
+		if (!GenericCrudController.Edit(Product.class, request, response)) 
+			return ;
+		
+		response.sendRedirect("list");		
 	}
 
 }

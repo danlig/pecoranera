@@ -21,6 +21,8 @@ public class AddController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GenericCrudController.Add(ProductType.class, request, response);
+		if (!GenericCrudController.Add(ProductType.class, request, response))
+			return ;
+		response.sendRedirect("list");
 	}
 }
