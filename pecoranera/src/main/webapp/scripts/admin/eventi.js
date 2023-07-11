@@ -82,6 +82,7 @@ $(document).ready(function(){
     $("table").on("input", "input[name='maxTickets']", function(){
         let event = $(this).attr("form");
         let val = $(this).value();
+        alert(val)
         $(`input[name='availableTickets'][form='${event}']`).value(val);
     })
 
