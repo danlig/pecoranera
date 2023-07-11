@@ -119,7 +119,7 @@ public class OrderDao {
 		for (Order o : resultList) {
 			o.setUser(null);
 			
-			if (o.getUser().getId() == user.getId())
+			if (user == null || o.getUser().getId() == user.getId())
 				orders.add(o);
 		}
 		
