@@ -89,3 +89,7 @@ input[value="Crea"]:active{
 #eventi > table {
 	margin-bottom: 20px;
 }
+
+#event-artist {
+	height: 40vh;
+}
