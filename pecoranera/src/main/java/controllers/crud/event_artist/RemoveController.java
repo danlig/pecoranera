@@ -21,8 +21,11 @@ public class RemoveController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EventArtist ea = new EventArtist();
 		
-		if (GenericCrudController.Validate(ea, GenericCrudController.operation.REMOVE_MODE, request, response))
-			EventDao.deleteArtist(ea.getEvent(), ea.getArtist());
+		if (!GenericCrudController.Validate(ea, GenericCrudController.operation.REMOVE_MODE, request, response))
+			return;
+			
+		EventDao.deleteArtist(ea.getEvent(), ea.getArtist());
+		response.sendRedirect("list?id_event=" + ea.getEvent().getId());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

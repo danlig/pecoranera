@@ -43,14 +43,6 @@ $(document).ready(function() {
         else{
             $(location).attr('href', "account.jsp");
         }
-        
-        // $.ajax({
-        //     type: "POST",
-        //     url: "assets/login.html",
-        //     success: function(responseText) {
-        //         $('body').load(responseText); 
-        //     }
-        // });
     });
 
 });

@@ -7,6 +7,10 @@ import model.Artist;
 public class ArtistDao {
 	private static BasicCrudDao<Artist> crud = new BasicCrudDao<>(Artist.class);
 
+	private ArtistDao() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static void doSave(Artist item) {
 		crud.doSave(item);
 	}

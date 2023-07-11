@@ -12,6 +12,10 @@ import model.Order;
 import model.User;
 
 public class ValidatorUtils {
+	private ValidatorUtils() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static boolean CheckOrder(HttpServletRequest request, HttpServletResponse response, Order order) throws IOException {
 		// Ottieni utente in sessione
 		int idUser = Integer.parseInt(request.getSession().getAttribute("user").toString());

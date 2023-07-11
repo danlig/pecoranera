@@ -8,12 +8,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.BasicCrudDao;
 
 public class GenericCrudController {
+	private static final Logger LOGGER = LogManager.getLogger(GenericCrudController.class);
+	
+	private GenericCrudController() {
+	    throw new IllegalStateException("Utility class");
+	}
 	
 	// Tipi di operazioni CRUD
 	public static enum operation {
@@ -26,7 +34,7 @@ public class GenericCrudController {
 		try {
 			obj = cls.getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
-			e.printStackTrace();
+			return false;
 		}
 		
 		// Verifica validità di tutti i parametri
@@ -88,7 +96,7 @@ public class GenericCrudController {
 		return true;
 	}
 	
-	public static <T> boolean Validate(Object obj, operation mode, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public static boolean Validate(Object obj, operation mode, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		for (Field field : obj.getClass().getDeclaredFields()) {
 	    	   String fieldName = field.getName();
 	    	   String fieldType = field.getType().toString();
@@ -111,74 +119,70 @@ public class GenericCrudController {
 	    	   }
 	    	   
 	    	   String setMethod = "set" + Character.toUpperCase(fieldName.charAt(0)) + fieldName.substring(1);
+	    	   final String formatError = "Errore formato del parametro: " + fieldName;
 	    	   
 	    	   // Parametro string
 	    	   if (fieldType.contains("String")) {
 	    		   callSetter(obj, setMethod, param); 
-	    		   continue;
 	    	   }
 	    	   
 	    	   // Parametro double
-	    	   if (fieldType.contains("double")) {
+	    	   else if (fieldType.contains("double")) {
 	    		   double paramDouble;
 	    		   
 		   			try {
 						paramDouble = Double.parseDouble(param);
 					} catch(NumberFormatException e) {
-						response.sendError(HttpServletResponse.SC_BAD_REQUEST, 
-								"Errore formato del parametro: " + fieldName);
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST, formatError);
 						return false;
 					}
 	    		   
 	    		   callSetter(obj, setMethod, paramDouble);
-	    		   continue;
 	    	   }
 	    	   
 	    	   // Parametro intero
-	    	   if (fieldType.contains("int")) {
+	    	   else if (fieldType.contains("int")) {
 	    		   int paramInt;
 	    		   
 		   			try {
 						paramInt = Integer.parseInt(param);
 					} catch(NumberFormatException e) {
-						response.sendError(HttpServletResponse.SC_BAD_REQUEST, 
-								"Errore formato del parametro: " + fieldName);
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST, formatError);
 						return false;
 					}
 	    		   
 	    		   callSetter(obj, setMethod, paramInt);
-	    		   continue;
 	    	   }
 	    	   
 	    	   // Parametro data
-	    	   if (fieldType.contains("Date")) {
+	    	   else if (fieldType.contains("Date")) {
 	    		   Date paramDate;
 	    		   SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN);
 	    		   
 		   	   		try {
 						paramDate = formatter.parse(request.getParameter("date"));
 					} catch (ParseException e) {
-						response.sendError(HttpServletResponse.SC_BAD_REQUEST, 
-								"Errore formato del parametro: " + fieldName);
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST, formatError);
 						return false;
 					}
 		   	   		
 	    		   callSetter(obj, setMethod, paramDate);
-	    		   continue;
 	    	   }
 	    	   
 	    	   // Parametro oggetto custom
-	    	   Object paramObj = GenericCrudController.doRetrieveByKeyAndValidate(field.getType(), param, response);
-	    	   if (paramObj == null) 
-	    		   return false;
-	    	   
-	    	   callSetter(obj, setMethod, paramObj);
+	    	   else {
+	    		   Object paramObj = GenericCrudController.doRetrieveByKeyAndValidate(field.getType(), param, response);
+	    		   if (paramObj == null) 
+	    			   return false;
+	    		   
+	    		   callSetter(obj, setMethod, paramObj);	    		   
+	    	   }
 	        }
 		
 		return true;
 	}
 	
-	public static <T> Object doRetrieveByKeyAndValidate(Class<?> cls, String value, HttpServletResponse response) throws IOException {
+	public static Object doRetrieveByKeyAndValidate(Class<?> cls, String value, HttpServletResponse response) throws IOException {
 		Object obj = null;
 		BasicCrudDao<?> dao = new BasicCrudDao<>(cls);
 		
@@ -206,7 +210,7 @@ public class GenericCrudController {
             // Invoke the setter method on the object
             method.invoke(obj, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error occurred in context", e);
         }
     }
 }

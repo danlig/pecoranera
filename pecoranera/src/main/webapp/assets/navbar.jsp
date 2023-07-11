@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<html>
+<html lang="it">
     <head>
-        <script src="https://kit.fontawesome.com/0447c444c7.js" crossorigin="anonymous"></script>
+    	<title>Navbar</title>
+        <script src="https://kit.fontawesome.com/0447c444c7.js" integrity="sha384-NXqxMSPXxh/QHJjTiZE20Ff9wAAqXItyo64QBwdeGVkl2y83+PEOLcMWCDu6B5lC" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
         <script>
             var isLoggedIn = ("${sessionScope.isAdmin == null || empty sessionScope.isAdmin}" == "false");

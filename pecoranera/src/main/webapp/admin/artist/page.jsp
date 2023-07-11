@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1" import="dao.ArtistDao, model.Artist, java.util.List, java.util.Map"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Artists</title>
@@ -35,6 +35,8 @@
 		}
 	%> --%>
 	<table>
+	<caption>Tabella di inserimento artista</caption>
+	
 		<tr>
 			<th>Id</th>
 			<th>Nome</th>
