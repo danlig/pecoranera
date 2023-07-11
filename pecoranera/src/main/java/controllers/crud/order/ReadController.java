@@ -3,7 +3,10 @@ package controllers.crud.order;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +18,8 @@ import com.google.gson.Gson;
 
 import dao.OrderDao;
 import dao.UserDao;
+import model.Event;
+import model.Order;
 import model.User;
 
 
@@ -44,8 +49,21 @@ public class ReadController extends HttpServlet {
         catch (Exception e){
         	user = null;
         }
+
+        List<Order> orders = new ArrayList<>();
 		
-		response.getWriter().write(new Gson().toJson(OrderDao.doRetrieveFilter(startDate, endDate, user)));	
+		for (Order o : OrderDao.doRetrieveFilter(startDate, endDate, user)) {
+			o.setUser(null);
+			
+			Event e = o.getEvent();
+			e.setEventArtists(null);
+			
+			orders.add(o);
+		}
+		
+		orders.sort(Comparator.comparing(Order::getDate).reversed());
+		
+		response.getWriter().write(new Gson().toJson(orders));	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

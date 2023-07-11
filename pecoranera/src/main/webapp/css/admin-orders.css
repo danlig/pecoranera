@@ -50,3 +50,11 @@ input[type=submit]:active{
     background-color: var(--neon-light);
     color: var(--main-color);
 }
+
+.order>div{
+    margin-right: 3rem;
+}
+
+::-webkit-calendar-picker-indicator{
+    filter: invert(1);
+}
