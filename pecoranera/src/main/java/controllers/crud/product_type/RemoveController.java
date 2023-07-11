@@ -18,7 +18,9 @@ public class RemoveController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GenericCrudController.Remove(ProductType.class, request, response);
+		if (!GenericCrudController.Remove(ProductType.class, request, response))
+			return ;
+		response.sendRedirect("list");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

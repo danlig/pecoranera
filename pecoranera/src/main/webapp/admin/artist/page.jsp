@@ -35,7 +35,7 @@
 		}
 	%> --%>
 	<table>
-	<caption>Tabella di inserimento artista</caption>
+	<caption>.</caption>
 	
 		<tr>
 			<th>Id</th>

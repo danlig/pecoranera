@@ -21,6 +21,7 @@
     
     <section id="event-artist">
 		<table>
+		<caption>.</caption>
 				<tr>
 					<th>Artist</th>
 					<th>Role</th>

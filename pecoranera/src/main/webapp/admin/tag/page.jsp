@@ -32,7 +32,7 @@
 	</c:forEach>
 
 	<table>
-	 	<caption>Tabella di inserimento tag</caption>
+	 	<caption>.</caption>
 		
 		<tr>
 			<th>Id</th>
