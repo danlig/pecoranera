@@ -23,9 +23,10 @@ public class ReadController extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json");
+		request.setAttribute("product_types", ProductTypeDao.doRetrieveAll());
 		
-		response.getWriter().write(new Gson().toJson(ProductTypeDao.doRetrieveAll()));	
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/product-type/page.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
