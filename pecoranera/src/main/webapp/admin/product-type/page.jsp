@@ -19,7 +19,8 @@
     </jsp:include>
 
     <section id="product">
-		<table>			
+		<table>
+		<caption>.</caption>		
 			<tr>
 				<th>Id</th>
 				<th>Nome</th>
