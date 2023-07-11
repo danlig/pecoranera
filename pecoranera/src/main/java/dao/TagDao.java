@@ -7,6 +7,10 @@ import model.Tag;
 public class TagDao {
 	private static BasicCrudDao<Tag> crud = new BasicCrudDao<>(Tag.class);
 
+	private TagDao() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static void doSave(Tag item) {
 		crud.doSave(item);
 	}

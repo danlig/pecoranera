@@ -18,7 +18,7 @@ $(document).ready(function() {
     });
 
     $('a[href="#"]').click(function() {
-        var offset = -200; // <-- change the value here
+        var offset = -200;
 
         $('html, body').animate({
             scrollTop: chiSiamo.offset().top + offset
@@ -27,12 +27,10 @@ $(document).ready(function() {
 
     $(window).on('resize scroll', function() {
         if (chiSiamo.isInViewport()) {
-            //console.log("VISIBILE");
             chiSiamo.addClass('insight');
             images.children("img").addClass('insight')
             
         } else {
-            //console.log("NOT! VISIBILE");
             chiSiamo.removeClass('insight');
             images.children("img").removeClass('insight')
         }

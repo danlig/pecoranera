@@ -9,6 +9,10 @@ import model.ProductType;
 public class ProductTypeDao {
 	private static BasicCrudDao<ProductType> crud = new BasicCrudDao<>(ProductType.class);
 
+	private ProductTypeDao() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static ProductType doSave(ProductType item) {
 		return crud.doSave(item);
 	}

@@ -7,6 +7,10 @@ import model.Product;
 public class ProductDao {
 	private static BasicCrudDao<Product> crud = new BasicCrudDao<>(Product.class);
 
+	private ProductDao() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static void doSave(Product item) {
 		crud.doSave(item);
 	}

@@ -54,18 +54,15 @@ public class EditController extends HttpServlet {
 		// Controllo dei file
 		Part filePart = request.getPart("photo");
 		
-		if (filePart != null && filePart.getSize() != 0) {
-			if (filePart != null) {
-				try {
-					if (!EventImageUpload.isImage(filePart)) {
-						response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Estensione file non valida");					
-						return;
-					}
-				} catch (Exception e) {
-					filePart = null;
+		if (filePart != null && filePart.getSize() != 0 && filePart != null) {
+			try {
+				if (!EventImageUpload.isImage(filePart)) {
+					response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Estensione file non valida");					
+					return;
 				}
+			} catch (Exception e) {
+				filePart = null;
 			}
-			
 		}
 		
 		if (!GenericCrudController.Edit(Event.class, request, response))

@@ -9,6 +9,10 @@ import model.Event;
 public class OrderDao {
 	private static BasicCrudDao<Order> crud = new BasicCrudDao<>(Order.class);
 
+	private OrderDao() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static boolean doSave(Order item) {
 		Event event = item.getEvent();
 		

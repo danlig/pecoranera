@@ -11,6 +11,10 @@ import model.keys.CartEventKey;
 public class CartDao {
 	private static BasicCrudDao<Cart> crud = new BasicCrudDao<>(Cart.class);
 
+	private CartDao() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static void doSave(Cart item) {
 		crud.doSave(item);
 	}

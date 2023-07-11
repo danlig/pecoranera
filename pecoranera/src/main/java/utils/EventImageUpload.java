@@ -10,6 +10,10 @@ import javax.servlet.http.Part;
 import org.apache.tika.Tika;
 
 public class EventImageUpload {
+	private EventImageUpload() {
+		throw new IllegalStateException("Utility class");
+	}
+	
     public static boolean upload(String contextPath, Part filePart, int idEvent) throws IOException  {
         final String filePath = contextPath
         		+ File.separator + "images" 

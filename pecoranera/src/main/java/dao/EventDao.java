@@ -34,6 +34,10 @@ public class EventDao {
 	private static final Logger LOGGER = LogManager.getLogger(EventDao.class);
 	private static BasicCrudDao<Event> crud = new BasicCrudDao<>(Event.class);
 
+	private EventDao() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static Event doSave(Event item) {
 		return crud.doSave(item);
 	}
