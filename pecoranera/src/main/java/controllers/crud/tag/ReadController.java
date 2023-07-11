@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dao.TagDao;
 import model.Tag;
 
@@ -19,15 +21,13 @@ public class ReadController extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Tag> tags = TagDao.doRetrieveAll();
-		request.setAttribute("tags", tags);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/tag/page.jsp");
-		dispatcher.forward(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		response.setContentType("application/json");
+		
+		response.getWriter().write(new Gson().toJson(TagDao.doRetrieveAll()));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

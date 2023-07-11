@@ -1,0 +1,23 @@
+@import "variables.css";
+@import "admin-tables.css";
+
+table{
+    font-size: .8rem;
+}
+
+input[name=price]{
+    width: 3rem;
+}
+
+input[name=date]{
+    width: 5rem;
+}
+
+input[name=maxTickets]{
+    width: 3rem;
+}
+
+select{
+    height: 1.25rem;
+    width: 3rem;
+}

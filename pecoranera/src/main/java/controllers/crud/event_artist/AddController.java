@@ -23,11 +23,8 @@ public class AddController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EventArtist ea = new EventArtist();
-		if (!GenericCrudController.Validate(ea, GenericCrudController.operation.ADD_MODE, request, response))
-			return;
-
-		EventDao.addArtist(ea.getEvent(), ea.getArtist(), ea.getRole());
-		response.sendRedirect("list?id_event=" + ea.getEvent().getId());
+		if (GenericCrudController.Validate(ea, GenericCrudController.operation.ADD_MODE, request, response))
+			EventDao.addArtist(ea.getEvent(), ea.getArtist(), ea.getRole());
 	}
 
 }
