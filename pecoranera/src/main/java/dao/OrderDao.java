@@ -124,10 +124,10 @@ public class OrderDao {
 		List<Order> orders = new ArrayList<>();
 
 		for (Order o : resultList) {
-			o.setUser(null);
-			
 			if (user == null || o.getUser().getId() == user.getId())
 				orders.add(o);
+			
+			o.setUser(null);
 		}
 		
 		return orders;
