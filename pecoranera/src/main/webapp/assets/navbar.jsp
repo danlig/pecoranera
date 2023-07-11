@@ -37,7 +37,7 @@
                     <li><a href="${pageContext.request.contextPath}/${sessionScope.isAdmin == true ? 'admin/menu.jsp' : 'menu.jsp'}" class="nav-links ${param.active_page == 'menu'  ? 'active_link' : ''}">MENU</a></li>
                     <li><a href="${pageContext.request.contextPath}/${sessionScope.isAdmin == true ? 'admin/ordini.jsp' : 'info.jsp'}" class="nav-links ${param.active_page == 'info'  ? 'active_link' : ''}"><span>${sessionScope.isAdmin == true ? 'ORDINI' : 'INFO'}</span></a></li>
                     <li id="nav-icons">
-                        <a href="${pageContext.request.contextPath}/account.jsp" class="nav-links ${param.active_page == 'account'  ? 'active_link' : ''}">
+                        <a href="account.jsp" class="nav-links ${param.active_page == 'account'  ? 'active_link' : ''}">
                             <c:choose>
                                 <c:when test= "${sessionScope.isAdmin == null || empty sessionScope.isAdmin}">
                                     <i class="fa-regular fa-circle-user"></i>
