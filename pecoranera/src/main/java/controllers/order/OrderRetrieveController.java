@@ -39,7 +39,6 @@ public class OrderRetrieveController extends HttpServlet{
 		List<Order> orders = new ArrayList<>();
 		
 		for (Order o : user.getOrders()) {
-			System.out.println(o.toString());
 			o.setUser(null);
 			
 			Event e = o.getEvent();
