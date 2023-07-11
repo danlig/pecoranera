@@ -20,11 +20,10 @@ public class RemoveController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EventArtist ea = new EventArtist();
+		
 		if (!GenericCrudController.Validate(ea, GenericCrudController.operation.REMOVE_MODE, request, response))
 			return;
-		
-		System.out.println(ea.toString());
-		
+			
 		EventDao.deleteArtist(ea.getEvent(), ea.getArtist());
 		response.sendRedirect("list?id_event=" + ea.getEvent().getId());
 	}

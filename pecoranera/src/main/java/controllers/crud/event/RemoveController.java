@@ -37,8 +37,6 @@ public class RemoveController extends HttpServlet {
 			
 			event.setCancellation(new Date());
 			EventDao.doSave(event);
-			
-			response.sendRedirect("list");
 		} catch (NumberFormatException ex) {
 			message.add("Id Format Not Allowed");
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, new Gson().toJson(message));

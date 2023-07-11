@@ -25,7 +25,6 @@ $(document).ready(function(){
         });
     }
 
-    // getUserTags();
     ajaxTagRequest("#filter-choice div").then(getUserTags());
     moveToListAndSort("#selected-filter div", "#filter-choice div", false);
     moveToListAndSort("#filter-choice div", "#selected-filter div", true);

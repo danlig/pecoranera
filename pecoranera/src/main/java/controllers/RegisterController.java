@@ -34,18 +34,17 @@ public class RegisterController extends HttpServlet {
 		String conf_password = request.getParameter("conf_password");
 			
 		if (!ValidatorUtils.CheckEmail(email) || UserDao.doRetrieveByEmail(email) != null) {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "email");
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "email invalida");
 			return;
 		}
 		
 		if (!ValidatorUtils.CheckUsername(username)) {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "username");
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "username invalido");
 			return;
 		} 
 
 		if (!ValidatorUtils.CheckPassword(password) || !password.equals(conf_password) || email.equals(password)) {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "password");
-			System.out.println("password");
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "password invalida");
 			return;
 		}
 		

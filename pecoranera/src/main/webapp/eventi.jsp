@@ -41,6 +41,8 @@
             
 
             <fieldset id="filter-fieldset">
+            <legend>Filtri</legend>
+            
                 <div>
                     <div id="date-fields">
                         <h3>Intervallo date</h3>

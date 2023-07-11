@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@taglib prefix="e" uri="https://www.owasp.org/index.php/OWASP_Java_Encoder_Project" %>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -18,7 +19,7 @@
         <jsp:param name="active_page" value="eventi" />
     </jsp:include>
 
-    <section id='<%= request.getParameter("id")%>' class="event">   
+    <section id='${e:forHtml(param.id)}' class="event">   
         <div id="mobile-title">
             <h2 class="event-header"></h2>
             <h3 class="event-date"></h3>

@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dao.ProductTypeDao;
+import dao.TagDao;
 import model.ProductType;
 
 public class ReadController extends HttpServlet {
@@ -20,12 +23,9 @@ public class ReadController extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<ProductType> product_types = ProductTypeDao.doRetrieveAll();
+		response.setContentType("application/json");
 		
-		request.setAttribute("product_types", product_types);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/product-type/page.jsp");
-		dispatcher.forward(request, response);
-		
+		response.getWriter().write(new Gson().toJson(ProductTypeDao.doRetrieveAll()));	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

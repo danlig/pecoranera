@@ -7,6 +7,10 @@ import model.User;
 public class UserDao {
 	private static BasicCrudDao<User> crud = new BasicCrudDao<>(User.class);
 
+	private UserDao() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static User doSave(User item) {
 		return crud.doSave(item);
 	}

@@ -15,7 +15,6 @@ $(document).ready(function(){
         }
 
         if(pages.hasOwnProperty(page)){
-            //$(`#${page}`).show();
             $("#display-data").append(pages[page]);
         } else {
             $("#display-data").load(`account/${page}.jsp`);

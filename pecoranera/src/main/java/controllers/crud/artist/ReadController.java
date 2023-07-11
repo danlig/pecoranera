@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dao.ArtistDao;
+import dao.ProductDao;
 import model.Artist;
 
 public class ReadController extends HttpServlet {
@@ -20,11 +23,7 @@ public class ReadController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Artist> artists = ArtistDao.doRetrieveAll();
-		request.setAttribute("artists", artists);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/artist/page.jsp");
-		dispatcher.forward(request, response);
+		response.getWriter().write(new Gson().toJson(ArtistDao.doRetrieveAll()));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

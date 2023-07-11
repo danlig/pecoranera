@@ -5,14 +5,11 @@ body{
 
 #upcoming{
     padding-top: calc(var(--nav-height) + 5vh);
+    padding-bottom: 10vh;
 }
 
 h1,h2{
     font-family: var(--header-font);
-}
-
-#upcoming{
-    padding-bottom: 10vh;
 }
 
 #upcoming h1{
@@ -44,8 +41,8 @@ h1,h2{
 }
 
 .upcoming-event>img{
+	background: url(../images/armstrong.jpg);
     background-size: cover;
-    background: url(../images/armstrong.jpg);
     position: absolute;
     object-position: center;
     object-fit: cover;
@@ -86,8 +83,7 @@ h1,h2{
 }
 
 .upcoming-event:hover>img, .upcoming-event:focus>img{
-    -webkit-filter: none; 
-    -webkit-filter: none; 
+    -webkit-filter: none;
     -moz-filter: none;
     filter: none;
     transform: scale(1.2);
@@ -349,8 +345,8 @@ input[type=submit]:hover, input[type=submit]:focus{
 }
 
 .small-event{
+	background: url(../images/armstrong.jpg);
     background-color: black;
-    background: url(../images/armstrong.jpg);
     background-position: center;
     background-size: cover;
     padding-top: calc(15rem/4);
@@ -453,7 +449,6 @@ input[type=submit]:hover, input[type=submit]:focus{
     }
 
     .upcoming-event>img{
-        -webkit-filter: none; 
         -webkit-filter: none; 
         -moz-filter: none;
         filter: none;

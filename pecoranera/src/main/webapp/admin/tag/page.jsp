@@ -3,7 +3,7 @@
  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Tags</title>
@@ -32,6 +32,8 @@
 	</c:forEach>
 
 	<table>
+	 	<caption>Tabella di inserimento tag</caption>
+		
 		<tr>
 			<th>Id</th>
 			<th>Nome</th>

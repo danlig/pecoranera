@@ -54,8 +54,7 @@ public class AddController extends HttpServlet {
 		if (filePart == null || filePart.getSize() == 0) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Inserisci immagine");
 			return;
-		} else {
-			if (filePart != null) {
+		} else if (filePart != null) {
 				try {
 					if (!EventImageUpload.isImage(filePart)) {
 						response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Estensione file non valida");					
@@ -64,8 +63,6 @@ public class AddController extends HttpServlet {
 				} catch (Exception e) {
 					filePart = null;
 				}
-			}
-			
 		}
 
 		Event event = new Event();
@@ -80,7 +77,5 @@ public class AddController extends HttpServlet {
 
 		if (filePart != null)
 			EventImageUpload.upload(getServletContext().getRealPath("/"), filePart, event.getId());
-		
-		response.sendRedirect("list");
 	}
 }
