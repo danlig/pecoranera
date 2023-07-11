@@ -35,7 +35,7 @@ public class AccessControllFilter extends HttpFilter implements Filter {
 		boolean condition2 = path.contains("/admin/") && (isAdmin==null || !isAdmin);
 		
 		if (condition1 || condition2) {
-			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login.jsp");
+			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/");
 			return;
 		}
 
