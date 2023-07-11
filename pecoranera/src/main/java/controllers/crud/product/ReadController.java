@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import javax.servlet.RequestDispatcher;
-
 import dao.ProductDao;
-import dao.ProductTypeDao;
 
 public class ReadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

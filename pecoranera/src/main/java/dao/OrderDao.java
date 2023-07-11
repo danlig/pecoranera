@@ -2,8 +2,18 @@ package dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.criteria.HibernateCriteriaBuilder;
+import org.hibernate.query.criteria.JpaPredicate;
+
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import model.Order;
+import model.User;
+import utils.HibernateUtils;
 import model.Event;
 
 public class OrderDao {
@@ -66,5 +76,53 @@ public class OrderDao {
 
 	public static List<Order> doRetrieveAll() {
 		return crud.doRetrieveAll();
+	}
+	
+	public static List<Order> doRetrieveFilter(Date dataInizio, Date dataFine, User user) {
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		Transaction tx = null;
+		List<Order> resultList = null;
+
+		try {
+		    tx = session.beginTransaction();
+		    
+		    // Create the CriteriaBuilder and CriteriaQuery
+		    HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+		    CriteriaQuery<Order> criteriaQuery = builder.createQuery(Order.class);
+		    Root<Order> root = criteriaQuery.from(Order.class);
+		    
+		    JpaPredicate condition = builder.isTrue(builder.literal(true));
+		    
+		    if (dataInizio != null && dataFine != null)
+		    	condition = builder.between(root.get("date"), dataInizio, dataFine);
+		    
+		    criteriaQuery.where(condition);
+		    
+		    criteriaQuery.orderBy(builder.asc(root.get("date")));
+		    
+		    // Execute the query and get the result list
+		    resultList = session.createQuery(criteriaQuery)
+				    .getResultList();
+		    
+		    tx.commit();
+		} catch (Exception e) {
+		    if (tx != null) {
+		        tx.rollback();
+		    }
+		    e.printStackTrace();
+		} finally {
+		    session.close();
+		}
+		
+		List<Order> orders = new ArrayList<>();
+
+		for (Order o : resultList) {
+			o.setUser(null);
+			
+			if (user == null || o.getUser().getId() == user.getId())
+				orders.add(o);
+		}
+		
+		return orders;
 	}
 }
