@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="java.util.List"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><!DOCTYPE html>
 
 <html lang="it">
 <head>
@@ -63,7 +64,7 @@
 					
 					
 					<td>
-						<input type="number" name="availableTickets">
+						<input type="number" name="availableTickets" placeholder="Insert Available Tickets">
 					</td>
 					
 					<td>

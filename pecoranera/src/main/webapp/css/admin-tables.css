@@ -21,6 +21,10 @@ td{
     padding-bottom: 1.5rem;
 }
 
+table th, table td {
+	padding: 10px;
+}
+
 input[type=text],
 textarea{
     background-color: var(--page-background);
@@ -80,4 +84,8 @@ input[value="Crea"]:active{
 
 .delete:hover{
     color: red;
+}
+
+#eventi > table {
+	margin-bottom: 20px;
 }
