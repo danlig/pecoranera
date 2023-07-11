@@ -20,7 +20,7 @@
 
     <section id="eventi">
         <table>
-        <caption>Tabella eventi</caption>
+        <caption>.</caption>
 			<tr>
 				<th>Id</th>
 				<th>Name</th>

@@ -30,7 +30,7 @@
 		</c:forEach>
 		
 		<table>
-		<caption>Tabella di inserimento tipo prodotto</caption>
+		<caption>.</caption>
 		
 		<tr>
 			<th>Id</th>
