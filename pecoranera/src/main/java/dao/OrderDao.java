@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
@@ -17,6 +19,7 @@ import utils.HibernateUtils;
 import model.Event;
 
 public class OrderDao {
+	private static final Logger LOGGER = LogManager.getLogger(EventDao.class);
 	private static BasicCrudDao<Order> crud = new BasicCrudDao<>(Order.class);
 
 	private OrderDao() {
@@ -113,7 +116,7 @@ public class OrderDao {
 		    if (tx != null) {
 		        tx.rollback();
 		    }
-		    e.printStackTrace();
+		    LOGGER.error("Error occurred in context", e);
 		} finally {
 		    session.close();
 		}

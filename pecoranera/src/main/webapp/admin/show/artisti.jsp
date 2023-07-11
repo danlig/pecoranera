@@ -22,6 +22,7 @@
 
     <section id="artist">
         <table>
+        <caption>Tabella artisti</caption>
             <tr>
                 <th>Id</th>
                 <th>Name</th>

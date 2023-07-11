@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@taglib prefix="e" uri="https://www.owasp.org/index.php/OWASP_Java_Encoder_Project" %>
 
 <div id="show-navbar">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/show-navbar.css">
