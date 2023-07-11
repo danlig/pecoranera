@@ -22,6 +22,7 @@
 
     <section id="tag">
         <table>
+        <caption>Tabella tag</caption>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
