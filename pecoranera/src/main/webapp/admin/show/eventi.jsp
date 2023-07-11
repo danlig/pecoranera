@@ -1,35 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.List"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="ISO-8859-1">
-		<title>Event</title>
-		<style type="text/css">
-			table, th, td {
-				border: 1px solid black; 
-				border-collapse: collapse;
-			}
-			th, td {
-				padding: 5px 10px;
-			}
-			
-			.successfully-color {
-				color: green;
-			}
-			
-			.error-color {
-				color: red;
-			}
-		</style>
-	</head>
-	<body>
-		<c:forEach var="message" items="${messages}">
-			<p class="${message.key}">${message.value}</p>
-		</c:forEach>
-		
-		<table>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pecoranera Jazz Art Bistrot</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-eventi.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <jsp:include page="../../assets/navbar.jsp">
+        <jsp:param name="active_page" value="eventi" />
+    </jsp:include>
+
+    <jsp:include page="../../assets/show-navbar.jsp">
+        <jsp:param name="active_page" value="eventi" />
+    </jsp:include>
+
+    <section id="eventi">
+        <table>
 			<tr>
 				<th>Id</th>
 				<th>Name</th>
@@ -37,7 +28,6 @@
 				<th>Price</th>
 				<th>Date</th>
 				<th>Max Tickets</th>
-				<th>Available Tickets</th>
 				<th>Photo</th>
 				<th>Artist</th>
 				<th>Tag</th>
@@ -55,7 +45,7 @@
 					</td>
 					
 					<td>
-						<input type="text" name="description" placeholder="Insert Description">
+                        <textarea name="description" placeholder="Insert Description" rows="4"></textarea>
 					</td>
 					
 					<td>
@@ -72,11 +62,6 @@
 						<input type="number" name="maxTickets" placeholder="Insert Max Tickets">
 					</td>
 					
-					
-					<td>
-						<input type="number" name="availableTickets">
-					</td>
-					
 					<td>
 						<input type="file" name="photo">
 					</td>
@@ -84,7 +69,7 @@
 					<td></td>
 					
 					<td>
-						<select style="height: 30px" name="tags" multiple>
+						<select name="tags" multiple>
 							<c:forEach var="tag" items="${tags}">
 								<option value="${tag.id}">${tag.name}</option>
 							</c:forEach>
@@ -110,7 +95,7 @@
 						</td>
 						
 						<td>
-							<input type="text" name="description" value="${event.description}">
+                            <textarea name="description" placeholder="Insert Description" rows="4" value="${event.description}"></textarea>
 						</td>
 						
 						<td>
@@ -126,10 +111,6 @@
 						</td>
 						
 						<td>
-							<input type="number" name="availableTickets" value="${event.availableTickets}">
-						</td>
-						
-						<td>
 							<input type="file" name="photo">
 						</td>
 						
@@ -138,7 +119,7 @@
 						</td>	
 						
 						<td>
-							<select style="height: 30px" name="tags" multiple>
+							<select name="tags" multiple>
 								<c:forEach var="tag" items="${tags}">
 									<option value="${tag.id}">${tag.name}</option>
 								</c:forEach>
@@ -150,11 +131,14 @@
 						</td>
 						
 						<td>
-							<a href="${pageContext.request.contextPath}/admin/event/delete?id=${event.id}">Elimina</a>
+							<a class="delete" href="${pageContext.request.contextPath}/admin/event/delete?id=${event.id}">Elimina</a>
 						</td>
 					</form>
 				</tr>
 			</c:forEach>
 		</table>
-	</body>
+    </section>
+
+    <jsp:include page="../../assets/footer.jsp"></jsp:include>
+</body>
 </html>

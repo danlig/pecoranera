@@ -32,13 +32,27 @@
                 <div id="outside-close" class="closed"></div>
 
                 <ul>
-                    <li><a href="index.jsp" class="nav-links ${param.active_page == 'home'  ? 'active_link' : ''}">HOME</a></li>
-                    <li><a href="eventi.jsp" class="nav-links ${param.active_page == 'eventi'  ? 'active_link' : ''}">EVENTI</a></li>
-                    <li><a href="menu.jsp" class="nav-links ${param.active_page == 'menu'  ? 'active_link' : ''}">MENU</a></li>
-                    <li><a href="info.jsp" class="nav-links ${param.active_page == 'info'  ? 'active_link' : ''}"><span>INFO</span></a></li>
+                    <li><a href="${pageContext.request.contextPath}/index.jsp" class="nav-links ${param.active_page == 'home'  ? 'active_link' : ''}">HOME</a></li>
+                    <li><a href="${pageContext.request.contextPath}/${sessionScope.isAdmin == true ?'admin/show.jsp' : 'eventi.jsp'}" class="nav-links ${param.active_page == 'eventi'  ? 'active_link' : ''}">EVENTI</a></li>
+                    <li><a href="${pageContext.request.contextPath}/${sessionScope.isAdmin == true ? 'admin/menu.jsp' : 'menu.jsp'}" class="nav-links ${param.active_page == 'menu'  ? 'active_link' : ''}">MENU</a></li>
+                    <li><a href="${pageContext.request.contextPath}/${sessionScope.isAdmin == true ? 'admin/ordini.jsp' : 'info.jsp'}" class="nav-links ${param.active_page == 'info'  ? 'active_link' : ''}"><span>${sessionScope.isAdmin == true ? 'ORDINI' : 'INFO'}</span></a></li>
                     <li id="nav-icons">
-                        <a href="account.jsp" class="nav-links ${param.active_page == 'account'  ? 'active_link' : ''}"><i class="fa-regular fa-circle-user"></i></a>
-                        <a href="carrello.jsp" class="nav-links ${param.active_page == 'carrello'  ? 'active_link' : ''}"><i class="fa-solid fa-cart-shopping"></i></a>
+                        <a href="${pageContext.request.contextPath}/account.jsp" class="nav-links ${param.active_page == 'account'  ? 'active_link' : ''}">
+                            <c:choose>
+                                <c:when test= "${sessionScope.isAdmin == null || empty sessionScope.isAdmin}">
+                                    <i class="fa-regular fa-circle-user"></i>
+                                </c:when>
+                                
+                                <c:otherwise>
+                                    <i class="fa-solid fa-user-lock"></i>
+                                </c:otherwise>
+                            </c:choose>
+                        </a>
+
+                        <c:if test= "${sessionScope.isAdmin != true}">
+                            <a href="carrello.jsp" class="nav-links ${param.active_page == 'carrello'  ? 'active_link' : ''}"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </c:if>
+
                     </li>   
                 </ul>
             </div>

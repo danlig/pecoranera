@@ -48,10 +48,6 @@ $(document).ready(function(){
                         $("#last-orders>div").append(orderToHTML(order));
                     });
                 }
-            },
-
-            error: () =>{
-                alert("Errore caricamento ordini");
             }
         });
 
@@ -68,10 +64,6 @@ $(document).ready(function(){
                     $("#likes>div").append(tagsToHtml(el));
                 });
         
-            },
-
-            error: () =>{
-                alert("Errore caricamento tag");
             }
         });
         
