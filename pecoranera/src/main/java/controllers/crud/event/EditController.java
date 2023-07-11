@@ -54,7 +54,7 @@ public class EditController extends HttpServlet {
 		// Controllo dei file
 		Part filePart = request.getPart("photo");
 		
-		if (filePart != null && filePart.getSize() != 0 && filePart != null) {
+		if (filePart != null && filePart.getSize() != 0) {
 			try {
 				if (!EventImageUpload.isImage(filePart)) {
 					response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Estensione file non valida");					
