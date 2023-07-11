@@ -26,7 +26,7 @@ $(document).ready(function(){
     }
 
     function loadProductTypes(){
-        $.ajax({
+        return $.ajax({
             url: "menu",
 
             dataType: 'json',
@@ -47,7 +47,6 @@ $(document).ready(function(){
                 alert("Errore nel caricamento dei tipi di prodotti")
             }
         });
-
     }
 
     function loadProducts(choice, isFirstTime){
@@ -96,6 +95,8 @@ $(document).ready(function(){
                 }
              });
         }
+        
+		return;
     }
     
     //click dei link categoria consegue un caricamento del prodotto del tipo scelto

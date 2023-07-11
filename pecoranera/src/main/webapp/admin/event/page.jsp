@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1" import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Event</title>
@@ -30,6 +30,7 @@
 		</c:forEach>
 		
 		<table>
+		<caption>Tabella di inserimento evento</caption>
 			<tr>
 				<th>Id</th>
 				<th>Name</th>

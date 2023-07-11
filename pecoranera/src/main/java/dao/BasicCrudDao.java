@@ -3,17 +3,21 @@ package dao;
 import java.util.List;
 import java.util.function.Function;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
+import controllers.GenericCrudController;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import utils.HibernateUtils;
 
 public class BasicCrudDao<T> {
+	private static final Logger LOGGER = LogManager.getLogger(BasicCrudDao.class);
 	private Class<T> cls;
 	private SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
@@ -36,7 +40,7 @@ public class BasicCrudDao<T> {
 			if (transaction != null) {
 				transaction.rollback();
 			}
-			ex.printStackTrace();
+			LOGGER.error("Error occurred in context", ex);
 		} finally {
 			session.close();
 		}

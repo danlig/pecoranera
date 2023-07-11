@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Set;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -13,6 +15,8 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import org.hibernate.query.criteria.JpaPredicate;
+
+import controllers.GenericCrudController;
 import jakarta.persistence.criteria.Join;
 
 import jakarta.persistence.criteria.Root;
@@ -27,6 +31,7 @@ import model.Tag;
 
 
 public class EventDao {
+	private static final Logger LOGGER = LogManager.getLogger(EventDao.class);
 	private static BasicCrudDao<Event> crud = new BasicCrudDao<>(Event.class);
 
 	public static Event doSave(Event item) {
@@ -76,7 +81,7 @@ public class EventDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            LOGGER.error("Error occurred in context", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -147,7 +152,7 @@ public class EventDao {
 		    if (tx != null) {
 		        tx.rollback();
 		    }
-		    e.printStackTrace();
+		    LOGGER.error("Error occurred in context", e);
 		} finally {
 		    session.close();
 		}

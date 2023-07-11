@@ -82,7 +82,7 @@ let resetTags = function(resetButton, fromElem, toElem){
         selectedTags.length = 0;
 
         fromElem.children('.filter-tag').each(function(){
-            $(this).remove;
+            $(this).remove();
 
             toElem.append($(this));
 

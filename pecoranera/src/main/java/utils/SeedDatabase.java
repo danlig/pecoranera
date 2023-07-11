@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
 
 import model.ProductType;
@@ -35,10 +35,11 @@ public class SeedDatabase {
 	private static final String[] tag_names = {"Blues", "Funk", "Jazz Classic", "Swing", "Soul", "Bebop"};
 	private static final int event_number = 10;
 	private static final int event_artist_number = 3;
+	private static SecureRandom random = new SecureRandom();
 	
 	private static double generateRandomPrice(double min, double max) {
 		DecimalFormat df2 = new DecimalFormat("0.0");
-	    double rand = new Random().nextDouble();
+	    double rand = random.nextDouble();
 	    return Double.parseDouble(df2.format(min + (rand * (max - min))));
 	}
 	

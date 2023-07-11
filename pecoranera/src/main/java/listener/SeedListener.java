@@ -14,19 +14,10 @@ public class SeedListener implements ServletContextListener {
     }
     
     public void contextInitialized(ServletContextEvent sce)  { 
-    	
-    	System.out.println("Controllo Database...");
+    	// Se non sono presenti dati nel db, vengono generati
     	if (EventDao.doRetrieveAll().isEmpty()) {
-    		System.out.println("Init Database...");
-    		try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
     		SeedDatabase.seed();
     	} 
-
-    	System.out.println("Database Pronto");
     }
 	
 }

@@ -340,8 +340,7 @@ h1{
 #menu-choice a:hover{
     color: var(--main-color);
     text-shadow: 0 0 5px black, 0 0 10px black;
-    -webkit-filter: none !important; 
-    -webkit-filter: none !important; 
+    -webkit-filter: none !important;
     -moz-filter: none !important;
     filter: none !important;
 }
@@ -436,8 +435,7 @@ h1{
     }
 
     #menu-choice a{
-        -webkit-filter: none; 
-        -webkit-filter: none; 
+        -webkit-filter: none;
         -moz-filter: none;
         filter: none;
         width: 100%;

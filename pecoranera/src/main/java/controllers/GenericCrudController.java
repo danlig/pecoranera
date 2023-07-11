@@ -8,12 +8,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.BasicCrudDao;
 
 public class GenericCrudController {
+	private static final Logger LOGGER = LogManager.getLogger(GenericCrudController.class);
 	
 	// Tipi di operazioni CRUD
 	public static enum operation {
@@ -26,7 +30,7 @@ public class GenericCrudController {
 		try {
 			obj = cls.getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
-			e.printStackTrace();
+			return false;
 		}
 		
 		// Verifica validità di tutti i parametri
@@ -206,7 +210,7 @@ public class GenericCrudController {
             // Invoke the setter method on the object
             method.invoke(obj, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error occurred in context", e);
         }
     }
 }
