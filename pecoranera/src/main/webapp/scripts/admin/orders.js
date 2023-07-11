@@ -20,23 +20,62 @@ $(document).ready(function(){
                         </div>
                     </div>
     
-                    <img class="ticket-qr" src="https://chart.googleapis.com/chart?cht=qr&chs=450x450&chl=${user}+${order.event.id}+${order.event.date}" alt="">
-    
                 </div>`;
     }
     
-    let loadUserOrder = async function(offsetPage){
+    let loadOrders = async function(){
         return $.ajax({
             url: "order/list",   
-    
+
+            dataType: "json",
+
             success: (orders) => {
-                $.each(orders, function(key, order) {
-                    $("#orders>div").append(orderToHTML(order));
-                });
+                if(orders.length == 0){
+                    $("#orders>div").append("<p>Nessun ordine da visualizzare</p>");
+                }else {
+                    $("#orders>div").children().remove();
+
+                    $.each(orders, function(key, order) {
+                        $("#orders>div").append(orderToHTML(order));
+                    });
+                }
                 
             }
         });
     }
+
+    let reloadOrders = async function(){
+        return $.ajax({
+            url: "order/list",   
+
+            dataType: "json",
+
+            data:{
+                startDate: $("#startDate").val() || new Date().toLocaleDateString("en-CA", {year:"numeric",month:"2-digit", day:"2-digit"}).replace("/", "-"),
+                endDate: $("#endDate").val() || "2200-12-31",
+                idUser: $("#idUser").val() || null
+            },
+
+            success: (orders) => {
+                $("#orders>div").children().remove();
+                if(orders.length == 0){
+                    $("#orders>div").append("<p>Nessun ordine da visualizzare</p>");
+                }else {
+
+                    $.each(orders, function(key, order) {
+                        $("#orders>div").append(orderToHTML(order));
+                    });
+                }
+                
+            }
+        });
+    }
+
+    $("#filters").on("submit", function(e){
+        e.preventDefault();
+
+        reloadOrders();
+    });
     
-    loadUserOrder();
+    loadOrders();
 })
